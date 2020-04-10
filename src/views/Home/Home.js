@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div className={classes.root}>
       {/* <Typography variant="h2">Hello</Typography> */}
-      <SearchInput/>
+      <SearchInput placeholder="Search for a food item"/>
     </div>
   )
 }
