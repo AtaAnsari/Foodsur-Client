@@ -24,7 +24,7 @@ validate.validators = {
 };
 
 export default class App extends Component {
-  // state = {users: []}
+  // state = { users: [] }
 
   // componentDidMount() {
   //   fetch('http://localhost:8080/api/users')
@@ -33,11 +33,11 @@ export default class App extends Component {
   //       return res.json()
   //     })
 
-  //     .then(users => this.setState({users}))
+  //     .then(users => this.setState({ users }))
   // }
   render() {
     return (
-      // <div className = "App">
+      // <div className="App">
       //   <h1>Users</h1>
       //   <ul>
       //     {this.state.users.map(user =>
@@ -45,7 +45,7 @@ export default class App extends Component {
       //     )}
       //   </ul>
       // </div>
-      
+
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
           <Routes />
