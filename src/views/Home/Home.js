@@ -2,6 +2,7 @@ import React from 'react';
 // import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { SearchInput } from '../../components'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,7 +16,8 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h1">Hello</Typography>
+      {/* <Typography variant="h2">Hello</Typography> */}
+      <SearchInput/>
     </div>
   )
 }
