@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { SearchInput } from '../../components'
-import ScanViewport from "./components"
+import {ScanViewport} from './components'
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,6 +33,7 @@ const Home = () => {
           Search
         </Button>
       </Box>
+      <ScanViewport />
     </div>
   )
 }
