@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Button, Container, Typography, Card } from '@material-ui/core';
+import { Button, Container, Typography } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,17 +23,41 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 const Landing = () => {
+
+  const history = useHistory()
+
+  const handleLogin = () => {
+    history.push("/login")
+  };
+
+  const handleSignUp = () => {
+    history.push("/sign-up")
+  }
+
   const classes = useStyles()
   return (
     <Container className={classes.root}>
       <Typography variant='h1' className={classes.header} gutterBottom={true} align={'center'} color={'text'}>
         Find the Right Food For You
       </Typography>
-      <Button variant='contained' color='primary' fullWidth={true} className={classes.buttonStyle}>Login</Button>
-      <Button variant='contained' color='primary' fullWidth={true} className={classes.buttonStyle}>Sign up</Button>
-    </Container>
-
+      <Button variant='contained'
+        color='primary'
+        fullWidth={true}
+        className={classes.buttonStyle}
+        onClick={handleLogin}>
+        Login
+      </Button>
+      <Button
+        variant='contained'
+        color='primary'
+        fullWidth={true}
+        className={classes.buttonStyle}
+        onClick={handleSignUp}>
+        Sign up
+      </Button>
+    </Container >
   )
 }
 
