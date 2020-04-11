@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { DietaryPreferencesTable } from './components'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,6 +20,7 @@ const dietaryPreferences = () => {
       >
         Please choose any dietary preferences that apply to you:
       </Typography>
+      <DietaryPreferencesTable />
     </div>
   )
 }
