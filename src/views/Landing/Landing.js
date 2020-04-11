@@ -39,7 +39,7 @@ const Landing = () => {
   const classes = useStyles()
   return (
     <Container className={classes.root}>
-      <Typography variant='h1' className={classes.header} gutterBottom={true} align={'center'} color={'text'}>
+      <Typography variant='h1' gutterBottom={true} align={'center'} color={'text'}>
         Find the Right Food For You
       </Typography>
       <Button variant='contained'
