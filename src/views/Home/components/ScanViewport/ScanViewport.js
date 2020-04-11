@@ -1,6 +1,6 @@
 import Scanner from '../Scanner/Scanner';
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import '../Scanner/styles.css';
@@ -44,16 +44,17 @@ const ScanViewport = () => {
         size="large"
         variant="contained"
       >
-        {camera ? <img
-          alt="STOP"
-          className= {classes.stop}
-          src="/images/logos/stop.png"
-        /> : <img
-          alt="Logo"
-          className= {classes.barcode}
-          src="/images/logos/barcode.png"
-        />}
-        
+        {camera ?
+          <img
+            alt="STOP"
+            className= {classes.stop}
+            src="/images/logos/stop.png"
+          /> :
+          <img
+            alt="Logo"
+            className= {classes.barcode}
+            src="/images/logos/barcode.png"
+          />}
       </Button>
       <div className="container">
         {camera && <Scanner onDetected={onDetected} />}
