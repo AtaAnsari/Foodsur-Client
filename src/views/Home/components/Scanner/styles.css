@@ -1,17 +1,3 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
-  height: 99vh;
-  width: 99vw;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.container {
-  position: relative;
-}
-
 .container,
 #interactive.viewport {
   width: 400px;
