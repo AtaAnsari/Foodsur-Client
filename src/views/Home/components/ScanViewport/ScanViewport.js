@@ -11,14 +11,15 @@ const useStyles = makeStyles(theme => ({
   },
   scanButton: {
     padding:'0',
-    width: '300px',
-    height: '200px'
+    width: '40vw',
+    height: '15vh',
+    marginTop: '2rem'
   },
   barcode: {
-    width: '250px'
+    width: '30vw'
   },
   stop: {
-    width: '100px'
+    width: '15vw'
   }
 }));
 
@@ -36,7 +37,6 @@ const ScanViewport = () => {
   return (
     <div>
       <p>{result ? result : 'Scanning...'}</p>
-
       <Button
         className={classes.scanButton}
         color="primary"
