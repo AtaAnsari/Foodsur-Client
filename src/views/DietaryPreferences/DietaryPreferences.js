@@ -6,6 +6,9 @@ import { DietaryPreferencesTable } from './components'
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
+  },
+  content: {
+    marginTop: theme.spacing(5)
   }
 }));
 
@@ -20,7 +23,9 @@ const dietaryPreferences = () => {
       >
         Please choose any dietary preferences that apply to you:
       </Typography>
-      <DietaryPreferencesTable />
+      <div className={classes.content}>
+        <DietaryPreferencesTable />
+      </div>
     </div>
   )
 }
