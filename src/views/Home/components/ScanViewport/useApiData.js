@@ -12,7 +12,7 @@ export function useApiData () {
   const FetchApiData = function(upcCode) {
     const upcUrl = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&upc=${upcCode}&app_id=${process.env.FOOD_DB_ID}&app_key=${process.env.FOOD_DB_KEY}`
     let upcIngredients
-    Promise.new([
+
       axios.get(upcUrl)
     .then(res => {
            upcIngredients = {"ingredients": [
@@ -27,7 +27,7 @@ export function useApiData () {
       upcIngredients))
     .then(res => console.log(res))
     .catch(err => console.log(err))
-  }
+    }
     
 
 //   // Determines which day is currently selected by the user
