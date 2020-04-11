@@ -1,7 +1,7 @@
 import Scanner from '../Scanner/Scanner';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Typography, Box} from '@material-ui/core';
+import { Box, Button, Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import '../Scanner/styles.css';
 import {useApiData} from './useApiData'
