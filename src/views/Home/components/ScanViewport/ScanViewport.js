@@ -19,9 +19,6 @@ const useStyles = makeStyles(theme => ({
   },
   stop: {
     width: '100px'
-  },
-  scannerContainer: {
-    position: 'relative'
   }
 }));
 
@@ -59,7 +56,7 @@ const ScanViewport = () => {
             src="/images/logos/barcode.png"
           />}
       </Button>
-      <div className={classes.scannerContainer}>
+      <div className="container">
         {camera && <Scanner onDetected={onDetected} />}
       </div>
     </div>
