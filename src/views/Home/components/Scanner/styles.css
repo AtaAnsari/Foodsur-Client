@@ -1,13 +1,18 @@
+.container {
+  position: relative;
+}
+
 .container,
 #interactive.viewport {
-  width: 400px;
-  height: 300px;
+  width: 70vw;
+  height: 40vh;
+  margin: 0 auto;
 }
 
 #interactive.viewport canvas,
 video {
-  width: 400px;
-  height: 300px;
+  width: 70vw;
+  height: 40vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -15,6 +20,6 @@ video {
 
 #interactive.viewport canvas.drawingBuffer,
 video.drawingBuffer {
-  width: 400px;
-  height: 300px;
+  width: 70vw;
+  height: 40vh;
 }
