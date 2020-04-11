@@ -7,12 +7,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(4),
     paddingTop: theme.spacing(10)
   },
-  buttonStyle: {
-    marginTop: '0.5rem',
-    marginBottom: '1rem'
-  },
-  cardStyle: {
-    padding: '1rem'
+  inputStyle: {
   }
 }));
 
@@ -23,7 +18,7 @@ const Login = () => {
       <Typography variant='h1' gutterBottom={true} align={'center'} color='secondary'>
         Login
       </Typography>
-      <TextField fullWidth id="Email Address" label="email" type='email' name='email' variant="outlined" />
+      <TextField className={classes.inputStyle} fullWidth id="Email Address" label="email" type='email' name='email' variant="outlined" />
       <TextField fullWidth id="password" label="Password" type='password' name='password' variant="outlined" />
       <Button
         type="submit"
