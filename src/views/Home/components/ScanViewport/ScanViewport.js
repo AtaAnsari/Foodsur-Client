@@ -1,7 +1,7 @@
 import Scanner from '../Scanner/Scanner';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Typography} from '@material-ui/core';
+import { Box, Button, Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import '../Scanner/styles.css';
 import {useApiData} from './useApiData'
@@ -14,15 +14,16 @@ const useStyles = makeStyles(theme => ({
   },
   scanButton: {
     padding:'0',
-    width: '40vw',
-    height: '15vh',
-    marginTop: '2rem'
+    width: '150px',
+    height: '100px',
+    marginTop: '50px',
+    marginBottom: '50px'
   },
   barcode: {
-    width: '30vw'
+    width: '125px'
   },
   stop: {
-    width: '15vw'
+    width: '50px'
   }
 }));
 
@@ -46,6 +47,7 @@ const ScanViewport = () => {
       <Typography variant="body1">
         {result}
       </Typography>
+      <Box display="flex" justifyContent="center">
       <Button
         className={classes.scanButton}
         color="primary"
@@ -65,6 +67,7 @@ const ScanViewport = () => {
             src="/images/logos/barcode.png"
           />}
       </Button>
+      </Box>
       <div className="container">
         {camera && <Scanner onDetected={onDetected} />}
       </div>
