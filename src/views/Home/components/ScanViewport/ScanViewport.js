@@ -1,7 +1,7 @@
 import Scanner from '../Scanner/Scanner';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Button} from '@material-ui/core';
+import { Button, Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import '../Scanner/styles.css';
 
@@ -36,7 +36,9 @@ const ScanViewport = () => {
 
   return (
     <div>
-      <p>{result ? result : 'Scanning...'}</p>
+      <Typography variant="body1">
+        {result}
+      </Typography>
       <Button
         className={classes.scanButton}
         color="primary"
