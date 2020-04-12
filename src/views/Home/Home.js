@@ -28,7 +28,7 @@ const Home = () => {
   const handleSearch = () => {
     history.push({
       pathname:'/search-results',
-      state: { message: 'hi' }
+      state: { searchTerm }
     })
   }
 
