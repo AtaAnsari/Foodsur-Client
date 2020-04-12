@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { DietaryPreferencesTable } from './components'
 
@@ -9,6 +9,11 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     marginTop: theme.spacing(5)
+  },
+  buttonBox: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.spacing(3)
   }
 }));
 
@@ -26,6 +31,15 @@ const dietaryPreferences = () => {
       <div className={classes.content}>
         <DietaryPreferencesTable />
       </div>
+      <Box className={classes.buttonBox}>
+        <Button
+          color="primary"
+          size="large"
+          variant="contained"
+        >
+          Confirm
+        </Button>
+      </Box>
     </div>
   )
 }
