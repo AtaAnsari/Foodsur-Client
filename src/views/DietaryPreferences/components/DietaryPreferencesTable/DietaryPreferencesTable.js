@@ -33,16 +33,14 @@ const DietaryPreferencesTable = () => {
         <TableBody>
           {preferences.map(preference => (
             <TableRow
-              hover
               key={preference.id}
+              onClick={() => handleSelect(preference.id)}
               selected={selectedPreferences.indexOf(preference.id) !== -1}
             >
               <TableCell padding="checkbox">
                 <Checkbox
                   checked={selectedPreferences.indexOf(preference.id) !== -1}
                   color="primary"
-                  onChange={() => handleSelect(preference.id)}
-                  // value="true"
                 />
                 {preference.name}
               </TableCell>
