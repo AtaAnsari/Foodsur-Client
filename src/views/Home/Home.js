@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from "react-dom";
-// import { makeStyles } from '@material-ui/styles';
+import { useHistory } from 'react-router-dom';
 import { Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { SearchInput } from '../../components'
@@ -21,6 +21,15 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
   const classes = useStyles();
+  
+  const history = useHistory();
+
+  const handleSearch = () => {
+    history.push({
+      pathname:'/search-results',
+      state: { message: 'hi' }
+    })
+  }
 
   return (
     <div className={classes.root}>
@@ -28,6 +37,7 @@ const Home = () => {
       <Box className={classes.searchButtonContainer}>
         <Button
           color="primary"
+          onClick={handleSearch}
           variant="contained"
         >
           Search
