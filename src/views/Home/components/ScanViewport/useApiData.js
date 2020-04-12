@@ -10,20 +10,21 @@ export function useApiData () {
 
 
   const FetchApiData = function(upcCode) {
-    const upcUrl = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&upc=${upcCode}&app_id=${process.env.FOOD_DB_ID}&app_key=${process.env.FOOD_DB_KEY}`
+    const upcUrl = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&upc=${upcCode}&app_id=7e7111eb&app_key=e019f6e0efdddb975bcbea5eeeb91c8c`
     let upcIngredients
 
       axios.get(upcUrl)
     .then(res => {
            upcIngredients = {"ingredients": [
         {
-          "quantity": res.data.parsed[0].quantity,
-          "measureURI": res.data.parsed[0].measure.uri,
-          "foodId": res.data.parsed[0].food.foodId
+          "quantity": 1,
+          "measureURI": res.data.hints[0].measures[0].uri,
+          "foodId": res.data.hints[0].food.foodId
         }
       ]}
+      console.log(upcIngredients);
     })
-    .then(res => axios.post(`https://api.edamam.com/api/food-database/nutrients?app_id=${process.env.NUTRITION_DB_ID}&app_key=${process.env.NUTRITION_DB_KEY}`,
+    .then(res => axios.post(`https://api.edamam.com/api/food-database/nutrients?app_id=edc61ca8&app_key=b9f17ae7284f840d6dd1ef3cbcdcde9e`,
       upcIngredients))
     .then(res => console.log(res))
     .catch(err => console.log(err))
