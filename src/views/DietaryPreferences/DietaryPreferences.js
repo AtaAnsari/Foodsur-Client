@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { DietaryPreferencesTable } from './components'
@@ -20,6 +20,21 @@ const useStyles = makeStyles(theme => ({
 const dietaryPreferences = () => {
   const classes = useStyles();
 
+  const [selectedPreferences, setSelectedPreferences] = useState([]);
+  
+  const handleSelect = id => {
+    const selectedIndex = selectedPreferences.indexOf(id);
+    let newSelectedPreferences = [];
+
+    if (selectedIndex === -1) {
+      newSelectedPreferences = [...selectedPreferences, id];
+    } else {
+      newSelectedPreferences = [...selectedPreferences.slice(0, selectedIndex), ...selectedPreferences.slice(selectedIndex + 1)];
+    }
+
+    setSelectedPreferences(newSelectedPreferences);
+  }
+
   return (
     <div className={classes.root}>
       <Typography
@@ -29,7 +44,10 @@ const dietaryPreferences = () => {
         Please choose any dietary preferences that apply to you:
       </Typography>
       <div className={classes.content}>
-        <DietaryPreferencesTable />
+        <DietaryPreferencesTable
+          handleSelect={handleSelect}
+          selectedPreferences={selectedPreferences}
+        />
       </div>
       <Box className={classes.buttonBox}>
         <Button
