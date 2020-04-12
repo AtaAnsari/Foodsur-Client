@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { SearchResultsTable } from './components'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +27,7 @@ const SearchResults = props => {
         Please choose the food you would like to see:
       </Typography>
       <div className={classes.content}>
-
+        <SearchResultsTable />
       </div>
     </div>
   )
