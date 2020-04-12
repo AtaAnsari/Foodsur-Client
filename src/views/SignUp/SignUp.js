@@ -16,13 +16,7 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const schema = {
-  firstName: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 32
-    }
-  },
-  lastName: {
+  userName: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
       maximum: 32
@@ -261,30 +255,16 @@ const SignUp = props => {
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('firstName')}
+                  error={hasError('userName')}
                   fullWidth
                   helperText={
-                    hasError('firstName') ? formState.errors.firstName[0] : null
+                    hasError('userName') ? formState.errors.userName[0] : null
                   }
-                  label="First name"
-                  name="firstName"
+                  label="user name"
+                  name="userName"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.firstName || ''}
-                  variant="outlined"
-                />
-                <TextField
-                  className={classes.textField}
-                  error={hasError('lastName')}
-                  fullWidth
-                  helperText={
-                    hasError('lastName') ? formState.errors.lastName[0] : null
-                  }
-                  label="Last name"
-                  name="lastName"
-                  onChange={handleChange}
-                  type="text"
-                  value={formState.values.lastName || ''}
+                  value={formState.values.userName || ''}
                   variant="outlined"
                 />
                 <TextField
@@ -363,10 +343,10 @@ const SignUp = props => {
                   Have an account?{' '}
                   <Link
                     component={RouterLink}
-                    to="/sign-in"
+                    to="/login"
                     variant="h6"
                   >
-                    Sign in
+                    Log In
                   </Link>
                 </Typography>
               </form>
