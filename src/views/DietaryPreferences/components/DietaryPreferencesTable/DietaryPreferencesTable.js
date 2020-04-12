@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Table,
   TableRow,
@@ -10,7 +10,22 @@ import {
 import useDietaryPreferences from 'hooks/useDietaryPreferences'
 
 const DietaryPreferencesTable = () => {
-  const preferences = useDietaryPreferences()
+  const preferences = useDietaryPreferences();
+
+  const [selectedPreferences, setSelectedPreferences] = useState([]);
+  
+  const handleSelect = id => {
+    const selectedIndex = selectedPreferences.indexOf(id);
+    let newSelectedPreferences = [];
+
+    if (selectedIndex === -1) {
+      newSelectedPreferences = [...selectedPreferences, id];
+    } else {
+      newSelectedPreferences = [...selectedPreferences.slice(0, selectedIndex), ...selectedPreferences.slice(selectedIndex + 1)];
+    }
+
+    setSelectedPreferences(newSelectedPreferences);
+  }
 
   return (
     <Paper>
@@ -20,13 +35,13 @@ const DietaryPreferencesTable = () => {
             <TableRow
               hover
               key={preference.id}
-              // selected={}
+              selected={selectedPreferences.indexOf(preference.id) !== -1}
             >
               <TableCell padding="checkbox">
                 <Checkbox
-                  // checked={}
+                  checked={selectedPreferences.indexOf(preference.id) !== -1}
                   color="primary"
-                  // onChange={}
+                  onChange={() => handleSelect(preference.id)}
                   // value="true"
                 />
                 {preference.name}
