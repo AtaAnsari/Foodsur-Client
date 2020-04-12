@@ -52,6 +52,7 @@ const dietaryPreferences = () => {
       <Box className={classes.buttonBox}>
         <Button
           color="primary"
+          onClick={() => console.log(selectedPreferences)}
           size="large"
           variant="contained"
         >
