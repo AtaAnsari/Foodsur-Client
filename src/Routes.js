@@ -9,6 +9,7 @@ import {
   Landing as LandingView,
   Login as LoginView,
   DietaryPreferences as DietaryPreferencesView,
+  DisplayUpc as DisplayUpcView,
   Dashboard as DashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
@@ -52,6 +53,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/dashboard"
+      />
+      <RouteWithLayout
+        component={DisplayUpcView}
+        exact
+        layout={MainLayout}
+        path="displayUpc"
       />
       <RouteWithLayout
         component={UserListView}

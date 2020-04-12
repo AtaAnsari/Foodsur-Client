@@ -12,3 +12,4 @@ export { default as Login } from './Login';
 export { default as SignUp } from './SignUp';
 export { default as Typography } from './Typography';
 export { default as UserList } from './UserList';
+export { default as DisplayUpc } from './DisplayUpc';
