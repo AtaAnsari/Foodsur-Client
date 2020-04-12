@@ -20,8 +20,9 @@ const useStyles = makeStyles(theme => ({
 
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState('')
+
   const classes = useStyles();
-  
   const history = useHistory();
 
   const handleSearch = () => {
@@ -33,7 +34,11 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
-      <SearchInput placeholder="Search for a food item"/>
+      <SearchInput
+        onChange={e => setSearchTerm(e.target.value)}
+        placeholder="Search for a food item"
+        value={searchTerm}
+      />
       <Box className={classes.searchButtonContainer}>
         <Button
           color="primary"
