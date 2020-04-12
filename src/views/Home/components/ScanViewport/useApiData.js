@@ -44,8 +44,6 @@ export function useApiData() {
     const dietLabels = res.data.dietLabels;
     setProduct(product.healthTags = healthLabels)
     setProduct(product.dietTags = dietLabels)
-    console.log("THIS IS THE RESPONSE", res)
-    console.log("THIS IS OUR PRODUCT", product)
   }
 
   return {
