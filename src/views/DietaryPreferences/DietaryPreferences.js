@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const dietaryPreferences = () => {
+const DietaryPreferences = () => {
   const classes = useStyles();
 
   const [selectedPreferences, setSelectedPreferences] = useState([]);
@@ -63,4 +63,4 @@ const dietaryPreferences = () => {
   )
 }
 
-export default dietaryPreferences;
+export default DietaryPreferences;
