@@ -7,5 +7,26 @@ export default function useUserRestrictions() {
     dietTags: []
   });
 
-return userRestrictions
+
+  const compareRestrictions = function (product) {
+
+    console.log(product);
+
+    const sharedRestricitions = []
+    const divergentRestrictions = []
+    product.healthTags.forEach(tag => {
+      if (userRestrictions.healthTags.includes(tag)) {
+        sharedRestricitions.push(tag)
+      } else {
+        divergentRestrictions.push(tag)
+      }
+    })
+    const restrictionData = {
+      sharedRestricitions,
+      divergentRestrictions
+    }
+    return restrictionData
+  }
+
+  return compareRestrictions
 }

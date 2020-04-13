@@ -9,7 +9,7 @@ import {
   Landing as LandingView,
   Login as LoginView,
   DietaryPreferences as DietaryPreferencesView,
-  DisplayUpc as DisplayUpcView,
+  DisplayProduct as DisplayProductView,
   DisplaySearch as DisplaySearchView,
   Dashboard as DashboardView,
   ProductList as ProductListView,
@@ -56,10 +56,10 @@ const Routes = () => {
         path="/dashboard"
       />
       <RouteWithLayout
-        component={DisplayUpcView}
+        component={DisplayProductView}
         exact
         layout={MainLayout}
-        path="/displayUpc"
+        path="/display-product"
       />
       <RouteWithLayout
         component={DisplaySearchView}

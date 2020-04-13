@@ -4,20 +4,14 @@ import axios from "axios"
 import useUserRestrictions from 'hooks/useUserRestrictions'
 
 export default function useApiData() {
-  // const [product, setProduct] = useState({
-  //   healthTags: [],
-  //   dietTags: [],
-  //   productName: "Monday"
-  // });
 
   let product = {}
-  const userRestrictions = useUserRestrictions();
 
   const FetchApiData = function (upcCode) {
     const upcUrl = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&upc=${upcCode}&app_id=7e7111eb&app_key=e019f6e0efdddb975bcbea5eeeb91c8c`
     let upcIngredients
 
-  return axios.get(upcUrl)
+    return axios.get(upcUrl)
       .then(res => {
         const name = res.data.hints[0].food.label
         product.productName = name
@@ -50,29 +44,8 @@ export default function useApiData() {
     console.log("THIS IS OUR PRODUCT", product)
   }
 
-  const compareRestrictions = function (product) {
-  
-    console.log(product);
-      
-      const sharedRestricitions = []
-      const divergentRestrictions = []
-      product.healthTags.forEach(tag =>{
-        if (userRestrictions.healthTags.includes(tag)){
-          sharedRestricitions.push(tag)
-        } else {
-          divergentRestrictions.push(tag)
-        }
-      })
-      const restrictionData = {
-        sharedRestricitions,
-        divergentRestrictions
-      }
-      return restrictionData
-    }
-
   return {
     FetchApiData,
-    compareRestrictions
   };
 
 }
