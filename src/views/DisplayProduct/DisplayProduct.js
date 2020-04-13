@@ -1,10 +1,10 @@
 import React from 'react'
 import { Divider } from '@material-ui/core';
 
-const DisplayUpc = (props) => {
+const DisplayProduct = (props) => {
   const productName = props.location.state.product.productName
   const allHealthTags = props.location.state.product.healthTags
-  const healthTagsArray = allHealthTags.map(tag =>  <h2>{tag}</h2>)
+  const healthTagsArray = allHealthTags.map(tag => <h2>{tag}</h2>)
 
   return (
     <div>
@@ -14,4 +14,4 @@ const DisplayUpc = (props) => {
   )
 }
 
-export default DisplayUpc
+export default DisplayProduct
