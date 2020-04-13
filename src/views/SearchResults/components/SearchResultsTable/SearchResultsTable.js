@@ -41,6 +41,11 @@ const SearchResultsTable = ({ searchResults }) => {
                   <TableCell>
                     {item.food.label}
                   </TableCell>
+                  <TableCell
+                    align="right"
+                  >
+                    <i className="fas fa-chevron-right"/>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
