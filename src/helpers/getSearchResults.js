@@ -12,7 +12,23 @@ export const getSearchResults = async(searchTerm) => {
     console.log(error)
   }
 
-  const searchResults = searchData.data.hints.slice(0, 10)
+  // Returns only the items that have a unique name (label)
+  const getUniqueItems = items => {
+    const uniqueItems = []
+    const itemLabels = []
+    
+    items.forEach(item => {
+      if (!itemLabels.includes(item.food.label.toLowerCase())) {
+        uniqueItems.push(item);
+        itemLabels.push(item.food.label.toLowerCase());
+      }
+    });
+
+    return uniqueItems;
+  }
+
+  // Gets 10 unique items from searchData
+  const searchResults = getUniqueItems(searchData.data.hints).slice(0, 10);
 
   return searchResults;
 }
