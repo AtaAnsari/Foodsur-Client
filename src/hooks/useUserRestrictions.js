@@ -9,24 +9,28 @@ export default function useUserRestrictions() {
 
 
   const compareRestrictions = function (product) {
-
-    console.log(product);
-
+    console.log('PRODUCT', product);
     const sharedRestricitions = []
     const divergentRestrictions = []
-    product.healthTags.forEach(tag => {
-      if (userRestrictions.healthTags.includes(tag)) {
+    userRestrictions.healthTags.forEach(tag => {
+      if (product.healthTags.includes(tag)) {
         sharedRestricitions.push(tag)
       } else {
         divergentRestrictions.push(tag)
       }
     })
-    const restrictionData = {
+    userRestrictions.dietTags.forEach(tag => {
+      if (product.dietTags.includes(tag)) {
+        sharedRestricitions.push(tag)
+      } else {
+        divergentRestrictions.push(tag)
+      }
+    })
+    return {
       sharedRestricitions,
       divergentRestrictions
     }
-    return restrictionData
   }
 
-  return compareRestrictions
+  return {compareRestrictions}
 }
