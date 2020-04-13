@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Table,
   TableRow,
@@ -22,9 +23,12 @@ const useStyles = makeStyles(theme => ({
 const SearchResultsTable = ({ searchResults }) => {
   const classes = useStyles();
 
+  const history = useHistory();
+
   const { isolateProductData } = useApiData()
 
-  const handleClick = item => {
+  // Gets product data from the item and sends it to /display-product
+  const handleClick = async item => {
     const product = { productName: item.food.label }
     const ingredients = {
       'ingredients': [
@@ -35,7 +39,12 @@ const SearchResultsTable = ({ searchResults }) => {
         }
       ]
     }
-    console.log(product, ingredients);
+    const productData = await isolateProductData(ingredients, product);
+
+    history.push({
+      pathname: '/display-product',
+      state: { product: productData}
+    })
   }
 
   return (
