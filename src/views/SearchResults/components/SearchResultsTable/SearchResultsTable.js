@@ -7,13 +7,22 @@ import {
   Paper
 } from '@material-ui/core';
 
-const SearchResultsTable = props => {
+const SearchResultsTable = ({ searchResults }) => {
 
   return (
     <Paper>
       <Table>
         <TableBody>
-
+          {searchResults.map((item, idx) => (
+            <TableRow
+              key={idx}
+              onClick={() => console.log(item.food.label)}
+            >
+              <TableCell>
+                {item.food.label}
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </ Table>
     </Paper>
