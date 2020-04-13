@@ -14,7 +14,7 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import Axios from 'axios';
+import axios from 'axios';
 
 const schema = {
   userName: {
@@ -186,11 +186,15 @@ const SignUp = props => {
   const registerUser = (e) => {
     e.preventDefault()
 
-    Axios.post('http://localhost:8080/api/users/new', {
-      username: 'test',
-      email: 'test',
-      password: 'test'
-    }).then(res => console.log('ok'))
+    const userData = {
+      username: formState.values.userName,
+      email: formState.values.email,
+      password: formState.values.password
+    }
+    console.log(userData)
+    axios.post('http://localhost:8080/api/users/new', userData)
+      .then(res => console.log(res.status))
+      .catch(err => console.log(err))
   }
 
   return (
