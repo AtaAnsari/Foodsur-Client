@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { SearchResultsTable } from './components'
-import { useSearchResults } from 'hooks/useSearchResults'
+import { getSearchResults } from 'helpers/getSearchResults'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +23,7 @@ const SearchResults = props => {
 
   // Fetch the search results and set as state
   useEffect(() => {
-    useSearchResults(searchTerm)
+    getSearchResults(searchTerm)
       .then(newResults => setResults(newResults));
   }, []);
 
