@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from "react-dom";
 import { useHistory } from 'react-router-dom';
-import { Button, Box } from '@material-ui/core';
+import { Button, Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { SearchInput } from '../../components'
 import {ScanViewport} from './components'
@@ -21,9 +21,18 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('')
+  const [error, setError] = useState('')
 
   const classes = useStyles();
   const history = useHistory();
+
+  const validateSearch = () => {
+    if (searchTerm) {
+      handleSearch();
+    } else {
+      setError('error');
+    }
+  }
 
   const handleSearch = () => {
     history.push({
@@ -39,10 +48,17 @@ const Home = () => {
         placeholder="Search for a food item"
         value={searchTerm}
       />
+      {error &&
+        <Typography
+          color="error"
+          variant="h6"
+        >
+          Please enter a search term
+        </Typography>}
       <Box className={classes.searchButtonContainer}>
         <Button
           color="primary"
-          onClick={handleSearch}
+          onClick={validateSearch}
           variant="contained"
         >
           Search
