@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Table,
   TableRow,
@@ -8,6 +9,7 @@ import {
   Paper
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import useApiData from 'hooks/useApiData';
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -20,6 +22,30 @@ const useStyles = makeStyles(theme => ({
 
 const SearchResultsTable = ({ searchResults }) => {
   const classes = useStyles();
+
+  const history = useHistory();
+
+  const { isolateProductData } = useApiData()
+
+  // Gets product data from the item and sends it to /display-product
+  const handleClick = async item => {
+    const product = { productName: item.food.label }
+    const ingredients = {
+      'ingredients': [
+        {
+          'quantity': 1,
+          'measureURI': item.measures[0].uri,
+          'foodId': item.food.foodId
+        }
+      ]
+    }
+    const productData = await isolateProductData(ingredients, product);
+
+    history.push({
+      pathname: '/display-product',
+      state: { product: productData}
+    })
+  }
 
   return (
     <>
@@ -39,7 +65,7 @@ const SearchResultsTable = ({ searchResults }) => {
               {searchResults.map((item, idx) => (
                 <TableRow
                   key={idx}
-                  onClick={() => console.log(item.food.label)}
+                  onClick={() => handleClick(item)}
                 >
                   <TableCell className={classes.foodItem}>
                     {item.food.label.toLowerCase()}
