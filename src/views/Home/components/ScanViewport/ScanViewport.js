@@ -30,24 +30,22 @@ const useStyles = makeStyles(theme => ({
 
 const ScanViewport = () => {
   const classes = useStyles();
-  const { FetchApiData } = useApiData();
+  const { FetchApiData, isolateProductData } = useApiData();
   const [camera, setCamera] = useState(false);
   const [result, setResult] = useState(null);
 
   const history = useHistory()
 
-  const onDetected = result => {
+  const onDetected = async result => {
+    const {upcIngredients, product} = await FetchApiData(result)
     setResult(result);
-    FetchApiData(result)
-      .then(res => {
+    const res = await isolateProductData(upcIngredients, product)
         history.push({
           pathname: "/display-product",
           state: {
             product: res
           }
         })
-      })
-
   };
 
 
@@ -86,4 +84,5 @@ const ScanViewport = () => {
 };
 
 export default ScanViewport;
+
 
