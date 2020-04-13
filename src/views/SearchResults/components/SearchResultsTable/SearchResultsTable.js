@@ -8,6 +8,7 @@ import {
   Paper
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import useApiData from 'hooks/useApiData';
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -20,6 +21,22 @@ const useStyles = makeStyles(theme => ({
 
 const SearchResultsTable = ({ searchResults }) => {
   const classes = useStyles();
+
+  const { isolateProductData } = useApiData()
+
+  const handleClick = item => {
+    const product = { productName: item.food.label }
+    const ingredients = {
+      'ingredients': [
+        {
+          'quantity': 1,
+          'measureURI': item.measures[0].uri,
+          'foodId': item.food.foodId
+        }
+      ]
+    }
+    console.log(product, ingredients);
+  }
 
   return (
     <>
@@ -39,7 +56,7 @@ const SearchResultsTable = ({ searchResults }) => {
               {searchResults.map((item, idx) => (
                 <TableRow
                   key={idx}
-                  onClick={() => console.log(item.food.label)}
+                  onClick={() => handleClick(item)}
                 >
                   <TableCell className={classes.foodItem}>
                     {item.food.label.toLowerCase()}
