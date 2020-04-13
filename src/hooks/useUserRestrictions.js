@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-export function useUserRestrictions() {
+export default function useUserRestrictions() {
   const [userRestrictions, setUserRestrictions] = useState({
-    restrictions: []
+    healthTags: ["SUGAR_CONSCIOUS", "PEANUT_FREE", "TREE_NUT_FREE", "ALCOHOL_FREE", "STONE_FREE"],
+    dietTags: []
   });
 
-
-  
-
-  return {
-    FetchApiData
-  };
-
+return userRestrictions
 }

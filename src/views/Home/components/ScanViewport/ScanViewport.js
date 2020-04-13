@@ -4,8 +4,9 @@ import ReactDOM from 'react-dom';
 import { Box, Button, Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import '../Scanner/styles.css';
-import {useApiData} from './useApiData'
+import useApiData from 'hooks/useApiData'
 import axios from "axios"
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,11 +34,19 @@ const ScanViewport = () => {
   const {FetchApiData} = useApiData();
   const [camera, setCamera] = useState(false);
   const [result, setResult] = useState(null);
-  
+
+  const history = useHistory()
 
   const onDetected = result => {
     setResult(result);
-    FetchApiData(result);
+    FetchApiData(result)
+    .then(res => {history.push({
+      pathname: "/displayupc",
+      state: {
+        product: res
+      }
+      })})
+    
   };
 
   
