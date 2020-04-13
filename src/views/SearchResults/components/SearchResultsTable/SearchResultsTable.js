@@ -12,6 +12,9 @@ import { makeStyles } from '@material-ui/styles';
 const useStyles = makeStyles(theme => ({
   content: {
     marginTop: theme.spacing(5)
+  },
+  foodItem: {
+    textTransform: 'capitalize'
   }
 }));
 
@@ -38,8 +41,8 @@ const SearchResultsTable = ({ searchResults }) => {
                   key={idx}
                   onClick={() => console.log(item.food.label)}
                 >
-                  <TableCell>
-                    {item.food.label}
+                  <TableCell className={classes.foodItem}>
+                    {item.food.label.toLowerCase()}
                   </TableCell>
                   <TableCell
                     align="right"
