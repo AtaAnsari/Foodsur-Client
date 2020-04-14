@@ -28,8 +28,8 @@ const Login = () => {
     const userData = { email: userEmail }
     axios.post('http://localhost:8080/api/users/login', userData)
       .then(res => {
-        if (res.data === 'Success') {
-          setCookie('session', '1', { path: '/' });
+        if (res.data.success) {
+          setCookie('session', res.data.userId, { path: '/' });
           history.push('/home');
         } else {
           console.log('Error');
