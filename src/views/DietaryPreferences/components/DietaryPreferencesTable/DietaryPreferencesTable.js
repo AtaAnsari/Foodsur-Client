@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Table,
   TableRow,
@@ -10,15 +10,21 @@ import {
 import useDietaryPreferences from 'hooks/useDietaryPreferences'
 
 const DietaryPreferencesTable = props => {
+  const [preferences, setPreferences] = useState('');
+
   const { handleSelect, selectedPreferences } = props;
 
-  const preferences = useDietaryPreferences();
+  // Fetch dietary preferences from database and set to state
+  useEffect(() => {
+    useDietaryPreferences()
+      .then(newPreferences => setPreferences(newPreferences.data));
+  }, [])
 
   return (
     <Paper>
       <Table>
         <TableBody>
-          {preferences.map(preference => (
+          {preferences && preferences.map(preference => (
             <TableRow
               key={preference.id}
               onClick={() => handleSelect(preference.id)}
