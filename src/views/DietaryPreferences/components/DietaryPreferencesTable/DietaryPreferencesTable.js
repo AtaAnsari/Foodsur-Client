@@ -7,12 +7,9 @@ import {
   TableBody,
   Paper
 } from '@material-ui/core';
-import useDietaryPreferences from 'hooks/useDietaryPreferences'
 
 const DietaryPreferencesTable = props => {
-  const { handleSelect, selectedPreferences } = props;
-
-  const preferences = useDietaryPreferences();
+  const { handleSelect, preferences, selectedPreferences } = props;
 
   return (
     <Paper>
