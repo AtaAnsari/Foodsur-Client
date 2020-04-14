@@ -28,9 +28,9 @@ return (
           container
           justify="space-between"
         >
-            <Grid item>
-              <Typography className={classes.contentPosition} variant="h3">{tag}</Typography>
-            </Grid>
+          <Grid item>
+            <Typography className={classes.contentPosition} variant="h3">{tag}</Typography>
+          </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
               <DoneIcon className={classes.icon} />
