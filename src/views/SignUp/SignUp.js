@@ -185,15 +185,19 @@ const SignUp = props => {
 
   const registerUser = (e) => {
     e.preventDefault()
-
     const userData = {
       username: formState.values.userName,
       email: formState.values.email,
       password: formState.values.password
     }
-    console.log(userData)
     axios.post('http://localhost:8080/api/users/new', userData)
-      .then(res => console.log(res.status))
+      .then(res => {
+        if (res.data === 'Success') {
+          history.push('/dietary-preferences')
+        } else {
+          console.log('Error!')
+        }
+      })
       .catch(err => console.log(err))
   }
 
