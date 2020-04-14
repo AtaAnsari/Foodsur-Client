@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Table,
   TableRow,
@@ -7,24 +7,15 @@ import {
   TableBody,
   Paper
 } from '@material-ui/core';
-import getDietaryPreferences from 'helpers/getDietaryPreferences'
 
 const DietaryPreferencesTable = props => {
-  const [preferences, setPreferences] = useState('');
-
-  const { handleSelect, selectedPreferences } = props;
-
-  // Fetch dietary preferences from database and set to state
-  useEffect(() => {
-    getDietaryPreferences()
-      .then(newPreferences => setPreferences(newPreferences.data));
-  }, [])
+  const { handleSelect, preferences, selectedPreferences } = props;
 
   return (
     <Paper>
       <Table>
         <TableBody>
-          {preferences && preferences.map(preference => (
+          {preferences.map(preference => (
             <TableRow
               key={preference.id}
               onClick={() => handleSelect(preference.id)}
