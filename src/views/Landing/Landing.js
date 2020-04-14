@@ -15,9 +15,21 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: "cover",
     backgroundAttachment: "fixed"
   },
-  buttonStyle: {
+  loginButtonStyle: {
     marginTop: '0.5rem',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    width: "200px",
+    position: 'absolute', 
+        left: '27%', 
+        top: '50%',
+  },
+  signupButtonStyle: {
+    marginTop: '0.5rem',
+    marginBottom: '1rem',
+    width: "200px",
+    position: 'absolute', 
+        left: '27%', 
+        top: '58%',
   },
   cardStyle: {
     padding: '1rem'
@@ -52,10 +64,11 @@ const Landing = () => {
             Find the Right Food For You
           </Typography>
         </div>
+        {/* <Box display="flex" flexDirection="column" justifyContent="center"> */}
         <Button variant='contained'
           color='primary'
           fullWidth={true}
-          className={classes.buttonStyle}
+          className={classes.loginButtonStyle}
           onClick={handleLogin}>
           Login
         </Button>
@@ -63,10 +76,11 @@ const Landing = () => {
           variant='contained'
           color='primary'
           fullWidth={true}
-          className={classes.buttonStyle}
+          className={classes.signupButtonStyle}
           onClick={handleSignUp}>
           Sign up
         </Button>
+        {/* </Box> */}
         
     </Container >
   )
