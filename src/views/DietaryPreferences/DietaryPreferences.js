@@ -3,6 +3,7 @@ import { Typography, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { DietaryPreferencesTable } from './components'
 import getDietaryPreferences from 'helpers/getDietaryPreferences'
+import axios from 'axios'
 
 
 const useStyles = makeStyles(theme => ({
@@ -45,8 +46,9 @@ const DietaryPreferences = () => {
     setSelectedPreferences(newSelectedPreferences);
   }
 
-  const storePreferences = () => {
-    console.log(selectedPreferences)
+  const storePreferences = async () => {
+    const preferences = { selectedPreferences }
+    await axios.post('http://localhost:8080/api/', preferences)
   }
 
   return (
@@ -69,7 +71,7 @@ const DietaryPreferences = () => {
           <Box className={classes.buttonBox}>
             <Button
               color="primary"
-              onClick={() => storePreferences}
+              onClick={storePreferences}
               size="large"
               variant="contained"
             >
