@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = () => {
+
   const history = useHistory()
   const classes = useStyles();
 
@@ -30,7 +31,6 @@ const Login = () => {
           console.log('Error')
         }
       })
-
   }
 
   return (

@@ -24,7 +24,7 @@ const DietaryPreferences = () => {
 
   const [preferences, setPreferences] = useState('');
   const [selectedPreferences, setSelectedPreferences] = useState([]);
-  
+
   // Fetch dietary preferences from database and set to state
   useEffect(() => {
     getDietaryPreferences()
@@ -43,6 +43,10 @@ const DietaryPreferences = () => {
     }
 
     setSelectedPreferences(newSelectedPreferences);
+  }
+
+  const storePreferences = () => {
+    console.log(selectedPreferences)
   }
 
   return (
@@ -65,7 +69,7 @@ const DietaryPreferences = () => {
           <Box className={classes.buttonBox}>
             <Button
               color="primary"
-              onClick={() => console.log(selectedPreferences)}
+              onClick={() => storePreferences}
               size="large"
               variant="contained"
             >
