@@ -16,20 +16,14 @@ const useStyles = makeStyles(theme => ({
     backgroundAttachment: "fixed"
   },
   loginButtonStyle: {
-    marginTop: '0.5rem',
+    marginTop: '2rem',
     marginBottom: '1rem',
-    width: "200px",
-    position: 'absolute', 
-        left: '27%', 
-        top: '50%',
+    width: "200px"
   },
   signupButtonStyle: {
     marginTop: '0.5rem',
     marginBottom: '1rem',
-    width: "200px",
-    position: 'absolute', 
-        left: '27%', 
-        top: '58%',
+    width: "200px"
   },
   cardStyle: {
     padding: '1rem'
@@ -37,9 +31,16 @@ const useStyles = makeStyles(theme => ({
   backgroundFilter: {
     backgroundColor: fade(theme.palette.primary.main, 0.5)
   },
-    tagLine: {
-      color: theme.palette.black
-    }
+  tagLine: {
+    color: theme.palette.black
+  },
+  buttonsContainer: {
+    flexDirection: "column",
+    display: "flex",
+    alignItems: "center"
+
+
+  }
   
 }));
 
@@ -59,12 +60,15 @@ const Landing = () => {
   const classes = useStyles()
   return (
     <Container className={classes.root}>
+  
+    <Box className={classes.buttonsContainer}>
+  
         <div className={classes.backgroundFilter}>
           <Typography className={classes.tagLine} variant='h1' gutterBottom={true} align={'center'} color={'text'}>
             Find the Right Food For You
           </Typography>
         </div>
-        {/* <Box display="flex" flexDirection="column" justifyContent="center"> */}
+        
         <Button variant='contained'
           color='primary'
           fullWidth={true}
@@ -72,6 +76,7 @@ const Landing = () => {
           onClick={handleLogin}>
           Login
         </Button>
+        
         <Button
           variant='contained'
           color='primary'
@@ -80,8 +85,7 @@ const Landing = () => {
           onClick={handleSignUp}>
           Sign up
         </Button>
-        {/* </Box> */}
-        
+        </Box>      
     </Container >
   )
 }
