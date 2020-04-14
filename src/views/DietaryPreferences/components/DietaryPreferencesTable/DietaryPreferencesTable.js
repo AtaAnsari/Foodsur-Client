@@ -7,7 +7,7 @@ import {
   TableBody,
   Paper
 } from '@material-ui/core';
-import useDietaryPreferences from 'hooks/useDietaryPreferences'
+import getDietaryPreferences from 'helpers/getDietaryPreferences'
 
 const DietaryPreferencesTable = props => {
   const [preferences, setPreferences] = useState('');
@@ -16,7 +16,7 @@ const DietaryPreferencesTable = props => {
 
   // Fetch dietary preferences from database and set to state
   useEffect(() => {
-    useDietaryPreferences()
+    getDietaryPreferences()
       .then(newPreferences => setPreferences(newPreferences.data));
   }, [])
 
