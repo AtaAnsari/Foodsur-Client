@@ -14,6 +14,7 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import axios from 'axios';
 
 const schema = {
   userName: {
@@ -179,13 +180,26 @@ const SignUp = props => {
     history.goBack();
   };
 
-  const handleSignUp = event => {
-    event.preventDefault();
-    history.push('/');
-  };
-
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
+
+  const registerUser = (e) => {
+    e.preventDefault()
+    const userData = {
+      username: formState.values.userName,
+      email: formState.values.email,
+      password: formState.values.password
+    }
+    axios.post('http://localhost:8080/api/users/new', userData)
+      .then(res => {
+        if (res.data === 'Success') {
+          history.push('/dietary-preferences')
+        } else {
+          console.log('Error!')
+        }
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <div className={classes.root}>
@@ -208,7 +222,7 @@ const SignUp = props => {
             <div className={classes.contentBody}>
               <form
                 className={classes.form}
-                onSubmit={handleSignUp}
+                onSubmit={registerUser}
               >
                 <Typography
                   className={classes.title}
@@ -220,7 +234,7 @@ const SignUp = props => {
                   color="textSecondary"
                   gutterBottom
                 >
-                  Use your email to create new account
+                  Use your email to create an account
                 </Typography>
                 <TextField
                   className={classes.textField}
