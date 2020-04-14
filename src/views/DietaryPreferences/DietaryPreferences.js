@@ -47,8 +47,8 @@ const DietaryPreferences = () => {
   }
 
   const storePreferences = async () => {
-    const preferences = { selectedPreferences }
-    await axios.post('http://localhost:8080/api/', preferences)
+    const userPreferences = { selectedPreferences }
+    await axios.post('http://localhost:8080/api/user-data/user-restrictions', userPreferences)
   }
 
   return (
