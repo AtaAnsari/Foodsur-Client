@@ -12,6 +12,8 @@ import './assets/scss/index.scss';
 import validators from './common/validators';
 import Routes from './Routes';
 
+import { CookiesProvider } from 'react-cookie';
+
 const browserHistory = createBrowserHistory();
 
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
@@ -46,11 +48,13 @@ export default class App extends Component {
       //   </ul>
       // </div>
 
-      <ThemeProvider theme={theme}>
-        <Router history={browserHistory}>
-          <Routes />
-        </Router>
-      </ThemeProvider>
+      <CookiesProvider>
+        <ThemeProvider theme={theme}>
+          <Router history={browserHistory}>
+            <Routes />
+          </Router>
+        </ThemeProvider>
+      </CookiesProvider>
     );
   }
 }
