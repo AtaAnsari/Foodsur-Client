@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 const Login = () => {
   const [userEmail, setUserEmail] = useState('');
 
-  const [cookies, setCookie] = useCookies(['user_id']);
+  const [cookies, setCookie] = useCookies(['session']);
 
   const history = useHistory()
   const classes = useStyles();
