@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Typography, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { DietaryPreferencesTable } from './components'
 import getDietaryPreferences from 'helpers/getDietaryPreferences'
+import axios from 'axios'
 
 
 const useStyles = makeStyles(theme => ({
@@ -21,10 +23,11 @@ const useStyles = makeStyles(theme => ({
 
 const DietaryPreferences = () => {
   const classes = useStyles();
+  const history = useHistory()
 
   const [preferences, setPreferences] = useState('');
   const [selectedPreferences, setSelectedPreferences] = useState([]);
-  
+
   // Fetch dietary preferences from database and set to state
   useEffect(() => {
     getDietaryPreferences()
@@ -43,6 +46,16 @@ const DietaryPreferences = () => {
     }
 
     setSelectedPreferences(newSelectedPreferences);
+  }
+
+  const storePreferences = () => {
+    const userPreferences = { selectedPreferences }
+    axios.post('http://localhost:8080/api/user-data/user-preferences', userPreferences)
+      .then(res => {
+        if (res.data === 'Success') {
+          history.push('/home')
+        }
+      })
   }
 
   return (
@@ -65,7 +78,7 @@ const DietaryPreferences = () => {
           <Box className={classes.buttonBox}>
             <Button
               color="primary"
-              onClick={() => console.log(selectedPreferences)}
+              onClick={storePreferences}
               size="large"
               variant="contained"
             >
