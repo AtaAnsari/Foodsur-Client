@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Container, TextField, Typography, Button } from '@material-ui/core';
 import axios from 'axios'
+import { useCookies } from 'react-cookie';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,21 +16,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = () => {
+  const [userEmail, setUserEmail] = useState('');
+
+  const [cookies, setCookie] = useCookies(['session']);
 
   const history = useHistory()
   const classes = useStyles();
-
-  const [userEmail, setUserEmail] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault()
     const userData = { email: userEmail }
     axios.post('http://localhost:8080/api/users/login', userData)
       .then(res => {
-        if (res.data === 'Success') {
-          history.push('/home')
+        if (res.data.success) {
+          setCookie('session', res.data.userId, { path: '/' });
+          history.push('/home');
         } else {
-          console.log('Error')
+          console.log('Error');
         }
       })
   }

@@ -40,6 +40,7 @@
     "quagga": "^0.12.1",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
+    "react-cookie": "^4.0.3",
     "react-dom": "^16.8.6",
     "react-perfect-scrollbar": "^1.5.3",
     "react-router-dom": "^5.1.2",
