@@ -12,6 +12,7 @@ import {
   DisplayProduct as DisplayProductView,
   DisplaySearch as DisplaySearchView,
   SearchResults as SearchResultsView,
+  UserFavourites as UserFavouritesView,
   Dashboard as DashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
@@ -73,6 +74,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/search-results"
+      />
+      <RouteWithLayout
+        component={UserFavouritesView}
+        exact
+        layout={MainLayout}
+        path='/user-favourites'
       />
       <RouteWithLayout
         component={UserListView}
