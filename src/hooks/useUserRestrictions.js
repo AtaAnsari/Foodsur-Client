@@ -9,7 +9,7 @@ export default function useUserRestrictions() {
 
 
   const compareRestrictions = function (product) {
-    console.log('PRODUCT', product);
+    
     const sharedRestricitions = []
     const divergentRestrictions = []
     userRestrictions.healthTags.forEach(tag => {

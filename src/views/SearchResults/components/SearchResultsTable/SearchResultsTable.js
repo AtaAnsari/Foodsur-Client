@@ -29,7 +29,10 @@ const SearchResultsTable = ({ searchResults }) => {
 
   // Gets product data from the item and sends it to /display-product
   const handleClick = async item => {
-    const product = { productName: item.food.label }
+    const product = { 
+      productName: item.food.label,
+      productId:item.food.foodId
+    }
     const ingredients = {
       'ingredients': [
         {

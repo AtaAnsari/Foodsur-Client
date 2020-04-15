@@ -8,21 +8,24 @@ export default function useApiData() {
     const upcUrl = `https://api.edamam.com/api/food-database/parser?nutrition-type=logging&upc=${upcCode}&app_id=7e7111eb&app_key=e019f6e0efdddb975bcbea5eeeb91c8c`
     let upcIngredients
     const res = await axios.get(upcUrl)
-        const name = res.data.hints[0].food.label
-        upcIngredients = {
-          "ingredients": [
-            {
-              "quantity": 1,
-              "measureURI": res.data.hints[0].measures[0].uri,
-              "foodId": res.data.hints[0].food.foodId
-            }
-          ]
+    const name = res.data.hints[0].food.label
+    const productId = res.data.hints[0].food.foodId
+    upcIngredients = {
+      "ingredients": [
+        {
+          "quantity": 1,
+          "measureURI": res.data.hints[0].measures[0].uri,
+          "foodId": productId
         }
-      const product = {productName: name}
-      return {
-        upcIngredients,
-        product
-        }
+      ]
+    }
+    const product = {productName: name,
+    productId: productId}
+    console.log('PRODUCTID', productId);
+    return {
+      upcIngredients,
+      product
+      }
       
     }
   
