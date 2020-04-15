@@ -54,12 +54,14 @@ const DietaryPreferences = () => {
 
   // Stores user's selected dietary preferences in db, goes to /home
   const storePreferences = () => {
-    const userData = { userId: cookies.session, selectedPreferences }
-    console.log(userData);
+    const userData = { userId: cookies.session, selectedPreferences };
+
     axios.post('http://localhost:8080/api/user-data/user-preferences', userData)
       .then(res => {
         if (res.data === 'Success') {
-          // history.push('/home')
+          history.push('/home');
+        } else {
+          console.log('Could not save dietary preferences to database');
         }
       })
   }
