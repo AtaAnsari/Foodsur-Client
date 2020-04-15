@@ -51,17 +51,18 @@ const CustomRouterLink = forwardRef((props, ref) => (
 ));
 
 const SidebarNav = props => {
-  const { pages, className, ...rest } = props;
+  const { pages, closeSidebar, className, ...rest } = props;
 
   const classes = useStyles();
 
   const [cookies, setCookie, removeCookie] = useCookies(['session']);
 
-  // Removes session cookie if 'Logout' is clicked
+  // Removes session cookie if 'Logout' is clicked, and closes the sidebar
   const handleClick = page => {
     if (page.title === 'Logout') {
       removeCookie('session');
     }
+    closeSidebar();
   }
 
   return (

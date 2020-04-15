@@ -107,6 +107,7 @@ const Sidebar = props => {
         <Divider className={classes.divider} />
         <SidebarNav
           className={classes.nav}
+          closeSidebar={onClose}
           pages={pages}
         />
         <UpgradePlan />
