@@ -2,10 +2,10 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 export default function useUserRestrictions() {
-  const [userRestrictions, setUserRestrictions] = useState({
-    healthTags: ["SUGAR_CONSCIOUS", "PEANUT_FREE", "TREE_NUT_FREE", "ALCOHOL_FREE"],
+  const userRestrictions = {
+    healthTags: ['SUGAR_CONSCIOUS', 'PEANUT_FREE', 'TREE_NUT_FREE', 'ALCOHOL_FREE'],
     dietTags: []
-  });
+  }
 
 
   const compareRestrictions = function (product) {
