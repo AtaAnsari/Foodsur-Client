@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles';
 import {Card, CardHeader, Divider, CardContent, Typography, Button, Box} from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +27,22 @@ const useStyles = makeStyles((theme) => ({
 
 const SummaryCardPass = (props) => {
 
+  const addFavourite = () => {
+    const productDetails = {
+      productName: props.productName,
+      api_id: props.productId
+    }
+    axios.post('http://localhost:8080/api/user-data/add-favourites', productDetails)
+
+    console.log("PRODUCT DETAILS", productDetails)
+    // const userPreferences = { selectedPreferences }
+    // axios.post('http://localhost:8080/api/user-data/user-preferences', userPreferences)
+    //   .then(res => {
+    //     if (res.data === 'Success') {
+    //       history.push('/home')
+        // }
+      // })
+  }
   const classes = useStyles();
   return(
   <div>
@@ -49,6 +65,7 @@ const SummaryCardPass = (props) => {
         <Button variant='contained'
               color='primary'
               className={classes.buttonStyle}
+              onClick={addFavourite}
             >
               Add to Favourites
         </Button>

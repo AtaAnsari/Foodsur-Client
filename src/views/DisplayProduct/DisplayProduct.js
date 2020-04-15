@@ -36,6 +36,8 @@ const formattedShared = sharedRestricitions.map(tag => tag.split('_').join(' '))
 const formattedDivergent = divergentRestrictions.map(tag => tag.split('_').join(' '))
 
 const productName = props.location.state.product.productName
+const productId = props.location.state.product.productId
+
 
 const shared = formattedShared.map(tag => <PassCard tag={tag} />)
 
@@ -51,6 +53,7 @@ const divergent = formattedDivergent.map(tag => <RestrictionCard tag={tag} />)
             /> :
             <SummaryCardPass
             productName={productName}
+            productId={productId}
             shared={shared}
             divergent={divergent}
             />}
