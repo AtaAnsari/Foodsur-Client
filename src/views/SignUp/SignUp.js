@@ -14,7 +14,10 @@ import {
   Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
+
 
 const schema = {
   userName: {
@@ -140,6 +143,8 @@ const SignUp = props => {
 
   const classes = useStyles();
 
+  const [cookies, setCookie] = useCookies(['session']);
+
   const [formState, setFormState] = useState({
     isValid: false,
     values: {},
@@ -192,8 +197,9 @@ const SignUp = props => {
     }
     axios.post('http://localhost:8080/api/users/new', userData)
       .then(res => {
-        if (res.data === 'Success') {
-          history.push('/dietary-preferences')
+        if (res.data.success) {
+          setCookie('session', res.data.userId, { path: '/' });
+          history.push('/dietary-preferences');
         } else {
           console.log('Error!')
         }
