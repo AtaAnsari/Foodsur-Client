@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-
+// Returns a function which produces a set of restrictions the user has and the product meets, and a set of restrictions the user has and the product doesn't meet
 export default function useUserRestrictions() {
   const userRestrictions = {
     healthTags: ['SUGAR_CONSCIOUS', 'PEANUT_FREE', 'TREE_NUT_FREE', 'ALCOHOL_FREE'],
-    dietTags: []
-  }
+    dietTags: ['LOW_CARB', 'HIGH_PROTEIN']
+  };
 
-
-  const compareRestrictions = function (product) {
+  const compareRestrictions = function(product) {
     console.log('PRODUCT', product);
+
     const sharedRestricitions = []
     const divergentRestrictions = []
+
     userRestrictions.healthTags.forEach(tag => {
       if (product.healthTags.includes(tag)) {
         sharedRestricitions.push(tag)
@@ -26,6 +25,7 @@ export default function useUserRestrictions() {
         divergentRestrictions.push(tag)
       }
     })
+
     return {
       sharedRestricitions,
       divergentRestrictions
