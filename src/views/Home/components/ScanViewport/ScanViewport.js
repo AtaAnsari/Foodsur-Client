@@ -76,9 +76,10 @@ const ScanViewport = () => {
             />}
         </Button>
       </Box>
-      <div className="container">
+      {camera? <div className="container">
         {camera && <Scanner onDetected={onDetected} />}
-      </div>
+      </div> : <div></div>}
+      
     </div>
   );
 };

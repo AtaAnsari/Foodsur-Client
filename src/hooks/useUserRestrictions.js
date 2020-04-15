@@ -3,7 +3,7 @@ import axios from "axios"
 
 export default function useUserRestrictions() {
   const [userRestrictions, setUserRestrictions] = useState({
-    healthTags: ["SUGAR_CONSCIOUS", "PEANUT_FREE", "TREE_NUT_FREE", "ALCOHOL_FREE", "CARBON_FREE"],
+    healthTags: ["SUGAR_CONSCIOUS", "PEANUT_FREE", "TREE_NUT_FREE", "ALCOHOL_FREE"],
     dietTags: []
   });
 

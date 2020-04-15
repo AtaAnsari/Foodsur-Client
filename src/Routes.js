@@ -47,7 +47,7 @@ const Routes = () => {
       <RouteWithLayout
         component={HomeView}
         exact
-        layout={MainLayout}
+        layout={MinimalLayout}
         path="/home"
       />
       <RouteWithLayout
