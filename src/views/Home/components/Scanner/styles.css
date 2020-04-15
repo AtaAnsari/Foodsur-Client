@@ -5,14 +5,14 @@
 .container,
 #interactive.viewport {
   width: 70vw;
-  height: 40vh;
+  height: 20vh;
   margin: 0 auto;
 }
 
 #interactive.viewport canvas,
 video {
   width: 70vw;
-  height: 40vh;
+  height: 20vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -21,5 +21,5 @@ video {
 #interactive.viewport canvas.drawingBuffer,
 video.drawingBuffer {
   width: 70vw;
-  height: 40vh;
+  height: 20vh;
 }
