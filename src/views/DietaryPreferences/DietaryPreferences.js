@@ -4,7 +4,9 @@ import { Typography, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { DietaryPreferencesTable } from './components'
 import getDietaryPreferences from 'helpers/getDietaryPreferences'
+
 import axios from 'axios'
+import { useCookies } from 'react-cookie';
 
 
 const useStyles = makeStyles(theme => ({
@@ -28,6 +30,8 @@ const DietaryPreferences = () => {
   const [preferences, setPreferences] = useState('');
   const [selectedPreferences, setSelectedPreferences] = useState([]);
 
+  const [cookies] = useCookies(['session']);
+
   // Fetch dietary preferences from database and set to state
   useEffect(() => {
     getDietaryPreferences()
@@ -48,12 +52,16 @@ const DietaryPreferences = () => {
     setSelectedPreferences(newSelectedPreferences);
   }
 
+  // Stores user's selected dietary preferences in db, goes to /home
   const storePreferences = () => {
-    const userPreferences = { selectedPreferences }
-    axios.post('http://localhost:8080/api/user-data/user-preferences', userPreferences)
+    const userData = { userId: cookies.session, selectedPreferences };
+
+    axios.post('http://localhost:8080/api/user-data/user-preferences', userData)
       .then(res => {
         if (res.data === 'Success') {
-          history.push('/home')
+          history.push('/home');
+        } else {
+          console.log('Could not save dietary preferences to database');
         }
       })
   }
