@@ -6,15 +6,21 @@ import ClearIcon from '@material-ui/icons/Clear';
 const useStyles = makeStyles(theme => ({
   avatar: {
     backgroundColor: theme.palette.error.main,
-    height: 56,
-    width: 56
+    height: 25,
+    width: 25,
+    marginTop: "10px"
   },
   card: {
-    padding: "10px",
-    margin: "15px"
+    padding: "5px",
+    margin: "5px"
   },
   contentPosition: {
     paddingTop: "15px"
+  },
+  content: {
+    paddingTop: "5px",
+    paddingBottom: "5px",
+
   }
 }));
 
@@ -23,13 +29,13 @@ const {tag} = props
   const classes = useStyles();
 return (
   <Card className={classes.card}>
-      <CardContent>
+      <CardContent className={classes.content}>
         <Grid
           container
           justify="space-between"
         >
           <Grid item>
-            <Typography className={classes.contentPosition} variant="h3">{tag}</Typography>
+            <Typography className={classes.contentPosition} variant="h5">{tag}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

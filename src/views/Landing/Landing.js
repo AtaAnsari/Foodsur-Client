@@ -60,9 +60,9 @@ const Landing = () => {
   const classes = useStyles()
   return (
     <Container className={classes.root}>
-  
-    <Box className={classes.buttonsContainer}>
-  
+
+      <Box className={classes.buttonsContainer}>
+    
         <div className={classes.backgroundFilter}>
           <Typography className={classes.tagLine} variant='h1' gutterBottom={true} align={'center'} color={'text'}>
             Find the Right Food For You
@@ -85,7 +85,9 @@ const Landing = () => {
           onClick={handleSignUp}>
           Sign up
         </Button>
-        </Box>      
+
+      </Box>    
+        
     </Container >
   )
 }

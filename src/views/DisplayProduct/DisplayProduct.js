@@ -1,11 +1,22 @@
 import React from 'react'
 import useUserRestrictions from 'hooks/useUserRestrictions'
-import { RestrictionCard, PassCard, ProductExpander } from './components'
+import { RestrictionCard, PassCard, SummaryCardAvoid, SummaryCardPass} from './components'
 import { makeStyles } from '@material-ui/styles';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+  },
+  largeIcon: {
+    width: "150px",
+    height: "150px",
+    color: theme.palette.error.main
+  }, 
+  iconContainer: {
+    display: "flex",
+    alignItems: "center", 
+    flexDirection: "column"
   }
 
 }));
@@ -32,11 +43,18 @@ const divergent = formattedDivergent.map(tag => <RestrictionCard tag={tag} />)
 
   return (
     <div>
-      <div className={classes.root}>
-        <ProductExpander productName={productName}/>
-        <div>{shared}</div>
-        <div>{divergent}</div>
-      </div>
+      {divergent.length > 0 ?
+            <SummaryCardAvoid
+            productName={productName}
+            shared={shared}
+            divergent={divergent}
+            /> :
+            <SummaryCardPass
+            productName={productName}
+            shared={shared}
+            divergent={divergent}
+            />}
+      
     </div>
   )
 }
