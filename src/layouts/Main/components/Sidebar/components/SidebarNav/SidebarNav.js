@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { List, ListItem, Button, colors } from '@material-ui/core';
+import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -54,6 +55,15 @@ const SidebarNav = props => {
 
   const classes = useStyles();
 
+  const [cookies, setCookie, removeCookie] = useCookies(['session']);
+
+  // Removes session cookie if 'Logout' is clicked
+  const handleClick = page => {
+    if (page.title === 'Logout') {
+      removeCookie('session');
+    }
+  }
+
   return (
     <List
       {...rest}
@@ -69,6 +79,7 @@ const SidebarNav = props => {
             activeClassName={classes.active}
             className={classes.button}
             component={CustomRouterLink}
+            onClick={() => handleClick(page)}
             to={page.href}
           >
             <div className={classes.icon}>{page.icon}</div>
