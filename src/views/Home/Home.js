@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/styles';
 import { SearchInput } from '../../components'
 import {ScanViewport} from './components'
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
@@ -15,7 +14,16 @@ const useStyles = makeStyles(theme => ({
     marginTop: '1rem',
     display: 'flex',
     justifyContent: 'flex-end'
-  }
+  },
+  logoWidth: {
+    width: "300px"
+  },
+  logoContainer: {
+    display:"flex",
+    justifyContent:"center",
+    marginBottom:"30px"
+  } 
+
 }));
 
 
@@ -43,6 +51,13 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
+      <Box className={classes.logoContainer}>
+        <img
+          className= {classes.logoWidth}
+          alt="Logo"
+          src="/images/logos/foodsur.png"
+        />
+      </Box>
       <SearchInput
         onChange={e => setSearchTerm(e.target.value)}
         placeholder="Search for a food item"

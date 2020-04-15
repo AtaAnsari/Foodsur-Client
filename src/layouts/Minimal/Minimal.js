@@ -21,7 +21,7 @@ const Minimal = props => {
 
   return (
     <div className={classes.root}>
-      <Topbar />
+      {/* <Topbar /> */}
       <main className={classes.content}>{children}</main>
     </div>
   );
