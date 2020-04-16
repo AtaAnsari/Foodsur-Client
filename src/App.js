@@ -25,17 +25,15 @@ validate.validators = {
   ...validators
 };
 
-export default class App extends Component {
+export default function App() {
 
-  render() {
-    return (
-      <CookiesProvider>
-        <ThemeProvider theme={theme}>
-          <Router history={browserHistory}>
-            <Routes />
-          </Router>
-        </ThemeProvider>
-      </CookiesProvider>
-    );
-  }
+  return (
+    <CookiesProvider>
+      <ThemeProvider theme={theme}>
+        <Router history={browserHistory}>
+          <Routes />
+        </Router>
+      </ThemeProvider>
+    </CookiesProvider>
+  );
 }
