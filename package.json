@@ -2,7 +2,7 @@
   "name": "react-material-dashboard",
   "author": "DeviasIO",
   "email": "contact@devias.io",
-  "proxy": "https://18440ac7.ngrok.io",
+  "proxy": "http://localhost:8080",
   "licence": "MIT",
   "version": "0.3.0",
   "private": false,
