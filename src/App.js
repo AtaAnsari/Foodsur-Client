@@ -26,28 +26,9 @@ validate.validators = {
 };
 
 export default class App extends Component {
-  // state = { users: [] }
 
-  // componentDidMount() {
-  //   fetch('http://localhost:8080/api/users')
-  //     .then(res => {
-  //       console.log(res)
-  //       return res.json()
-  //     })
-
-  //     .then(users => this.setState({ users }))
-  // }
   render() {
     return (
-      // <div className="App">
-      //   <h1>Users</h1>
-      //   <ul>
-      //     {this.state.users.map(user =>
-      //       <li key={user.id}>{user.username}</li>
-      //     )}
-      //   </ul>
-      // </div>
-
       <CookiesProvider>
         <ThemeProvider theme={theme}>
           <Router history={browserHistory}>
