@@ -195,7 +195,7 @@ const SignUp = props => {
       email: formState.values.email,
       password: formState.values.password
     }
-    axios.post('http://3853b041.ngrok.io/api/users/new', userData)
+    axios.post('/api/users/new', userData)
       .then(res => {
         if (res.data.success) {
           setCookie('session', res.data.userId, { path: '/' });

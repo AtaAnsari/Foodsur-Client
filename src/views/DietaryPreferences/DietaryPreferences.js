@@ -56,7 +56,7 @@ const DietaryPreferences = () => {
   const storePreferences = () => {
     const userData = { userId: cookies.session, selectedPreferences };
 
-    axios.post('http://3853b041.ngrok.io/api/user-data/user-preferences', userData)
+    axios.post('/api/user-data/user-preferences', userData)
       .then(res => {
         if (res.data === 'Success') {
           history.push('/home');

@@ -10,7 +10,7 @@ const useStyle = makeStyles(theme => {
 const UserFavourites = () => {
 
   const getUserFavourites = () => {
-    axios.get('http://3853b041.ngrok.io/api/user-data/user-favourites')
+    axios.get('/api/user-data/user-favourites')
       .then(res => console.log(res.data))
   }
 
