@@ -30,6 +30,7 @@ const Login = () => {
       .then(res => {
         if (res.data.success) {
           setCookie('session', res.data.userId, { path: '/' });
+          setCookie('restrictions', res.data.userRestrictions, { path: '/' });
           history.push('/home');
         } else {
           console.log('Error');
