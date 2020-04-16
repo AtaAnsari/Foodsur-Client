@@ -9,7 +9,6 @@ const Scanner = props => {
     Quagga.init(config, err => {
       if (err) {
         console.log(err, 'error msg');
-        return
       }
       Quagga.start();
       return () => {

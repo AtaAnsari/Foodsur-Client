@@ -10,7 +10,7 @@ const useStyle = makeStyles(theme => {
 const UserFavourites = () => {
 
   const getUserFavourites = () => {
-    axios.get('/api/user-data/user-favourites')
+    axios.get('http://localhost:8080/api/user-data/user-favourites')
       .then(res => console.log(res.data))
   }
 

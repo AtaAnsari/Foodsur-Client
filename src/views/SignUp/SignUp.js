@@ -195,7 +195,7 @@ const SignUp = props => {
       email: formState.values.email,
       password: formState.values.password
     }
-    axios.post('/api/users/new', userData)
+    axios.post('http://localhost:8080/api/users/new', userData)
       .then(res => {
         if (res.data.success) {
           setCookie('session', res.data.userId, { path: '/' });
