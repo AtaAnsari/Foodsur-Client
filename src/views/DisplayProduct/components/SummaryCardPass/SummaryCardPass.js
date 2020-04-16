@@ -32,7 +32,7 @@ const SummaryCardPass = (props) => {
       productName: props.productName,
       api_id: props.productId
     }
-    axios.post('http://localhost:8080/api/user-data/add-favourites', productDetails)
+    axios.post('http://3853b041.ngrok.io/api/user-data/add-favourites', productDetails)
 
     console.log("PRODUCT DETAILS", productDetails)
     // const userPreferences = { selectedPreferences }
