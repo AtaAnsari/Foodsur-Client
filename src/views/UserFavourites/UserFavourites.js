@@ -1,26 +1,37 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { Container, TextField, Typography, Button } from '@material-ui/core';
+import { UserFavouritesTable } from './components'
 import axios from 'axios'
 
-const useStyle = makeStyles(theme => {
-
+const useStyles = makeStyles(theme => {
+  root: {
+    padding: theme.spacing(4)
+  }
 })
 
 const UserFavourites = () => {
 
-  const getUserFavourites = () => {
-    axios.get('/api/user-data/user-favourites')
-      .then(res => console.log(res.data))
+  const classes = useStyles()
+
+  const [favourites, setFavourites] = useState([])
+
+  async function getUserFavourites() {
+    const userData = await axios.get('/api/user-data/user-favourites')
+    return userData
   }
 
-  useEffect(() => getUserFavourites(), [])
+  useEffect(() => {
+    getUserFavourites()
+      .then(product => setFavourites(product.data))
+  }
+    , [])
 
   return (
-    <Container>
-      <h1> Hello</ h1>
-
-    </Container>
+    <Container className={classes.root}>
+      <Typography align='center' variant='h2'>Favorited Items</Typography>
+      <UserFavouritesTable favourites={favourites} />
+    </Container >
   )
 }
 
