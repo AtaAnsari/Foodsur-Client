@@ -45,6 +45,7 @@
     "react-perfect-scrollbar": "^1.5.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.0.1",
+    "react-spinners": "^0.8.1",
     "recompose": "^0.30.0",
     "underscore": "^1.9.1",
     "uuid": "^3.3.2",

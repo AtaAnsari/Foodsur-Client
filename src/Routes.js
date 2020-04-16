@@ -22,7 +22,8 @@ import {
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
+  Loading as LoadingView
 } from './views';
 
 const Routes = () => {
@@ -56,6 +57,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/dashboard"
+      />
+      <RouteWithLayout
+        component={LoadingView}
+        exact
+        layout={MainLayout}
+        path="/loading"
       />
       <RouteWithLayout
         component={DisplayProductView}
