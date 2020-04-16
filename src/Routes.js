@@ -42,7 +42,7 @@ const Routes = () => {
       <RouteWithLayout
         component={DietaryPreferencesView}
         exact
-        layout={MinimalLayout}
+        layout={MainLayout}
         path="/dietary-preferences"
       />
       <RouteWithLayout
