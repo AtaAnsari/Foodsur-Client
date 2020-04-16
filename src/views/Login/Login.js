@@ -26,7 +26,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault()
     const userData = { email: userEmail }
-    axios.post('http://localhost:8080/api/users/login', userData)
+    axios.post('/api/users/login', userData)
       .then(res => {
         if (res.data.success) {
           setCookie('session', res.data.userId, { path: '/' });
