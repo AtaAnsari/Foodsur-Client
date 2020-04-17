@@ -1,9 +1,9 @@
+import { useContext } from 'react';
+import RestrictionsContext from 'context/restrictionsContext';
+
 // Returns a function which produces a set of restrictions the user has and the product meets, and a set of restrictions the user has and the product doesn't meet
 export default function useUserRestrictions() {
-  const userRestrictions = {
-    healthTags: ['SUGAR_CONSCIOUS', 'PEANUT_FREE', 'TREE_NUT_FREE', 'ALCOHOL_FREE'],
-    dietTags: ['LOW_CARB', 'HIGH_PROTEIN']
-  };
+  const { restrictions } = useContext(RestrictionsContext);
 
   const compareRestrictions = function(product) {
     console.log('PRODUCT', product);
@@ -11,14 +11,14 @@ export default function useUserRestrictions() {
     const sharedRestricitions = []
     const divergentRestrictions = []
 
-    userRestrictions.healthTags.forEach(tag => {
+    restrictions.healthTags.forEach(tag => {
       if (product.healthTags.includes(tag)) {
         sharedRestricitions.push(tag)
       } else {
         divergentRestrictions.push(tag)
       }
     })
-    userRestrictions.dietTags.forEach(tag => {
+    restrictions.dietTags.forEach(tag => {
       if (product.dietTags.includes(tag)) {
         sharedRestricitions.push(tag)
       } else {
