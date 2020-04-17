@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { Container, TextField, Typography, Button } from '@material-ui/core';
-import { UserFavouritesTable } from './components'
+import { UserFavouritesCard } from './components'
 import axios from 'axios'
 
 const useStyles = makeStyles(theme => {
@@ -30,7 +30,10 @@ const UserFavourites = () => {
   return (
     <Container className={classes.root}>
       <Typography align='center' variant='h2'>Favorited Items</Typography>
-      <UserFavouritesTable favourites={favourites} />
+      {
+        favourites.map(favourite => (
+          <UserFavouritesCard favourite={favourite} />
+        ))}
     </Container >
   )
 }
