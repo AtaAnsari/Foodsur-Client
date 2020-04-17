@@ -6,13 +6,15 @@ export default function useUserRestrictions() {
 
   const { restrictions } = useContext(RestrictionsContext);
 
-  const compareRestrictions = function(product) {
-    
+  const compareRestrictions = function (product) {
+
     const sharedRestricitions = []
     const divergentRestrictions = []
 
+    console.log('From User:', restrictions.dietTags, 'From api:', product.dietTags)
+
     restrictions.healthTags.forEach(tag => {
-       let tagType = "Health Restriction"
+      let tagType = "Health Restriction"
 
       if (product.healthTags.includes(tag)) {
         let cardColour = "#EBFFEB"
@@ -25,7 +27,7 @@ export default function useUserRestrictions() {
 
 
     restrictions.dietTags.forEach(tag => {
-        let dietTagType = "Dietary Preference"
+      let dietTagType = "Dietary Preference"
 
       if (product.dietTags.includes(tag)) {
         let cardColour = "#EBFFEB"
@@ -35,7 +37,7 @@ export default function useUserRestrictions() {
         divergentRestrictions.push([tag, dietTagType, cardColour])
       }
     })
-    
+
     console.log('SHARED-RESTRICTIONS', sharedRestricitions);
     console.log('DIVERGENT-RESTRICTIONS', divergentRestrictions);
 

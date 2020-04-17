@@ -19,28 +19,31 @@ export default function useApiData() {
         }
       ]
     }
-    const product = {productName: name,
-    productId: productId}
+    const product = {
+      productName: name,
+      productId: productId
+    }
     console.log('PRODUCTID', productId);
     return {
       upcIngredients,
       product
-      }
-      
     }
-  
+
+  }
+
 
   const isolateProductData = async function (upcIngredients, product) {
-      const ingredients = upcIngredients
+    const ingredients = upcIngredients
 
-      const res = await axios.post(`https://api.edamam.com/api/food-database/nutrients?app_id=edc61ca8&app_key=b9f17ae7284f840d6dd1ef3cbcdcde9e`,
-        ingredients)
-      const healthLabels = res.data.healthLabels;
-      const dietLabels = res.data.dietLabels;
-      product.healthTags = healthLabels
-      product.dietTags = dietLabels
-      // .catch(err => console.log(err))
-      return product
+    const res = await axios.post(`https://api.edamam.com/api/food-database/nutrients?app_id=edc61ca8&app_key=b9f17ae7284f840d6dd1ef3cbcdcde9e`,
+      ingredients)
+    const healthLabels = res.data.healthLabels;
+    const dietLabels = res.data.dietLabels;
+    console.log(dietLabels)
+    product.healthTags = healthLabels
+    product.dietTags = dietLabels
+    // .catch(err => console.log(err))
+    return product
   }
 
   return {
