@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles';
-import { Card, CardContent, Grid, Typography, Avatar} from '@material-ui/core';
+import { Card, CardContent, Grid, Typography, Avatar, Box} from '@material-ui/core';
 import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles(theme => ({
@@ -25,10 +25,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PassCard = props => {
-const {tag} = props
+const {tag, tagType, cardColour} = props
   const classes = useStyles();
 return (
-  <Card className={classes.card}>
+  <Card className={classes.card} style={{backgroundColor: cardColour}}>
       <CardContent className={classes.content}>
         <Grid
           container
@@ -36,6 +36,11 @@ return (
         >
           <Grid item>
             <Typography className={classes.contentPosition} variant="h5">{tag}</Typography>
+            <Typography component="div">
+              <Box fontStyle="italic">
+                {tagType}
+              </Box>
+            </Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

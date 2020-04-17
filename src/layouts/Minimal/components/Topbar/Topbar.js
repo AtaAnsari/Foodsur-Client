@@ -1,46 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
+import InputIcon from '@material-ui/icons/Input';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: 'none'
+    boxShadow: 'none',
+    color: "black",
+    backgroundColor: fade(theme.palette.primary.main, 0)
   },
-  logo: {
-    width: '100px'
+  flexGrow: {
+    flexGrow: 1
+  },
+  signOutButton: {
+    marginLeft: theme.spacing(1)
+  },
+  logoWidth: {
+    width: "100px"
   }
 }));
 
 const Topbar = props => {
-  const { className, ...rest } = props;
+  const { className, onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
+
+  const [notifications] = useState([]);
 
   return (
     <AppBar
       {...rest}
       className={clsx(classes.root, className)}
-      color="primary"
-      position="fixed"
     >
       <Toolbar>
-        <RouterLink to="/">
-          <img
-            className= {classes.logo}
-            alt="Logo"
-            src="/images/logos/foodsur.png"
-          />
-        </RouterLink>
+        <div className={classes.flexGrow} />
+        <Hidden mdDown>
+          <IconButton color="inherit">
+            <Badge
+              badgeContent={notifications.length}
+              color="primary"
+              variant="dot"
+            >
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <IconButton
+            className={classes.signOutButton}
+            color="inherit"
+          >
+            <InputIcon />
+          </IconButton>
+        </Hidden>
+        <Hidden lgUp>
+          <IconButton
+            color="inherit"
+            onClick={onSidebarOpen}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
       </Toolbar>
     </AppBar>
   );
 };
 
 Topbar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  onSidebarOpen: PropTypes.func
 };
-
 export default Topbar;

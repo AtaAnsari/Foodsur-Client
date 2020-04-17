@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-end'
   },
   logoWidth: {
-    width: "300px"
+    height: "100px",
+    width: "262px"
   },
   logoContainer: {
     display:"flex",

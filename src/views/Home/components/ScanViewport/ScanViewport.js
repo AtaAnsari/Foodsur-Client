@@ -8,6 +8,7 @@ import useApiData from 'hooks/useApiData'
 import { useHistory } from 'react-router-dom';
 
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
@@ -40,6 +41,9 @@ const ScanViewport = () => {
   const history = useHistory()
 
   const onDetected = async result => {
+    history.push({
+          pathname: "/loading"
+        })
     const {upcIngredients, product} = await FetchApiData(result)
     setResult(result);
     const res = await isolateProductData(upcIngredients, product)
@@ -82,7 +86,6 @@ const ScanViewport = () => {
       {camera? <div className="container">
         {camera && <Scanner onDetected={onDetected} />}
       </div> : <div></div>}
-      
     </div>
   );
 };

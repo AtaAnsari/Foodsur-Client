@@ -12,6 +12,7 @@ import {
   DisplayProduct as DisplayProductView,
   DisplaySearch as DisplaySearchView,
   SearchResults as SearchResultsView,
+  UserFavourites as UserFavouritesView,
   Dashboard as DashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
@@ -21,7 +22,8 @@ import {
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
-  NotFound as NotFoundView
+  NotFound as NotFoundView,
+  Loading as LoadingView
 } from './views';
 
 const Routes = () => {
@@ -41,7 +43,7 @@ const Routes = () => {
       <RouteWithLayout
         component={DietaryPreferencesView}
         exact
-        layout={MinimalLayout}
+        layout={MainLayout}
         path="/dietary-preferences"
       />
       <RouteWithLayout
@@ -57,6 +59,12 @@ const Routes = () => {
         path="/dashboard"
       />
       <RouteWithLayout
+        component={LoadingView}
+        exact
+        layout={MainLayout}
+        path="/loading"
+      />
+      <RouteWithLayout
         component={DisplayProductView}
         exact
         layout={MainLayout}
@@ -67,6 +75,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/search-results"
+      />
+      <RouteWithLayout
+        component={UserFavouritesView}
+        exact
+        layout={MainLayout}
+        path='/user-favourites'
       />
       <RouteWithLayout
         component={UserListView}

@@ -1,7 +1,12 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles';
-import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
+import { Card, CardContent, Grid, Typography, Avatar, Box } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
+import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
+
+
+
+
 
 const useStyles = makeStyles(theme => ({
   avatar: {
@@ -25,10 +30,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const RestrictionCard = props => {
-const {tag} = props
+const {tag, tagType, cardColour} = props
   const classes = useStyles();
 return (
-  <Card className={classes.card}>
+  <Card className={classes.card} style={{backgroundColor: cardColour}}>
       <CardContent className={classes.content}>
         <Grid
           container
@@ -36,11 +41,21 @@ return (
         >
           <Grid item>
             <Typography className={classes.contentPosition} variant="h5">{tag}</Typography>
+            <Typography component="div">
+              <Box fontStyle="italic">
+                {tagType}
+              </Box>
+            </Typography>
           </Grid>
           <Grid item>
+          {
+            cardColour==="#FEFBE7"? <Avatar className={classes.avatar} style={{backgroundColor: "#FFE01B"}}>
+              <PriorityHighIcon />
+            </Avatar> :
             <Avatar className={classes.avatar}>
               <ClearIcon className={classes.icon} />
-            </Avatar>
+            </Avatar> 
+          }
           </Grid>
         </Grid>
       </CardContent>
