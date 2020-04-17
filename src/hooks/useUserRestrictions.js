@@ -4,16 +4,16 @@ import axios from "axios"
 export default function useUserRestrictions() {
   const [userRestrictions, setUserRestrictions] = useState({
     healthTags: ["SUGAR_CONSCIOUS", "PEANUT_FREE", "TREE_NUT_FREE", "ALCOHOL_FREE"],
-    dietTags: ["LOW_CARB", "KETO"]
+    dietTags: []
   });
 
 
   const compareRestrictions = function (product) {
-    
+
     const sharedRestricitions = []
     const divergentRestrictions = []
     userRestrictions.healthTags.forEach(tag => {
-       let tagType = "Health Restriction"
+      let tagType = "Health Restriction"
       if (product.healthTags.includes(tag)) {
         let cardColour = "#EBFFEB"
         sharedRestricitions.push([tag, tagType, cardColour])
@@ -23,17 +23,17 @@ export default function useUserRestrictions() {
       }
     })
     userRestrictions.dietTags.forEach(tag => {
-        let dietTagType = "Dietary Preference"
+      let dietTagType = "Dietary Preference"
       if (product.dietTags.includes(tag)) {
         let cardColour = "#EBFFEB"
         sharedRestricitions.push([tag, dietTagType, cardColour])
       } else {
-        let cardColour="#FEFBE7"
+        let cardColour = "#FEFBE7"
         divergentRestrictions.push([tag, dietTagType, cardColour])
       }
     })
-      console.log('SHARED-RESTRICTIONS', sharedRestricitions);
-     console.log('DIVERGENT-RESTRICTIONS', divergentRestrictions);
+    console.log('SHARED-RESTRICTIONS', sharedRestricitions);
+    console.log('DIVERGENT-RESTRICTIONS', divergentRestrictions);
 
     return {
       sharedRestricitions,
@@ -41,5 +41,5 @@ export default function useUserRestrictions() {
     }
   }
 
-  return {compareRestrictions}
+  return { compareRestrictions }
 }
