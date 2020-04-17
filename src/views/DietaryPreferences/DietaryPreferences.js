@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Typography, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { DietaryPreferencesTable } from './components'
 import getDietaryPreferences from 'helpers/getDietaryPreferences'
+import RestrictionsContext from 'context/restrictionsContext';
 
 import axios from 'axios'
 import { useCookies } from 'react-cookie';
@@ -30,6 +31,8 @@ const DietaryPreferences = () => {
   const [preferences, setPreferences] = useState('');
   const [selectedPreferences, setSelectedPreferences] = useState([]);
 
+  const { setRestrictions } = useContext(RestrictionsContext);
+
   const [cookies] = useCookies(['session']);
 
   // Fetch dietary preferences from database and set to state
@@ -52,13 +55,15 @@ const DietaryPreferences = () => {
     setSelectedPreferences(newSelectedPreferences);
   }
 
-  // Stores user's selected dietary preferences in db, goes to /home
+  // Stores user's selected dietary preferences in db
+  // Sets the RestrictionsContext to the user's dietary restrictions
   const storePreferences = () => {
     const userData = { userId: cookies.session, selectedPreferences };
 
     axios.post('/api/user-data/user-preferences', userData)
       .then(res => {
-        if (res.data === 'Success') {
+        if (res.data.success) {
+          setRestrictions(res.data.userRestrictions);
           history.push('/home');
         } else {
           console.log('Could not save dietary preferences to database');

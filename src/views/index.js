@@ -14,6 +14,5 @@ export { default as SignUp } from './SignUp';
 export { default as Typography } from './Typography';
 export { default as UserList } from './UserList';
 export { default as DisplayProduct } from './DisplayProduct';
-export { default as DisplaySearch } from './DisplaySearch';
 export { default as UserFavourites } from './UserFavourites';
 export { default as Loading } from './Loading';

@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
+import { useContext } from 'react';
+import RestrictionsContext from 'context/restrictionsContext';
 
+// Returns a function which produces a set of restrictions the user has and the product meets, and a set of restrictions the user has and the product doesn't meet
 export default function useUserRestrictions() {
-  const [userRestrictions, setUserRestrictions] = useState({
-    healthTags: ["SUGAR_CONSCIOUS", "PEANUT_FREE", "TREE_NUT_FREE", "ALCOHOL_FREE"],
-    dietTags: ["LOW_CARB", "KETO"]
-  });
+  const { restrictions } = useContext(RestrictionsContext);
 
-
-  const compareRestrictions = function (product) {
+  const compareRestrictions = function(product) {
     
     const sharedRestricitions = []
     const divergentRestrictions = []
-    userRestrictions.healthTags.forEach(tag => {
+
+    restrictions.healthTags.forEach(tag => {
        let tagType = "Health Restriction"
+
       if (product.healthTags.includes(tag)) {
         let cardColour = "#EBFFEB"
         sharedRestricitions.push([tag, tagType, cardColour])
@@ -22,8 +21,10 @@ export default function useUserRestrictions() {
         divergentRestrictions.push([tag, tagType, cardColour])
       }
     })
-    userRestrictions.dietTags.forEach(tag => {
+
+    restrictions.dietTags.forEach(tag => {
         let dietTagType = "Dietary Preference"
+
       if (product.dietTags.includes(tag)) {
         let cardColour = "#EBFFEB"
         sharedRestricitions.push([tag, dietTagType, cardColour])
@@ -32,8 +33,9 @@ export default function useUserRestrictions() {
         divergentRestrictions.push([tag, dietTagType, cardColour])
       }
     })
-      console.log('SHARED-RESTRICTIONS', sharedRestricitions);
-     console.log('DIVERGENT-RESTRICTIONS', divergentRestrictions);
+
+    console.log('SHARED-RESTRICTIONS', sharedRestricitions);
+    console.log('DIVERGENT-RESTRICTIONS', divergentRestrictions);
 
     return {
       sharedRestricitions,

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Container, TextField, Typography, Button } from '@material-ui/core';
 import axios from 'axios'
 import { useCookies } from 'react-cookie';
+
+import RestrictionsContext from 'context/restrictionsContext';
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,11 +20,14 @@ const useStyles = makeStyles(theme => ({
 const Login = () => {
   const [userEmail, setUserEmail] = useState('');
 
+  const { setRestrictions } = useContext(RestrictionsContext);
+
   const [cookies, setCookie] = useCookies(['session']);
 
   const history = useHistory()
   const classes = useStyles();
 
+  // On successful login, set a session cookie with user id and set RestrictionsContext to the users dietary restrictions
   const handleLogin = (e) => {
     e.preventDefault()
     const userData = { email: userEmail }
@@ -30,6 +35,7 @@ const Login = () => {
       .then(res => {
         if (res.data.success) {
           setCookie('session', res.data.userId, { path: '/' });
+          setRestrictions(res.data.userRestrictions);
           history.push('/home');
         } else {
           console.log('Error');
