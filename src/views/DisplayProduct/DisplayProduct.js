@@ -31,17 +31,27 @@ const DisplayProduct = (props) => {
 
   const { sharedRestricitions, divergentRestrictions } = compareRestrictions(product)
 
-  const formattedShared = sharedRestricitions.map(tag => tag.split('_').join(' '))
+  const healthRestriction = function (divergentRestrictions) {
+   for (const restriction of divergentRestrictions){
+     if(restriction[1]=== "Health Restriction"){
+       return true
+     }
+   }
+  }
 
-  const formattedDivergent = divergentRestrictions.map(tag => tag.split('_').join(' '))
+  const hasHealthRestriction = healthRestriction(divergentRestrictions)
+
+  const formattedShared = sharedRestricitions.map(tagArray => [tagArray[0].split('_').join(' '), tagArray[1], tagArray[2]])
+
+  const formattedDivergent = divergentRestrictions.map(tagArray => [tagArray[0].split('_').join(' '), tagArray[1], tagArray[2]])
 
   const productName = props.location.state.product.productName
   const productId = props.location.state.product.productId
 
 
-  const shared = formattedShared.map(tag => <PassCard tag={tag} />)
+  const shared = formattedShared.map(tagArray => <PassCard tag={tagArray[0]} tagType={tagArray[1]} cardColour={tagArray[2]}/>)
 
-  const divergent = formattedDivergent.map(tag => <RestrictionCard tag={tag} />)
+  const divergent = formattedDivergent.map(tagArray => <RestrictionCard tag={tagArray[0]} tagType={tagArray[1]} cardColour={tagArray[2]}/>)
 
   return (
     <div>
@@ -50,6 +60,7 @@ const DisplayProduct = (props) => {
           productName={productName}
           shared={shared}
           divergent={divergent}
+          hasHealthRestriction={hasHealthRestriction}
         /> :
         <SummaryCardPass
           productName={productName}

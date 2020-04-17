@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles';
 import {Card, CardHeader, Divider, CardContent, Typography, Button} from '@material-ui/core';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,14 +31,24 @@ const SummaryCardAvoid = (props) => {
         title={props.productName}
       />
       <Divider />
-      <CardContent>
+      {props.hasHealthRestriction ?
+        <CardContent>
         <div className={classes.iconContainer}>
         <NotInterestedIcon className={classes.largeIcon}/>
         <Typography variant="h3">
-          Avoid This Item
+          Health Restriction Detected
         </Typography>
         </div>
-      </CardContent>
+      </CardContent> :
+        <CardContent>
+        <div className={classes.iconContainer}>
+        <ErrorOutlineIcon className={classes.largeIcon} style={{color: "#FFE01B"}}/>
+        <Typography variant="h3">
+         Doesn't Match Diet Preferences
+        </Typography>
+        </div>
+      </CardContent>}
+      
     </Card>
     <Card>
       {props.divergent}
