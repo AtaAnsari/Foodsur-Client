@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Chart } from 'react-chartjs-2';
@@ -11,6 +11,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import './assets/scss/index.scss';
 import validators from './common/validators';
 import Routes from './Routes';
+import RestrictionsContext from './context/restrictionsContext';
 
 import { CookiesProvider } from 'react-cookie';
 
@@ -26,14 +27,19 @@ validate.validators = {
 };
 
 export default function App() {
+  const [restrictions, setRestrictions] = useState({});
+
+  const value = { restrictions, setRestrictions };
 
   return (
     <CookiesProvider>
-      <ThemeProvider theme={theme}>
-        <Router history={browserHistory}>
-          <Routes />
-        </Router>
-      </ThemeProvider>
+      <RestrictionsContext.Provider value={value}>
+        <ThemeProvider theme={theme}>
+          <Router history={browserHistory}>
+            <Routes />
+          </Router>
+        </ThemeProvider>
+      </RestrictionsContext.Provider>
     </CookiesProvider>
   );
 }
