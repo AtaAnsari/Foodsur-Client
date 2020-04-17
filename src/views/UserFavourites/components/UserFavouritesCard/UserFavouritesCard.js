@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
 
   }
 }));
-to
 
 const UserFavouritesCard = props => {
   const classes = useStyles()

@@ -23,7 +23,8 @@ import {
   SignUp as SignUpView,
   SignIn as SignInView,
   NotFound as NotFoundView,
-  Loading as LoadingView
+  Loading as LoadingView,
+  PopularProducts as PopularProductsView
 } from './views';
 
 const Routes = () => {
@@ -87,6 +88,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path='/user-favourites'
+      />
+      <RouteWithLayout
+        component={PopularProductsView}
+        exact
+        layout={MainLayout}
+        path='/popular-products'
       />
       <RouteWithLayout
         component={UserListView}

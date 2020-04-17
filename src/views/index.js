@@ -17,3 +17,4 @@ export { default as DisplayProduct } from './DisplayProduct';
 export { default as DisplaySearch } from './DisplaySearch';
 export { default as UserFavourites } from './UserFavourites';
 export { default as Loading } from './Loading';
+export { default as PopularProducts } from './PopularProducts'
