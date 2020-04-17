@@ -1,1 +1,1 @@
-export { default as UserFavouritesTable } from './UserFavouritesTable'
+export { default as UserFavouritesCard } from './UserFavouritesCard'
