@@ -72,12 +72,6 @@ const Routes = () => {
         path="/display-product"
       />
       <RouteWithLayout
-        component={DisplaySearchView}
-        exact
-        layout={MainLayout}
-        path="/displaySearch"
-      />
-      <RouteWithLayout
         component={SearchResultsView}
         exact
         layout={MainLayout}

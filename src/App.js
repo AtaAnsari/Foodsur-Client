@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Chart } from 'react-chartjs-2';
@@ -11,6 +11,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import './assets/scss/index.scss';
 import validators from './common/validators';
 import Routes from './Routes';
+import RestrictionsContext from './context/restrictionsContext';
 
 import { CookiesProvider } from 'react-cookie';
 
@@ -25,36 +26,20 @@ validate.validators = {
   ...validators
 };
 
-export default class App extends Component {
-  // state = { users: [] }
+export default function App() {
+  const [restrictions, setRestrictions] = useState({});
 
-  // componentDidMount() {
-  //   fetch('http://localhost:8080/api/users')
-  //     .then(res => {
-  //       console.log(res)
-  //       return res.json()
-  //     })
+  const value = { restrictions, setRestrictions };
 
-  //     .then(users => this.setState({ users }))
-  // }
-  render() {
-    return (
-      // <div className="App">
-      //   <h1>Users</h1>
-      //   <ul>
-      //     {this.state.users.map(user =>
-      //       <li key={user.id}>{user.username}</li>
-      //     )}
-      //   </ul>
-      // </div>
-
-      <CookiesProvider>
+  return (
+    <CookiesProvider>
+      <RestrictionsContext.Provider value={value}>
         <ThemeProvider theme={theme}>
           <Router history={browserHistory}>
             <Routes />
           </Router>
         </ThemeProvider>
-      </CookiesProvider>
-    );
-  }
+      </RestrictionsContext.Provider>
+    </CookiesProvider>
+  );
 }
