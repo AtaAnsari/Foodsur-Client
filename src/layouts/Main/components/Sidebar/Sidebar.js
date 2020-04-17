@@ -57,7 +57,7 @@ const Sidebar = props => {
       icon: <StarIcon />
     },
     {
-      title: 'Account',
+      title: 'Profile',
       href: '/account',
       icon: <AccountBoxIcon />
     },
