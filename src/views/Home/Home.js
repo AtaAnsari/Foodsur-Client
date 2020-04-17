@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/styles';
 import { SearchInput } from '../../components'
 import { ScanViewport } from './components'
 
+import { useCookies } from 'react-cookie';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,10 +40,11 @@ const Home = () => {
   const history = useHistory();
 
   const { restrictions } = useContext(RestrictionsContext);
+  const [cookies] = useCookies(['session']);
 
-  // If user is not properly logged in (restrictions state is not set), send them back to /landing
+  // If user is not properly logged in (no cookie or restrictions state is not set), send them back to /landing
   useEffect(() => {
-    if (!restrictions.healthTags) {
+    if (!restrictions.healthTags || !cookies.session) {
       history.push('/landing');
     }
   }, [])
