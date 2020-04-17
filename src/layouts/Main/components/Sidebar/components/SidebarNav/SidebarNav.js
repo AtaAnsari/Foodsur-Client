@@ -61,7 +61,6 @@ const SidebarNav = props => {
   const handleClick = page => {
     if (page.title === 'Logout') {
       removeCookie('session');
-      removeCookie('restrictions');
     }
     closeSidebar();
   }
