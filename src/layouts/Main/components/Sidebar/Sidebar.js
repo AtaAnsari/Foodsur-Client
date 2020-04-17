@@ -6,7 +6,7 @@ import { Divider, Drawer } from '@material-ui/core';
 
 import HomeIcon from '@material-ui/icons/Home';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import StarIcon from '@material-ui/icons/Star';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
@@ -52,9 +52,9 @@ const Sidebar = props => {
       icon: <FavoriteIcon />
     },
     {
-      title: 'Products',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
+      title: 'Popular',
+      href: '/popular-products',
+      icon: <StarIcon />
     },
     {
       title: 'Account',
