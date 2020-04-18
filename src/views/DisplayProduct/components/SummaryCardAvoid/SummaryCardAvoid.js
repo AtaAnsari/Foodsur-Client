@@ -42,10 +42,6 @@ const SummaryCardAvoid = (props) => {
   const [favourite, setFavourite] = useState(false)
   const history = useHistory();
 
-  const handleBack = function() {
-    history.push("/home");
-  };
-
   const addFavourite = () => {
     const {product} = props
     console.log(' product',  product);
@@ -76,7 +72,7 @@ const SummaryCardAvoid = (props) => {
       <Card>
         <div style={{display:"flex"}}>
         <div className={classes.backButton}>
-        <IconButton onClick={handleBack}>
+        <IconButton onClick={history.goBack}>
         <ArrowBackIcon />
         </IconButton>
         </div>

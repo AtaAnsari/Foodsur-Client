@@ -63,16 +63,15 @@ const addFavourite = () => {
   const removeFavorite = () => {
     setFavourite(false)
   }
-  const handleBack = function() {
-    history.push("/home");
-  };
+
   const classes = useStyles();
+
   return (
     <div>
       <Card>
         <div style={{display:"flex"}}>
         <div className={classes.backButton}>
-        <IconButton onClick={handleBack}>
+        <IconButton onClick={history.goBack}>
         <ArrowBackIcon />
         </IconButton>
         </div>
