@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import { makeStyles } from '@material-ui/styles';
-import {Card, CardHeader, Divider, CardContent, Typography, Button, Box} from '@material-ui/core';
+import {Card, CardHeader, Divider, CardContent, Typography, Button, Box, IconButton} from '@material-ui/core';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import { useCookies } from 'react-cookie';
 import axios from 'axios'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,6 +41,11 @@ const SummaryCardAvoid = (props) => {
 
   const [cookies] = useCookies(['session']);
   const [favourite, setFavourite] = useState(false)
+  const history = useHistory();
+
+  const handleBack = function() {
+    history.push("/home");
+  };
 
   const addFavourite = () => {
     const {product} = props
@@ -66,11 +73,20 @@ const SummaryCardAvoid = (props) => {
 
   const classes = useStyles();
   return(
-  <div>
-    <Card>
-      <CardHeader
-        title={props.productName}
-      />
+      <div>
+      <Card>
+        <div style={{display:"flex"}}>
+        <div className={classes.backButton}>
+        <IconButton onClick={handleBack}>
+        <ArrowBackIcon />
+        </IconButton>
+        </div>
+        <CardHeader
+          title={props.productName}
+        >
+        </CardHeader>
+        
+        </div>
       <Divider />
       {props.hasHealthRestriction ?
         <CardContent>
