@@ -77,12 +77,13 @@ const Sidebar = props => {
       href: '/account',
       icon: <AccountBoxIcon />
     },
-    {
-      title: 'Logout',
-      href: '/landing',
-      icon: <ExitToAppIcon />
-    }
   ];
+
+  const logout =  {
+    title: 'Logout',
+    href: '/landing',
+    icon: <ExitToAppIcon />
+  }
 
   return (
     <Drawer
@@ -107,6 +108,7 @@ const Sidebar = props => {
         <SidebarNav
           className={classes.nav}
           closeSidebar={onClose}
+          logout={logout}
           pages={pages}
         />
         <Divider className={classes.divider} />
