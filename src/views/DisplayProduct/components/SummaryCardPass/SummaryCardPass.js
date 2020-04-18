@@ -4,6 +4,7 @@ import { Card, CardHeader, Divider, CardContent, Typography, Button, Box } from 
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonStyle: {
     margin: "10px"
+  },
+  backButton: {
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "10px"
   }
 
 }));
@@ -50,9 +56,16 @@ const [cookies] = useCookies(['session']);
   return (
     <div>
       <Card>
+        <div style={{display:"flex"}}>
+        <div className={classes.backButton}>
+        <ArrowBackIcon/>
+        </div>
         <CardHeader
           title={props.productName}
-        />
+        >
+        </CardHeader>
+        
+        </div>
         <Divider />
         <CardContent>
           <div className={classes.iconContainer}>
