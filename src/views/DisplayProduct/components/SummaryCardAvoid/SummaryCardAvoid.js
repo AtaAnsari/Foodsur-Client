@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { makeStyles } from '@material-ui/styles';
-import {Card, CardHeader, Divider, CardContent, Typography, Button} from '@material-ui/core';
+import {Card, CardHeader, Divider, CardContent, Typography, Button, Box, IconButton} from '@material-ui/core';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { useCookies } from 'react-cookie';
+import axios from 'axios'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,19 +21,72 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center", 
     flexDirection: "column"
+  },
+  buttonStyle: {
+    margin: "10px",
+    "&:hover": {
+      backgroundColor: "#5f981a"
+    }
+  },
+  backButton: {
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "10px"
   }
 
 }));
 
 const SummaryCardAvoid = (props) => {
 
+
+  const [cookies] = useCookies(['session']);
+  const [favourite, setFavourite] = useState(false)
+  const history = useHistory();
+
+  const handleBack = function() {
+    history.push("/home");
+  };
+
+  const addFavourite = () => {
+    const {product} = props
+    console.log(' product',  product);
+    const { dietTags, healthTags } = product
+    const productTags = dietTags.concat(healthTags)
+      
+    setFavourite(true)
+  
+    const productDetails = {
+        productName: props.productName,
+        api_id: props.productId,
+        productTags,
+        userId: cookies.session
+      }
+  
+      axios.post('/api/user-data/add-favourites', productDetails)
+  
+      console.log("PRODUCT DETAILS", productDetails)
+    }
+  
+    const removeFavorite = () => {
+      setFavourite(false)
+    }
+
   const classes = useStyles();
   return(
-  <div>
-    <Card>
-      <CardHeader
-        title={props.productName}
-      />
+      <div>
+      <Card>
+        <div style={{display:"flex"}}>
+        <div className={classes.backButton}>
+        <IconButton onClick={handleBack}>
+        <ArrowBackIcon />
+        </IconButton>
+        </div>
+        <CardHeader
+          title={props.productName}
+        >
+        </CardHeader>
+        
+        </div>
       <Divider />
       {props.hasHealthRestriction ?
         <CardContent>
@@ -44,13 +101,37 @@ const SummaryCardAvoid = (props) => {
         <div className={classes.iconContainer}>
         <ErrorOutlineIcon className={classes.largeIcon} style={{color: "#FFE01B"}}/>
         <Typography variant="h3">
-         Doesn't Match Diet Preferences
+        Doesn't Match Diet Preferences
         </Typography>
         </div>
       </CardContent>}
       
     </Card>
     <Card>
+      {
+        !props.hasHealthRestriction ?
+        <Box display="flex" justifyContent="center">
+          {
+            favourite ? 
+            <Button variant='contained'
+            color='primary'
+            className={classes.buttonStyle}
+            onClick={removeFavorite}
+          >
+            Remove From Favourites
+        </Button> :
+        <Button variant='contained'
+        color='primary'
+        className={classes.buttonStyle}
+        onClick={addFavourite}
+        >
+        Add to Favourites
+        </Button>
+
+          }
+        </Box> :
+        <div></div>
+      }
       {props.divergent}
       {props.shared}
     </Card>
