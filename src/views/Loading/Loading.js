@@ -47,7 +47,9 @@ const Loading = () => {
   
   const [spinner, setSpinner] = useState(true);
   const [searchAgainButton, setSearchAgainButton] = useState(false);
+  const [delayed, setDelayed] = useState(true);
 
+  // Show a "search again" button if loading takes longer than 5 seconds
   useEffect(() => {
     const timedButton = setTimeout(() => {
       setSearchAgainButton(true)
@@ -56,8 +58,15 @@ const Loading = () => {
     return () => clearTimeout(timedButton);
   }, []);
 
+  // Delay the rendering of loading screen by 300 ms
+  useEffect(() => {
+    const timeDelay = setTimeout(() => setDelayed(false), 300);
+    return () => clearTimeout(timeDelay);
+  }, []);
+
   return (
     <div className={classes.root}>
+      {!delayed &&
       <Box className={classes.container} >
         <Box>
           <img
@@ -87,7 +96,7 @@ const Loading = () => {
             </Button>
           </div> :
           <div/>}
-      </Box>
+      </Box>}
     </div>
   );
 };
