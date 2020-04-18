@@ -7,13 +7,16 @@ import useLoginValidation from 'hooks/useLoginValidation'
 const PopularProducts = () => {
   useLoginValidation();
 
-const [cookies] = useCookies(['session']);
-const userId = {
-  id: cookies.session
+  const [cookies] = useCookies(['session']);
+  const userId = {
+    id: cookies.session
   }
 
-  const getPopularProducts = () => {
-    axios.post('/api/user-data/popular-products', userId)
+  const getPopularProducts = async () => {
+    const popularData = await axios.get('/api/user-data/popular-products', {
+      params: userId
+    })
+    return popularData
   }
 
   useEffect(() => {
@@ -22,7 +25,7 @@ const userId = {
 
   return (
     <h1>Hello</h1>
-  )
+  ).then(res => console.log(res.data))
 }
 
 export default PopularProducts
