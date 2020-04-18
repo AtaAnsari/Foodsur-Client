@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Divider, Drawer } from '@material-ui/core';
+import { Divider, Drawer, Box } from '@material-ui/core';
 
 import HomeIcon from '@material-ui/icons/Home';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -32,6 +32,13 @@ const useStyles = makeStyles(theme => ({
   },
   nav: {
     marginBottom: theme.spacing(2)
+  },
+  logo: {
+    width: '120px'
+  },
+  logoContainer: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 }));
 
@@ -80,7 +87,13 @@ const Sidebar = props => {
         {...rest}
         className={clsx(classes.root, className)}
       >
-        <Profile />
+        <Box className={classes.logoContainer}>
+          <img
+            alt="Logo"
+            className={classes.logo}
+            src="/images/logos/foodsur.png"
+          />
+        </Box>
         <Divider className={classes.divider} />
         <SidebarNav
           className={classes.nav}
