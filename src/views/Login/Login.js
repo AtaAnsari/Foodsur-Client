@@ -14,6 +14,11 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(10)
   },
   inputStyle: {
+  },
+  loginButton: {
+    "&:hover": {
+      backgroundColor: "#5f981a"
+    }
   }
 }));
 
@@ -68,6 +73,7 @@ const Login = () => {
           name='password'
           variant="outlined" />
         <Button
+          className={classes.loginButton}
           type="submit"
           fullWidth
           variant="contained"

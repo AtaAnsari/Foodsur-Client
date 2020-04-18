@@ -134,7 +134,10 @@ const useStyles = makeStyles(theme => ({
     marginLeft: '-14px'
   },
   signUpButton: {
-    margin: theme.spacing(2, 0)
+    margin: theme.spacing(2, 0),
+    "&:hover": {
+      backgroundColor: "#5f981a"
+    }
   }
 }));
 

@@ -18,12 +18,18 @@ const useStyles = makeStyles(theme => ({
   loginButtonStyle: {
     marginTop: '2rem',
     marginBottom: '1rem',
-    width: "200px"
+    width: "200px",
+    "&:hover": {
+      backgroundColor: "#5f981a"
+    }
   },
   signupButtonStyle: {
     marginTop: '0.5rem',
     marginBottom: '1rem',
-    width: "200px"
+    width: "200px",
+    "&:hover": {
+      backgroundColor: "#5f981a"
+    }
   },
   cardStyle: {
     padding: '1rem'

@@ -23,7 +23,10 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column"
   },
   buttonStyle: {
-    margin: "10px"
+    margin: "10px",
+    "&:hover": {
+      backgroundColor: "#5f981a"
+    }
   },
   backButton: {
     display: "flex",

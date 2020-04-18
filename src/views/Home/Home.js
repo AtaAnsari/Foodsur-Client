@@ -26,7 +26,13 @@ const useStyles = makeStyles(theme => ({
     display:"flex",
     justifyContent:"center",
     marginBottom:"30px"
-  } 
+  }, 
+  searchButton: {
+    color: "primary",
+    "&:hover": {
+      backgroundColor: "#5f981a"
+    }
+  }
 
 }));
 
@@ -78,9 +84,10 @@ const Home = () => {
         </Typography>}
       <Box className={classes.searchButtonContainer}>
         <Button
+          variant= "contained"
+          className={classes.searchButton}
           color="primary"
           onClick={validateSearch}
-          variant="contained"
         >
           Search
         </Button>
