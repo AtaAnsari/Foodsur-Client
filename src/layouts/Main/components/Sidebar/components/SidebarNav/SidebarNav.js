@@ -63,10 +63,8 @@ const SidebarNav = props => {
   const notLanding = location.pathname !== '/landing';
 
   // Removes session cookie if 'Logout' is clicked, and closes the sidebar
-  const handleClick = page => {
-    if (page.title === 'Logout') {
-      removeCookie('session');
-    }
+  const handleLogout = () => {
+    removeCookie('session');
     closeSidebar();
   }
 
@@ -85,7 +83,7 @@ const SidebarNav = props => {
             activeClassName={classes.active}
             className={classes.button}
             component={CustomRouterLink}
-            onClick={() => handleClick(page)}
+            onClick={() => closeSidebar()}
             to={page.href}
           >
             <div className={classes.icon}>{page.icon}</div>
@@ -103,7 +101,7 @@ const SidebarNav = props => {
             activeClassName={classes.active}
             className={classes.button}
             component={CustomRouterLink}
-            onClick={() => handleClick()}
+            onClick={() => handleLogout()}
             to={logout.href}
           >
             <div className={classes.icon}>{logout.icon}</div>
