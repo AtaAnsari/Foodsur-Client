@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useCookies } from 'react-cookie';
+import useLoginValidation from 'hooks/useLoginValidation'
+
 
 const PopularProducts = () => {
+  useLoginValidation();
 
 const [cookies] = useCookies(['session']);
 const userId = {

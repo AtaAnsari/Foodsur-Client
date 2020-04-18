@@ -1,11 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import RestrictionsContext from 'context/restrictionsContext';
 
 import { Button, Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { SearchInput } from '../../components'
 import { ScanViewport } from './components'
+
+import useLoginValidation from 'hooks/useLoginValidation';
 
 
 const useStyles = makeStyles(theme => ({
@@ -37,14 +38,7 @@ const Home = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const { restrictions } = useContext(RestrictionsContext);
-
-  // If user is not properly logged in (restrictions state is not set), send them back to /landing
-  useEffect(() => {
-    if (!restrictions.healthTags) {
-      history.push('/landing');
-    }
-  }, [])
+  useLoginValidation();
 
   const validateSearch = () => {
     if (searchTerm) {
