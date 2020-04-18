@@ -53,6 +53,8 @@ const Loading = () => {
     const timedButton = setTimeout(() => {
       setSearchAgainButton(true)
     }, 5000);
+
+    return () => clearTimeout(timedButton);
   }, []);
   const handleBack = function() {
     history.goBack();
