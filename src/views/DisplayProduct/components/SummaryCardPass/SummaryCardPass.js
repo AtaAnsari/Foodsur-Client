@@ -32,8 +32,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     marginLeft: "10px"
+  },
+  productName: {
+    textTransform: 'capitalize'
   }
-
 }));
 
 const SummaryCardPass = (props) => {
@@ -78,7 +80,8 @@ const addFavourite = () => {
         </IconButton>
         </div>
         <CardHeader
-          title={props.productName}
+          className={classes.productName}
+          title={props.productName.toLowerCase()}
         >
         </CardHeader>
         
