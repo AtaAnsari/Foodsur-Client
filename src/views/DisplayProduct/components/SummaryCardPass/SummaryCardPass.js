@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, Divider, CardContent, Typography, Button, Box } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SummaryCardPass = (props) => {
 
+const [cookies] = useCookies(['session']);
+
   const addFavourite = () => {
     const { product } = props
     const { dietTags, healthTags } = product
@@ -35,7 +38,8 @@ const SummaryCardPass = (props) => {
     const productDetails = {
       productName: props.productName,
       api_id: props.productId,
-      productTags
+      productTags,
+      userId: cookies.session
     }
 
     axios.post('/api/user-data/add-favourites', productDetails)
