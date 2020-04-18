@@ -23,17 +23,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column"
   },
   buttonStyle: {
-    margin: "10px",
-    "&:hover": {
-      backgroundColor: "#5f981a"
-    }
+    margin: "10px"
   },
   backButton: {
     display: "flex",
     alignItems: "center",
     marginLeft: "10px"
+  },
+  productName: {
+    textTransform: 'capitalize'
   }
-
 }));
 
 const SummaryCardAvoid = (props) => {
@@ -42,10 +41,6 @@ const SummaryCardAvoid = (props) => {
   const [cookies] = useCookies(['session']);
   const [favourite, setFavourite] = useState(false)
   const history = useHistory();
-
-  const handleBack = function() {
-    history.push("/home");
-  };
 
   const addFavourite = () => {
     const {product} = props
@@ -77,12 +72,14 @@ const SummaryCardAvoid = (props) => {
       <Card>
         <div style={{display:"flex"}}>
         <div className={classes.backButton}>
-        <IconButton onClick={handleBack}>
+        <IconButton onClick={history.goBack}>
         <ArrowBackIcon />
         </IconButton>
         </div>
         <CardHeader
-          title={props.productName}
+          className={classes.productName}
+          title={props.productName.toLowerCase()}
+          titleTypographyProps={{variant: 'h4'}}
         >
         </CardHeader>
         
@@ -114,7 +111,7 @@ const SummaryCardAvoid = (props) => {
           {
             favourite ? 
             <Button variant='contained'
-            color='primary'
+            color='secondary'
             className={classes.buttonStyle}
             onClick={removeFavorite}
           >

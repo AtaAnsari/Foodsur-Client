@@ -45,6 +45,7 @@ const Loading = () => {
 
   const history = useHistory();
   const classes = useStyles();
+  
   const [spinner, setSpinner] = useState(true);
   const [searchAgainButton, setSearchAgainButton] = useState(false);
 
@@ -88,8 +89,6 @@ const Loading = () => {
         <div></div>}
       </Box>
     </div>
-
-    
   );
 };
 
