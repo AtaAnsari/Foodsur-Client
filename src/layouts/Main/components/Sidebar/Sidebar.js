@@ -36,6 +36,9 @@ const useStyles = makeStyles(theme => ({
   logo: {
     width: '120px'
   },
+  edamamLogo: {
+    width: '130px'
+  },
   logoContainer: {
     display: 'flex',
     justifyContent: 'center'
@@ -100,7 +103,13 @@ const Sidebar = props => {
           closeSidebar={onClose}
           pages={pages}
         />
-        <UpgradePlan />
+        <Box className={classes.logoContainer}>
+          <img
+            alt="Logo"
+            className={classes.edamamLogo}
+            src="/images/logos/edamam.png"
+          />
+        </Box>
       </div>
     </Drawer>
   );
