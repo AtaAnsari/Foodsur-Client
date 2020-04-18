@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable react/display-name */
 import React, { forwardRef } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -22,12 +22,13 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'none',
     letterSpacing: 0,
     width: '100%',
-    fontWeight: theme.typography.fontWeightMedium
+    fontWeight: theme.typography.fontWeightMedium,
+    fontSize: '1rem'
   },
   icon: {
     color: theme.palette.icon,
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
     display: 'flex',
     alignItems: 'center',
     marginRight: theme.spacing(1)
@@ -51,18 +52,19 @@ const CustomRouterLink = forwardRef((props, ref) => (
 ));
 
 const SidebarNav = props => {
-  const { pages, closeSidebar, className, ...rest } = props;
+  const { pages, logout, closeSidebar, className, ...rest } = props;
 
   const classes = useStyles();
 
   const [cookies, setCookie, removeCookie] = useCookies(['session']);
 
+  // Won't show logout link in Sidebar if currently at /landing
+  const location = useLocation();
+  const notLanding = location.pathname !== '/landing';
+
   // Removes session cookie if 'Logout' is clicked, and closes the sidebar
-  const handleClick = page => {
-    if (page.title === 'Logout') {
-      removeCookie('session');
-      removeCookie('restrictions');
-    }
+  const handleLogout = () => {
+    removeCookie('session');
     closeSidebar();
   }
 
@@ -81,7 +83,7 @@ const SidebarNav = props => {
             activeClassName={classes.active}
             className={classes.button}
             component={CustomRouterLink}
-            onClick={() => handleClick(page)}
+            onClick={() => closeSidebar()}
             to={page.href}
           >
             <div className={classes.icon}>{page.icon}</div>
@@ -89,6 +91,24 @@ const SidebarNav = props => {
           </Button>
         </ListItem>
       ))}
+      {notLanding &&
+        <ListItem
+          className={classes.item}
+          disableGutters
+          key={logout.title}
+        >
+          <Button
+            activeClassName={classes.active}
+            className={classes.button}
+            component={CustomRouterLink}
+            onClick={() => handleLogout()}
+            to={logout.href}
+          >
+            <div className={classes.icon}>{logout.icon}</div>
+            {logout.title}
+          </Button>
+        </ListItem>
+      }
     </List>
   );
 };

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
+import useLoginValidation from 'hooks/useLoginValidation'
 
 const PopularProducts = () => {
+  useLoginValidation();
 
   const getPopularProducts = () => {
     axios.get('/api/user-data/popular-products', (req, res) => {

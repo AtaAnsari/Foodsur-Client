@@ -2,15 +2,12 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Divider, Drawer } from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import ImageIcon from '@material-ui/icons/Image';
+import { Divider, Drawer, Box } from '@material-ui/core';
+
+import HomeIcon from '@material-ui/icons/Home';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import StarIcon from '@material-ui/icons/Star';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import { Profile, SidebarNav, UpgradePlan } from './components';
@@ -35,6 +32,22 @@ const useStyles = makeStyles(theme => ({
   },
   nav: {
     marginBottom: theme.spacing(2)
+  },
+  logo: {
+    width: '120px'
+  },
+  edamamLogo: {
+    width: '130px'
+  },
+  logoContainer: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  edamamContainer: {
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'flex-end'
   }
 }));
 
@@ -45,51 +58,32 @@ const Sidebar = props => {
 
   const pages = [
     {
-      title: 'Dashboard',
-      href: '/dashboard',
-      icon: <DashboardIcon />
+      title: 'Home',
+      href: '/home',
+      icon: <HomeIcon />
     },
     {
-      title: 'Users',
-      href: '/users',
-      icon: <PeopleIcon />
+      title: 'Favourites',
+      href: '/user-favourites',
+      icon: <FavoriteIcon />
     },
     {
-      title: 'Products',
-      href: '/products',
-      icon: <ShoppingBasketIcon />
+      title: 'Popular',
+      href: '/popular-products',
+      icon: <StarIcon />
     },
     {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
-    },
-    {
-      title: 'Typography',
-      href: '/typography',
-      icon: <TextFieldsIcon />
-    },
-    {
-      title: 'Icons',
-      href: '/icons',
-      icon: <ImageIcon />
-    },
-    {
-      title: 'Account',
+      title: 'Profile',
       href: '/account',
       icon: <AccountBoxIcon />
     },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />
-    },
-    {
-      title: 'Logout',
-      href: '/landing',
-      icon: <ExitToAppIcon />
-    }
   ];
+
+  const logout =  {
+    title: 'Logout',
+    href: '/landing',
+    icon: <ExitToAppIcon />
+  }
 
   return (
     <Drawer
@@ -103,14 +97,28 @@ const Sidebar = props => {
         {...rest}
         className={clsx(classes.root, className)}
       >
-        <Profile />
+        <Box className={classes.logoContainer}>
+          <img
+            alt="Logo"
+            className={classes.logo}
+            src="/images/logos/foodsur.png"
+          />
+        </Box>
         <Divider className={classes.divider} />
         <SidebarNav
           className={classes.nav}
           closeSidebar={onClose}
+          logout={logout}
           pages={pages}
         />
-        <UpgradePlan />
+        <Divider className={classes.divider} />
+        <Box className={classes.edamamContainer}>
+          <img
+            alt="Logo"
+            className={classes.edamamLogo}
+            src="/images/logos/edamam.png"
+          />
+        </Box>
       </div>
     </Drawer>
   );
