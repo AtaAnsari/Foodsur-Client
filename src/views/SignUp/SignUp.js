@@ -141,6 +141,8 @@ const SignUp = props => {
     errors: {}
   });
 
+  const [userError, setUserError] = useState('')
+
   useEffect(() => {
     const errors = validate(formState.values, schema);
 
@@ -190,7 +192,8 @@ const SignUp = props => {
           setCookie('session', res.data.userId, { path: '/' });
           history.push('/dietary-preferences');
         } else {
-          console.log('Error!')
+          setUserError('Error')
+
         }
       })
       .catch(err => console.log(err))
@@ -272,6 +275,13 @@ const SignUp = props => {
                   value={formState.values.password || ''}
                   variant="outlined"
                 />
+                {userError &&
+                  <Typography
+                    color="error"
+                    variant="h6"
+                  >
+                    A user with that email already exists
+                  </Typography>}
                 <div className={classes.policy}>
                   <Checkbox
                     checked={formState.values.policy || false}
