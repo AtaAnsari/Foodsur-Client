@@ -29,10 +29,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "30px"
   },
   searchButton: {
-    color: "primary",
-    "&:hover": {
-      backgroundColor: "#5f981a"
-    }
+    color: "primary"
   }
 
 }));
