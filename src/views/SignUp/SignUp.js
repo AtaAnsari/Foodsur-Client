@@ -11,7 +11,8 @@ import {
   Link,
   FormHelperText,
   Checkbox,
-  Typography
+  Typography,
+  Box
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -53,32 +54,8 @@ const useStyles = makeStyles(theme => ({
   grid: {
     height: '100%'
   },
-  quoteContainer: {
-    [theme.breakpoints.down('md')]: {
-      display: 'none'
-    }
-  },
-  quote: {
-    backgroundColor: theme.palette.neutral,
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundImage: 'url(/images/auth.jpg)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-  },
-  quoteInner: {
-    textAlign: 'center',
-    flexBasis: '600px'
-  },
-  quoteText: {
-    color: theme.palette.white,
-    fontWeight: 300
-  },
   name: {
-    marginTop: theme.spacing(3),
+    marginTop: theme.spacing(1),
     color: theme.palette.white
   },
   bio: {
@@ -93,8 +70,8 @@ const useStyles = makeStyles(theme => ({
   contentHeader: {
     display: 'flex',
     alignItems: 'center',
-    paddingTop: theme.spacing(5),
-    paddingBototm: theme.spacing(2),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2)
   },
@@ -120,7 +97,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   title: {
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(1)
   },
   textField: {
     marginTop: theme.spacing(2)
@@ -134,11 +111,20 @@ const useStyles = makeStyles(theme => ({
     marginLeft: '-14px'
   },
   signUpButton: {
-    margin: theme.spacing(2, 0),
+    margin: theme.spacing(1, 0),
     "&:hover": {
       backgroundColor: "#5f981a"
     }
-  }
+  },
+  logoWidth: {
+    height: "100px",
+    width: "262px"
+  },
+  logoContainer: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "30px"
+  },
 }));
 
 const SignUp = props => {
@@ -154,6 +140,8 @@ const SignUp = props => {
     touched: {},
     errors: {}
   });
+
+  const [userError, setUserError] = useState('')
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -204,7 +192,8 @@ const SignUp = props => {
           setCookie('session', res.data.userId, { path: '/' });
           history.push('/dietary-preferences');
         } else {
-          console.log('Error!')
+          setUserError('Error')
+
         }
       })
       .catch(err => console.log(err))
@@ -212,6 +201,13 @@ const SignUp = props => {
 
   return (
     <div className={classes.root}>
+      <Box className={classes.logoContainer}>
+        <img
+          className={classes.logoWidth}
+          alt="Logo"
+          src="/images/logos/foodsur.png"
+        />
+      </Box>
       <Grid
         className={classes.grid}
         container
@@ -223,11 +219,6 @@ const SignUp = props => {
           xs={12}
         >
           <div className={classes.content}>
-            <div className={classes.contentHeader}>
-              <IconButton onClick={handleBack}>
-                <ArrowBackIcon />
-              </IconButton>
-            </div>
             <div className={classes.contentBody}>
               <form
                 className={classes.form}
@@ -239,12 +230,6 @@ const SignUp = props => {
                 >
                   Create new account
                 </Typography>
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Use your email to create an account
-                </Typography>
                 <TextField
                   className={classes.textField}
                   error={hasError('userName')}
@@ -252,7 +237,8 @@ const SignUp = props => {
                   helperText={
                     hasError('userName') ? formState.errors.userName[0] : null
                   }
-                  label="user name"
+                  required
+                  label="Username"
                   name="userName"
                   onChange={handleChange}
                   type="text"
@@ -261,6 +247,7 @@ const SignUp = props => {
                 />
                 <TextField
                   className={classes.textField}
+                  required
                   error={hasError('email')}
                   fullWidth
                   helperText={
@@ -280,6 +267,7 @@ const SignUp = props => {
                   helperText={
                     hasError('password') ? formState.errors.password[0] : null
                   }
+                  required
                   label="Password"
                   name="password"
                   onChange={handleChange}
@@ -287,6 +275,13 @@ const SignUp = props => {
                   value={formState.values.password || ''}
                   variant="outlined"
                 />
+                {userError &&
+                  <Typography
+                    color="error"
+                    variant="h6"
+                  >
+                    A user with that email already exists
+                  </Typography>}
                 <div className={classes.policy}>
                   <Checkbox
                     checked={formState.values.policy || false}

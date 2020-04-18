@@ -23,10 +23,10 @@ const useStyles = makeStyles(theme => ({
     width: "262px"
   },
   logoContainer: {
-    display:"flex",
-    justifyContent:"center",
-    marginBottom:"30px"
-  }, 
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "30px"
+  },
   searchButton: {
     color: "primary",
     "&:hover": {
@@ -53,9 +53,10 @@ const Home = () => {
       setError('error');
     }
   }
+  console.log(error)
 
   const handleSearch = () => {
-    history.push({
+
       pathname: "/loading"
     })
     history.push({
@@ -68,7 +69,7 @@ const Home = () => {
     <div className={classes.root}>
       <Box className={classes.logoContainer}>
         <img
-          className= {classes.logoWidth}
+          className={classes.logoWidth}
           alt="Logo"
           src="/images/logos/foodsur.png"
         />
@@ -87,7 +88,7 @@ const Home = () => {
         </Typography>}
       <Box className={classes.searchButtonContainer}>
         <Button
-          variant= "contained"
+          variant="contained"
           className={classes.searchButton}
           color="primary"
           onClick={validateSearch}
