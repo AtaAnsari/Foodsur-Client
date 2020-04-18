@@ -35,10 +35,11 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState('');
+  const [error, setError] = useState('')
+  const [cookies, setCookie] = useCookies(['session']);
 
   const { setRestrictions } = useContext(RestrictionsContext);
 
-  const [cookies, setCookie] = useCookies(['session']);
 
   const history = useHistory()
   const classes = useStyles();
@@ -49,12 +50,13 @@ const Login = () => {
     const userData = { email: userEmail }
     axios.post('/api/users/login', userData)
       .then(res => {
+        console.log(res)
         if (res.data.success) {
           setCookie('session', res.data.userId, { path: '/' });
           setRestrictions(res.data.userRestrictions);
           history.push('/home');
         } else {
-          console.log('Error');
+          setError('Error')
         }
       })
   }
@@ -78,6 +80,7 @@ const Login = () => {
           <TextField
             className={classes.textField}
             fullWidth
+            required
             id="Email Address"
             label="email"
             type='email'
@@ -89,6 +92,7 @@ const Login = () => {
           <TextField
             className={classes.textField}
             fullWidth
+            required
             id="password"
             label="Password"
             type='password'
@@ -100,7 +104,15 @@ const Login = () => {
           type="submit"
           fullWidth
           variant="contained"
-          color="primary">Submit</Button>
+          color="primary">Submit
+          </Button>
+        {error &&
+          <Typography
+            color="error"
+            variant="h6"
+          >
+            Please enter a valid username and password
+        </Typography>}
         <Typography
           color="textSecondary"
           variant="body1"

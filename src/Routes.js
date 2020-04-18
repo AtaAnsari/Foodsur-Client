@@ -128,7 +128,7 @@ const Routes = () => {
       <RouteWithLayout
         component={LoginView}
         exact
-        layout={MainLayout}
+        layout={MinimalLayout}
         path="/login"
       />
       <RouteWithLayout
