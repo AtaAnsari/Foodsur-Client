@@ -23,10 +23,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column"
   },
   buttonStyle: {
-    margin: "10px",
-    "&:hover": {
-      backgroundColor: "#5f981a"
-    }
+    margin: "10px"
   },
   backButton: {
     display: "flex",
@@ -118,7 +115,7 @@ const SummaryCardAvoid = (props) => {
           {
             favourite ? 
             <Button variant='contained'
-            color='primary'
+            color='secondary'
             className={classes.buttonStyle}
             onClick={removeFavorite}
           >
