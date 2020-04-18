@@ -22,12 +22,13 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'none',
     letterSpacing: 0,
     width: '100%',
-    fontWeight: theme.typography.fontWeightMedium
+    fontWeight: theme.typography.fontWeightMedium,
+    fontSize: '1rem'
   },
   icon: {
     color: theme.palette.icon,
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
     display: 'flex',
     alignItems: 'center',
     marginRight: theme.spacing(1)
