@@ -7,6 +7,7 @@ import { SearchInput } from '../../components'
 import { ScanViewport } from './components'
 
 import useLoginValidation from 'hooks/useLoginValidation';
+import { getSearchResults } from 'helpers/getSearchResults';
 
 
 const useStyles = makeStyles(theme => ({
@@ -53,16 +54,16 @@ const Home = () => {
       setError('error');
     }
   }
-  console.log(error)
 
   const handleSearch = () => {
-
-      pathname: "/loading"
-    })
-    history.push({
-      pathname:'/search-results',
-      state: { searchTerm }
-    })
+    history.push('/loading');
+    getSearchResults(searchTerm)
+      .then(searchResults => {
+        history.replace({
+          pathname:'/search-results',
+          state: { searchResults }
+        })
+      })
   }
 
   return (
