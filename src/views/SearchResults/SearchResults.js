@@ -34,7 +34,7 @@ const SearchResults = props => {
   }, []);
 
   const handleBack = () => {
-    history.goBack();
+    history.push("/home");
   };
 
   return (

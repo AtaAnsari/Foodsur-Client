@@ -56,6 +56,9 @@ const Home = () => {
 
   const handleSearch = () => {
     history.push({
+      pathname: "/loading"
+    })
+    history.push({
       pathname:'/search-results',
       state: { searchTerm }
     })
