@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { css } from "@emotion/core";
 import { Box, Button, Typography} from '@material-ui/core';
-import BarLoader from "react-spinners/BarLoader";
-import typography from 'theme/typography';
+import BarLoader from 'react-spinners/BarLoader';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -56,39 +55,38 @@ const Loading = () => {
 
     return () => clearTimeout(timedButton);
   }, []);
-  const handleBack = function() {
-    history.goBack();
-  };
 
   return (
     <div className={classes.root}>
       <Box className={classes.container} >
-        <Box>  
-        <img
-              className= {classes.logo}
-              alt="Logo"
-              src="/images/logos/S-logo-lrg.png"
-            />
+        <Box>
+          <img
+            alt="Logo"
+            className= {classes.logo}
+            src="/images/logos/S-logo-lrg.png"
+          />
         </Box>
         <BarLoader
-            css={override}
-            size={150}
-            color={"#79AB2B"}
-            loading={spinner}
-          />
+          color={'#79AB2B'}
+          css={override}
+          loading={spinner}
+          size={150}
+        />
         {searchAgainButton ?
-        <div className={classes.searchAgainButtonContainer}>
-                <Typography variant="h5"> Hmm, there seems to be a problem.</Typography>
-        <Button variant='contained'
-        color='primary'
-        className={classes.buttonStyle}
-        onClick={handleBack}
-        >
-        Search Again
-        </Button> 
-        </div>
-  :
-        <div></div>}
+          <div className={classes.searchAgainButtonContainer}>
+            <Typography variant="h5">
+            Hmm, there seems to be a problem.
+            </Typography>
+            <Button
+              className={classes.buttonStyle}
+              color="primary"
+              onClick={history.goBack}
+              variant="contained"
+            >
+            Search Again
+            </Button>
+          </div> :
+          <div/>}
       </Box>
     </div>
   );
