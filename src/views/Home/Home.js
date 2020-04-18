@@ -53,14 +53,10 @@ const Home = () => {
       setError('error');
     }
   }
-  console.log(error)
 
   const handleSearch = () => {
-
-      pathname: "/loading"
-    })
     history.push({
-      pathname:'/search-results',
+      pathname: '/search-results',
       state: { searchTerm }
     })
   }
