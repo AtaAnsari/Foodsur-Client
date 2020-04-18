@@ -30,9 +30,9 @@ const SearchResultsTable = ({ searchResults }) => {
   // Gets product data from the item and sends it to /display-product
   const handleClick = async item => {
     history.push({
-      pathname: "/loading"
+      pathname: '/loading'
     })
-    const product = { 
+    const product = {
       productName: item.food.label,
       productId:item.food.foodId
     }
@@ -47,7 +47,7 @@ const SearchResultsTable = ({ searchResults }) => {
     }
     const productData = await isolateProductData(ingredients, product);
 
-    history.push({
+    history.replace({
       pathname: '/display-product',
       state: { product: productData}
     })
