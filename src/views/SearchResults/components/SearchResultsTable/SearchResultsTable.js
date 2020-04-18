@@ -29,6 +29,9 @@ const SearchResultsTable = ({ searchResults }) => {
 
   // Gets product data from the item and sends it to /display-product
   const handleClick = async item => {
+    history.push({
+      pathname: "/loading"
+    })
     const product = { 
       productName: item.food.label,
       productId:item.food.foodId

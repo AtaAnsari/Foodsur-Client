@@ -67,6 +67,7 @@ const addFavourite = () => {
   const handleBack = function() {
     history.push("/home");
   };
+  
   const classes = useStyles();
   return (
     <div>
