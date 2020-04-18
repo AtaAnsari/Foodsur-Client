@@ -4,6 +4,7 @@ import { Container, TextField, Typography, Button } from '@material-ui/core';
 import { UserFavouritesCard } from './components'
 import axios from 'axios'
 import useLoginValidation from 'hooks/useLoginValidation';
+import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles(theme => {
   root: {
@@ -12,13 +13,21 @@ const useStyles = makeStyles(theme => {
 })
 
 const UserFavourites = () => {
+
   const classes = useStyles()
+  const [cookies] = useCookies(['session']);
   const [favourites, setFavourites] = useState([])
 
   useLoginValidation();
-  
-  async function getUserFavourites() {
-    const userData = await axios.get('/api/user-data/user-favourites')
+
+  const userId = {
+    id: cookies.session
+  }
+
+  const getUserFavourites = async () => {
+    const userData = await axios.get('/api/user-data/user-favourites', {
+      params: userId
+    })
     return userData
   }
 
@@ -33,6 +42,7 @@ const UserFavourites = () => {
       });
     return () => loggedIn = false;
   }, [])
+  console.log(favourites)
 
   return (
     <Container className={classes.root}>

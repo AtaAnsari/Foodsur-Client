@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useCookies } from 'react-cookie';
 import useLoginValidation from 'hooks/useLoginValidation'
@@ -8,6 +8,8 @@ const PopularProducts = () => {
   useLoginValidation();
 
   const [cookies] = useCookies(['session']);
+  const [popularProducts, setPoplarProducts] = useState([])
+
   const userId = {
     id: cookies.session
   }
@@ -20,12 +22,21 @@ const PopularProducts = () => {
   }
 
   useEffect(() => {
+    let loggedIn = true;
     getPopularProducts()
+      .then(product => {
+        if (loggedIn) {
+          setPoplarProducts(product.data);
+        }
+      });
+    return () => loggedIn = false;
   }, [])
+
+  console.log(popularProducts)
 
   return (
     <h1>Hello</h1>
-  ).then(res => console.log(res.data))
+  )
 }
 
 export default PopularProducts
