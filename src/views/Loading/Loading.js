@@ -29,28 +29,25 @@ const override = css`
 
 const Loading = () => {
   const classes = useStyles();
-  const [spinner, setSpinner] = useState(true);
 
   return (
     <div className={classes.root}>
       <Box className={classes.container} >
-      <Box>  
-      <img
-            className= {classes.logo}
+        <Box>
+          <img
             alt="Logo"
+            className= {classes.logo}
             src="/images/logos/S-logo-lrg.png"
           />
-       </Box>   
-<BarLoader
+        </Box>
+        <BarLoader
+          color={'#79AB2B'}
           css={override}
+          loading
           size={150}
-          color={"#79AB2B"}
-          loading={spinner}
         />
-    </Box>
+      </Box>
     </div>
-
-    
   );
 };
 
