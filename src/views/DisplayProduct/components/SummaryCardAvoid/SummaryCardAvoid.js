@@ -86,6 +86,7 @@ const SummaryCardAvoid = (props) => {
         <CardHeader
           className={classes.productName}
           title={props.productName.toLowerCase()}
+          titleTypographyProps={{variant: 'h4'}}
         >
         </CardHeader>
         
