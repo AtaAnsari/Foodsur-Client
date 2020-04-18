@@ -33,7 +33,7 @@ const Routes = () => {
       <Redirect
         exact
         from="/"
-        to="/dashboard"
+        to="/landing"
       />
       <RouteWithLayout
         component={LandingView}
