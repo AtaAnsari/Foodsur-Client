@@ -44,18 +44,22 @@ const ScanViewport = () => {
   const history = useHistory()
 
   const onDetected = async result => {
-    history.push({
-          pathname: "/loading"
-        })
-    const {upcIngredients, product} = await FetchApiData(result)
-    setResult(result);
-    const res = await isolateProductData(upcIngredients, product)
-        history.push({
-          pathname: "/display-product",
-          state: {
-            product: res
-          }
-        })
+    if (history.location.pathname === '/home') {
+      history.push({
+        pathname: '/loading'
+      });
+      console.log('pushed');
+      const {upcIngredients, product} = await FetchApiData(result);
+      setResult(result);
+      const res = await isolateProductData(upcIngredients, product);
+  
+      history.replace({
+        pathname: '/display-product',
+        state: {
+          product: res
+        }
+      });
+    }
   };
 
 
