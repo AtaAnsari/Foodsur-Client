@@ -109,6 +109,7 @@ const Sidebar = props => {
           closeSidebar={onClose}
           pages={pages}
         />
+        <Divider className={classes.divider} />
         <Box className={classes.edamamContainer}>
           <img
             alt="Logo"
