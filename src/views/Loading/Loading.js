@@ -51,7 +51,7 @@ const Loading = () => {
   useEffect(() => {
     const timedButton = setTimeout(() => {
       setSearchAgainButton(true)
-    }, 1000);
+    }, 5000);
   }, []);
   const handleBack = function() {
     history.goBack();
