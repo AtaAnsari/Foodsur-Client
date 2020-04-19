@@ -10,7 +10,33 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
+  deploy:
+    machine:
+      enabled: true
+
+    working_directory: ~/client
+
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "cc:f4:78:cc:c1:b3:7e:79:8f:86:26:7a:9e:66:70:8a"
+      - checkout
+      - run:
+          name: Push Master to Production
+          command: |
+            git push https://github.com/AtaAnsari/Foodsur-Client.git master:production
+
 workflows:
-    build:
-      jobs:
-        - build
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: production
+      - deploy:
+          filters:
+            branches:
+              ignore: production
+          requires:
+            - build
