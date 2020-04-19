@@ -10,6 +10,7 @@ import { Bar } from 'react-chartjs-2';
 
 
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
@@ -44,6 +45,7 @@ const PopularProducts = () => {
   const [cookies] = useCookies(['session']);
   const [popularProducts, setPoplarProducts] = useState([])
   const [popularityCount, setpopularityCount] = useState([])
+
 
   const userId = {
     id: cookies.session
@@ -90,14 +92,16 @@ const PopularProducts = () => {
 // console.log('PRODUCTLIST', popularProducts)
  
   const productList = popularProducts.map((product, idx)=> {
+  console.log('product', product);
     // return product.name
   // })
   // console.log('productNameList', productNameList)
   // const productList = productNameList.map((productName) => {
-  
+  const productName = product.name.toLowerCase()
   return <ProductExpander 
-  productName={product.name.toLowerCase()}
+  productName={productName}
   rank={idx + 1}
+  apiId={product.apiId}
   // nutriFacs={nutriFacs}
   /> }
   )
@@ -176,7 +180,7 @@ const options = {
   return (
     <div className={classes.background}>
       <div className={classes.header}>
-         <Typography variant='h1' gutterBottom={true} align={'center'} color='black'>
+        <Typography variant='h1' gutterBottom={true} align={'center'} color='black'>
           Popular Items
         </Typography>
       </div>

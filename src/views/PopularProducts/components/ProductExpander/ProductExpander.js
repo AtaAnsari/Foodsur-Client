@@ -18,26 +18,21 @@
 
 // const classes = useStyles();
 
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
-import DeleteIcon from '@material-ui/icons/Delete';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-
+import { getSearchResults } from 'helpers/getSearchResults'
+import useApiData from 'hooks/useApiData';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -55,22 +50,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
-
 const ProductExpander = (props) => {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
+  const [dense, setDense] = useState(false);
+  const [secondary, setSecondary] = useState(false);
+  const { isolateProductData } = useApiData()
+  const history = useHistory();
 
 //   const handleBack = function() {
 //   history.push("/home");
 // };
+
+const handleArrowClick = (productName, apiId)=> {
+  const upcIngredients = {
+    "ingredients": [
+      {
+        "quantity": 1,
+        "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+        "foodId": apiId
+      }
+    ]
+  }
+
+  const product = {
+    productName,
+    productId: apiId
+  }
+
+isolateProductData(upcIngredients, product)
+  .then((productData) => {history.push({
+    pathname: '/display-product',
+    state: { product: productData}
+  })});
+}
 
   return (
  <div className={classes.root}>
@@ -92,7 +104,7 @@ const ProductExpander = (props) => {
                     <IconButton edge="end" aria-label="delete">
                       <StarBorderIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton onClick={()=> {handleArrowClick(props.productName, props.apiId)}} edge="end" aria-label="delete">
                       <KeyboardArrowRightIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
