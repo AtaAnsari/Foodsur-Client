@@ -44,7 +44,6 @@ const SummaryCardAvoid = (props) => {
 
   const addFavourite = () => {
     const { product } = props
-    console.log(' product', product);
     const { dietTags, healthTags } = product
     const productTags = dietTags.concat(healthTags)
 
@@ -58,8 +57,6 @@ const SummaryCardAvoid = (props) => {
     }
 
     axios.post('/api/user-data/add-favourites', productDetails)
-
-    console.log("PRODUCT DETAILS", productDetails)
   }
 
   const removeFavourite = () => {

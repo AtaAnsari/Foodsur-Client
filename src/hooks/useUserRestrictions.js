@@ -8,10 +8,8 @@ export default function useUserRestrictions() {
 
   const compareRestrictions = function (product) {
 
-    const sharedRestricitions = []
-    const divergentRestrictions = []
-
-    console.log('From User:', restrictions.dietTags, 'From api:', product.dietTags)
+    const sharedRestricitions = [];
+    const divergentRestrictions = [];
 
     restrictions.healthTags.forEach(tag => {
       let tagType = "Health Restriction"
@@ -37,9 +35,6 @@ export default function useUserRestrictions() {
         divergentRestrictions.push([tag, dietTagType, cardColour])
       }
     })
-
-    console.log('SHARED-RESTRICTIONS', sharedRestricitions);
-    console.log('DIVERGENT-RESTRICTIONS', divergentRestrictions);
 
     return {
       sharedRestricitions,

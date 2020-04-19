@@ -42,7 +42,6 @@ const UserFavourites = () => {
       });
     return () => loggedIn = false;
   }, [])
-  console.log(favourites)
 
   return (
     <Container className={classes.root}>

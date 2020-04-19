@@ -32,7 +32,6 @@ const PopularProducts = () => {
     return () => loggedIn = false;
   }, [])
 
-  console.log(popularProducts)
 
   return (
     <h1>Hello</h1>
