@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, Divider, CardContent, Typography, Button, Box, IconButton } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -23,33 +23,32 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column"
   },
   buttonStyle: {
-    margin: "10px",
-    "&:hover": {
-      backgroundColor: "#5f981a"
-    }
+    margin: "10px"
   },
   backButton: {
     display: "flex",
     alignItems: "center",
     marginLeft: "10px"
+  },
+  productName: {
+    textTransform: 'capitalize'
   }
-
 }));
 
 const SummaryCardPass = (props) => {
 
-const [cookies] = useCookies(['session']);
-const [favourite, setFavourite] = useState(false)
-const history = useHistory();
+  const [cookies] = useCookies(['session']);
+  const [favourite, setFavourite] = useState(false)
+  const history = useHistory();
 
-const addFavourite = () => {
-  const { product } = props
-  const { dietTags, healthTags } = product
-  const productTags = dietTags.concat(healthTags)
-    
-  setFavourite(true)
+  const addFavourite = () => {
+    const { product } = props
+    const { dietTags, healthTags } = product
+    const productTags = dietTags.concat(healthTags)
 
-  const productDetails = {
+    setFavourite(true)
+
+    const productDetails = {
       productName: props.productName,
       api_id: props.productId,
       productTags,
@@ -58,31 +57,38 @@ const addFavourite = () => {
 
     axios.post('/api/user-data/add-favourites', productDetails)
 
-    console.log("PRODUCT DETAILS", productDetails)
   }
 
-  const removeFavorite = () => {
-    setFavourite(false)
+  const removeFavourite = () => {
+    const userId = { 
+      userId: cookies.session,
+      apiId: props.productId
+     }
+
+    axios.delete('/api/user-data/remove-favourites', {
+      params: userId
+    })
+      .then(res => setFavourite(false))
   }
-  const handleBack = function() {
-    history.push("/home");
-  };
-  
+
   const classes = useStyles();
+
   return (
     <div>
       <Card>
-        <div style={{display:"flex"}}>
-        <div className={classes.backButton}>
-        <IconButton onClick={handleBack}>
-        <ArrowBackIcon />
-        </IconButton>
-        </div>
-        <CardHeader
-          title={props.productName}
-        >
-        </CardHeader>
-        
+        <div style={{ display: "flex" }}>
+          <div className={classes.backButton}>
+            <IconButton onClick={history.goBack}>
+              <ArrowBackIcon />
+            </IconButton>
+          </div>
+          <CardHeader
+            className={classes.productName}
+            title={props.productName.toLowerCase()}
+            titleTypographyProps={{ variant: 'h4' }}
+          >
+          </CardHeader>
+
         </div>
         <Divider />
         <CardContent>
@@ -90,30 +96,32 @@ const addFavourite = () => {
             <CheckCircleOutlineIcon className={classes.largeIcon} />
             <Typography variant="h3">
               Good to Go!
-        </Typography>
+            </Typography>
           </div>
         </CardContent>
       </Card>
       <Card>
-        <Box display="flex" justifyContent="center">
-          {
-            favourite ? 
-            <Button variant='contained'
-            color='primary'
-            className={classes.buttonStyle}
-            onClick={removeFavorite}
-          >
-            Remove From Favourites
-        </Button> :
-        <Button variant='contained'
-        color='primary'
-        className={classes.buttonStyle}
-        onClick={addFavourite}
+        <Box
+          display="flex"
+          justifyContent="center"
         >
-        Add to Favourites
-        </Button>
-
-          }
+          {favourite ?
+            <Button
+              className={classes.buttonStyle}
+              color='secondary'
+              onClick={removeFavourite}
+              variant='contained'
+            >
+              Remove From Favourites
+            </Button> :
+            <Button
+              className={classes.buttonStyle}
+              color='primary'
+              onClick={addFavourite}
+              variant='contained'
+            >
+              Add to Favourites
+            </Button>}
         </Box>
         {props.divergent}
         {props.shared}

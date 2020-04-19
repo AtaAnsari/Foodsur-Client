@@ -7,6 +7,7 @@ import { SearchInput } from '../../components'
 import { ScanViewport } from './components'
 
 import useLoginValidation from 'hooks/useLoginValidation';
+import { getSearchResults } from 'helpers/getSearchResults';
 
 
 const useStyles = makeStyles(theme => ({
@@ -23,15 +24,12 @@ const useStyles = makeStyles(theme => ({
     width: "262px"
   },
   logoContainer: {
-    display:"flex",
-    justifyContent:"center",
-    marginBottom:"30px"
-  }, 
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "30px"
+  },
   searchButton: {
-    color: "primary",
-    "&:hover": {
-      backgroundColor: "#5f981a"
-    }
+    color: "primary"
   }
 
 }));
@@ -55,20 +53,22 @@ const Home = () => {
   }
 
   const handleSearch = () => {
-    history.push({
-      pathname: "/loading"
-    })
-    history.push({
-      pathname:'/search-results',
-      state: { searchTerm }
-    })
+
+    history.push('/loading');
+    getSearchResults(searchTerm)
+      .then(searchResults => {
+        history.replace({
+          pathname:'/search-results',
+          state: { searchResults }
+        })
+      })
   }
 
   return (
     <div className={classes.root}>
       <Box className={classes.logoContainer}>
         <img
-          className= {classes.logoWidth}
+          className={classes.logoWidth}
           alt="Logo"
           src="/images/logos/foodsur.png"
         />
@@ -87,7 +87,7 @@ const Home = () => {
         </Typography>}
       <Box className={classes.searchButtonContainer}>
         <Button
-          variant= "contained"
+          variant="contained"
           className={classes.searchButton}
           color="primary"
           onClick={validateSearch}
