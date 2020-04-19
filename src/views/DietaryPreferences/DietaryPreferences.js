@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.spacing(3)
+  },
+  errorBox: {
+    marginTop: theme.spacing(1)
   }
 }));
 
@@ -30,6 +33,7 @@ const DietaryPreferences = () => {
 
   const [preferences, setPreferences] = useState('');
   const [selectedPreferences, setSelectedPreferences] = useState([]);
+  const [error, setError] = useState('')
 
   const { setRestrictions } = useContext(RestrictionsContext);
 
@@ -59,16 +63,19 @@ const DietaryPreferences = () => {
   // Sets the RestrictionsContext to the user's dietary restrictions
   const storePreferences = () => {
     const userData = { userId: cookies.session, selectedPreferences };
-
-    axios.post('/api/user-data/user-preferences', userData)
-      .then(res => {
-        if (res.data.success) {
-          setRestrictions(res.data.userRestrictions);
-          history.push('/home');
-        } else {
-          console.log('Could not save dietary preferences to database');
-        }
-      })
+    if(selectedPreferences > 0){
+      axios.post('/api/user-data/user-preferences', userData)
+        .then(res => {
+          if (res.data.success) {
+            setRestrictions(res.data.userRestrictions);
+            history.push('/home');
+          } else {
+            console.log('Could not save dietary preferences to database');
+          }
+        })
+      } else {
+        setError('Error')
+      }
   }
 
   return (
@@ -88,6 +95,17 @@ const DietaryPreferences = () => {
               selectedPreferences={selectedPreferences}
             />
           </div>
+          <Box
+          className={classes.errorBox}>
+          {error &&
+          <Typography
+            color="error"
+            variant="h6"
+            align='center'
+          >
+            Please select at least one dietary restriction
+           </Typography>}
+          </Box>
           <Box className={classes.buttonBox}>
             <Button
               color="primary"
