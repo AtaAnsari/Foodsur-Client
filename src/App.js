@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { Router } from 'react-router-dom';
+import Media from 'react-media'
 import { createBrowserHistory } from 'history';
 import { Chart } from 'react-chartjs-2';
 import { ThemeProvider } from '@material-ui/styles';
@@ -12,6 +13,7 @@ import './assets/scss/index.scss';
 import validators from './common/validators';
 import Routes from './Routes';
 import RestrictionsContext from './context/restrictionsContext';
+import DesktopView from './DesktopView'
 
 import { CookiesProvider } from 'react-cookie';
 
@@ -32,14 +34,21 @@ export default function App() {
   const value = { restrictions, setRestrictions };
 
   return (
-    <CookiesProvider>
-      <RestrictionsContext.Provider value={value}>
-        <ThemeProvider theme={theme}>
-          <Router history={browserHistory}>
-            <Routes />
-          </Router>
-        </ThemeProvider>
-      </RestrictionsContext.Provider>
-    </CookiesProvider>
+    <Media queries={{
+      desktop: {minWidth: 769} }}>
+      {matches => 
+        matches.desktop ? (
+          <DesktopView />
+        ) :
+        (<CookiesProvider>
+          <RestrictionsContext.Provider value={value}>
+            <ThemeProvider theme={theme}>
+              <Router history={browserHistory}>
+                <Routes />
+              </Router>
+            </ThemeProvider>
+          </RestrictionsContext.Provider>
+        </CookiesProvider>)}
+      </Media>
   );
 }
