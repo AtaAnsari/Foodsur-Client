@@ -68,6 +68,10 @@ const ProductExpander = (props) => {
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
 
+//   const handleBack = function() {
+//   history.push("/home");
+// };
+
   return (
  <div className={classes.root}>
      <Grid item xs={12} md={6}>

@@ -5,12 +5,42 @@ import useLoginValidation from 'hooks/useLoginValidation'
 import { ProductExpander } from './components'
 import { Bar } from 'react-chartjs-2';
  import palette from 'theme/palette';
+ import { makeStyles } from '@material-ui/styles';
+ import {Typography} from '@material-ui/core';
 
 
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(4)
+  },
+  graph: {
+    backgroundColor: "white",
+    marginLeft: "20px",
+    marginRight: "20px"
+  },
+  header: {
+    backgroundColor: "white",
+    paddingTop: "20px",
+    paddingBottom: "20px"
+  },
+  subtitle: {
+    backgroundColor: "white",
+    marginBottom: "20px"
+  },
+  background: {
+    backgroundColor: "white"
+  },
+  list: {
+    textTransform: 'capitalize'
+  }
+
+}));
 
 const PopularProducts = () => {
-  useLoginValidation();
 
+  const classes = useStyles();
+  useLoginValidation();
   const [cookies] = useCookies(['session']);
   const [popularProducts, setPoplarProducts] = useState([])
   const [popularityCount, setpopularityCount] = useState([])
@@ -65,10 +95,8 @@ const PopularProducts = () => {
   // console.log('productNameList', productNameList)
   // const productList = productNameList.map((productName) => {
   
-  
   return <ProductExpander 
-  
-  productName={product.name}
+  productName={product.name.toLowerCase()}
   rank={idx + 1}
   // nutriFacs={nutriFacs}
   /> }
@@ -146,14 +174,32 @@ const options = {
 };
 
   return (
-    <div>
-             <Bar
-            data={data}
-            options={options}
-          />
-    {productList}
+    <div className={classes.background}>
+      <div className={classes.header}>
+         <Typography variant='h1' gutterBottom={true} align={'center'} color='black'>
+          Popular Items
+        </Typography>
+      </div>
+      <div className={classes.graph}>
+        <Bar
+          data={data}
+          options={options}
+        />
+      </div>
+      <div className={classes.subtitle}>
+      <Typography variant='h6' gutterBottom={true} align={'center'} color='black'>
+          Rank
+        </Typography>
+      </div>
+         <div>
+      <Typography variant='h4' gutterBottom={true} align={'start'} color='black' style={{paddingLeft:'20px'}}>
+          Ranked Food Items:
+        </Typography>
+      </div>
+      <div className={classes.list}>
+       {productList}
+      </div>
     </div>
-
   )
 }
 
