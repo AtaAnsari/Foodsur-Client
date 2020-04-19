@@ -192,8 +192,8 @@ const options = {
         </Typography>
       </div>
          <div>
-      <Typography variant='h4' gutterBottom={true} align={'start'} color='black' style={{paddingLeft:'20px'}}>
-          Ranked Food Items:
+      <Typography variant='h5' gutterBottom={true} align={'start'} color='black' style={{paddingLeft:'20px'}}>
+          Ranked Items That Meet your Requirements:
         </Typography>
       </div>
       <div className={classes.list}>
