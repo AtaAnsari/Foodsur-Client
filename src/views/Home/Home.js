@@ -53,6 +53,7 @@ const Home = () => {
   }
 
   const handleSearch = () => {
+
     history.push('/loading');
     getSearchResults(searchTerm)
       .then(searchResults => {
