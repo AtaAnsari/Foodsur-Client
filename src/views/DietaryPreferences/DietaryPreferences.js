@@ -63,7 +63,7 @@ const DietaryPreferences = () => {
   // Sets the RestrictionsContext to the user's dietary restrictions
   const storePreferences = () => {
     const userData = { userId: cookies.session, selectedPreferences };
-    if(selectedPreferences > 0){
+    if(selectedPreferences.length > 0){
       axios.post('/api/user-data/user-preferences', userData)
         .then(res => {
           if (res.data.success) {
