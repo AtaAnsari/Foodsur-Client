@@ -7,6 +7,7 @@ import { SearchInput } from '../../components'
 import { ScanViewport } from './components'
 
 import useLoginValidation from 'hooks/useLoginValidation';
+import { getSearchResults } from 'helpers/getSearchResults';
 
 
 const useStyles = makeStyles(theme => ({
@@ -28,10 +29,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "30px"
   },
   searchButton: {
-    color: "primary",
-    "&:hover": {
-      backgroundColor: "#5f981a"
-    }
+    color: "primary"
   }
 
 }));
@@ -55,10 +53,15 @@ const Home = () => {
   }
 
   const handleSearch = () => {
-    history.push({
-      pathname: '/search-results',
-      state: { searchTerm }
-    })
+
+    history.push('/loading');
+    getSearchResults(searchTerm)
+      .then(searchResults => {
+        history.replace({
+          pathname:'/search-results',
+          state: { searchResults }
+        })
+      })
   }
 
   return (
