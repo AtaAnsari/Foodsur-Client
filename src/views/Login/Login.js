@@ -50,7 +50,6 @@ const Login = () => {
     const userData = { email: userEmail }
     axios.post('/api/users/login', userData)
       .then(res => {
-        console.log(res)
         if (res.data.success) {
           setCookie('session', res.data.userId, { path: '/' });
           setRestrictions(res.data.userRestrictions);

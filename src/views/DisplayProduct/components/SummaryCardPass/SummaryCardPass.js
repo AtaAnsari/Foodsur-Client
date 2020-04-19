@@ -57,7 +57,6 @@ const SummaryCardPass = (props) => {
 
     axios.post('/api/user-data/add-favourites', productDetails)
 
-    console.log("PRODUCT DETAILS", productDetails)
   }
 
   const removeFavourite = () => {

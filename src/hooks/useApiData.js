@@ -23,7 +23,7 @@ export default function useApiData() {
       productName: name,
       productId: productId
     }
-    console.log('PRODUCTID', productId);
+  
     return {
       upcIngredients,
       product
@@ -39,7 +39,6 @@ export default function useApiData() {
       ingredients)
     const healthLabels = res.data.healthLabels;
     const dietLabels = res.data.dietLabels;
-    console.log(dietLabels)
     product.healthTags = healthLabels
     product.dietTags = dietLabels
     // .catch(err => console.log(err))
