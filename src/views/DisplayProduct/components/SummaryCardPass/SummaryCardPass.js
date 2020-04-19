@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, Divider, CardContent, Typography, Button, Box, IconButton } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -37,18 +37,18 @@ const useStyles = makeStyles((theme) => ({
 
 const SummaryCardPass = (props) => {
 
-const [cookies] = useCookies(['session']);
-const [favourite, setFavourite] = useState(false)
-const history = useHistory();
+  const [cookies] = useCookies(['session']);
+  const [favourite, setFavourite] = useState(false)
+  const history = useHistory();
 
-const addFavourite = () => {
-  const { product } = props
-  const { dietTags, healthTags } = product
-  const productTags = dietTags.concat(healthTags)
-    
-  setFavourite(true)
+  const addFavourite = () => {
+    const { product } = props
+    const { dietTags, healthTags } = product
+    const productTags = dietTags.concat(healthTags)
 
-  const productDetails = {
+    setFavourite(true)
+
+    const productDetails = {
       productName: props.productName,
       api_id: props.productId,
       productTags,
@@ -60,8 +60,16 @@ const addFavourite = () => {
     console.log("PRODUCT DETAILS", productDetails)
   }
 
-  const removeFavorite = () => {
-    setFavourite(false)
+  const removeFavourite = () => {
+    const userId = { 
+      userId: cookies.session,
+      apiId: props.productId
+     }
+
+    axios.delete('/api/user-data/remove-favourites', {
+      params: userId
+    })
+      .then(res => setFavourite(false))
   }
 
   const classes = useStyles();
@@ -69,19 +77,19 @@ const addFavourite = () => {
   return (
     <div>
       <Card>
-        <div style={{display:"flex"}}>
-        <div className={classes.backButton}>
-        <IconButton onClick={history.goBack}>
-        <ArrowBackIcon />
-        </IconButton>
-        </div>
-        <CardHeader
-          className={classes.productName}
-          title={props.productName.toLowerCase()}
-          titleTypographyProps={{variant: 'h4'}}
-        >
-        </CardHeader>
-        
+        <div style={{ display: "flex" }}>
+          <div className={classes.backButton}>
+            <IconButton onClick={history.goBack}>
+              <ArrowBackIcon />
+            </IconButton>
+          </div>
+          <CardHeader
+            className={classes.productName}
+            title={props.productName.toLowerCase()}
+            titleTypographyProps={{ variant: 'h4' }}
+          >
+          </CardHeader>
+
         </div>
         <Divider />
         <CardContent>
@@ -102,7 +110,7 @@ const addFavourite = () => {
             <Button
               className={classes.buttonStyle}
               color='secondary'
-              onClick={removeFavorite}
+              onClick={removeFavourite}
               variant='contained'
             >
               Remove From Favourites
@@ -113,7 +121,7 @@ const addFavourite = () => {
               onClick={addFavourite}
               variant='contained'
             >
-            Add to Favourites
+              Add to Favourites
             </Button>}
         </Box>
         {props.divergent}
