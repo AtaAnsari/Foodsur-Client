@@ -17,11 +17,13 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent: 'center',
     flexWrap: 'wrap',
     backgroundColor: 'rgba(255, 215, 0, .4)'
   },
   text: {
-    width: '60%'
+    width: '60%',
+    margin: '60px 0'
   },
   logo: {
     width: '680px'
@@ -47,7 +49,7 @@ export default function DesktopView() {
             gutterBottom
             variant="h3"
           >
-              Foodsur is a Progressive Web Application that is viewed best on mobile. 
+              Foodsur is a Progressive Web Application that is best viewed on mobile.
           </Typography>
         </Box>
         <Box className={classes.text}>
