@@ -1,19 +1,19 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles';
-import { Container, Box, Typography, Grid } from '@material-ui/core';
+import { Box, Typography, Grid } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
-    backgroundImage: "url('/images/landing-bg.jpg')",
-    height: "100%",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "cover",
-    backgroundAttachment: "fixed",
-    flexDirection: "column",
-    display: "flex",
-    alignItems: "center",
+    backgroundImage: 'url(\'/images/landing-bg.jpg\')',
+    height: '100%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
+    flexDirection: 'column',
+    display: 'flex',
+    alignItems: 'center',
     justtifyContent: 'center'
   },
   backgroundFilter: {
@@ -21,24 +21,26 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function DesktopView () {
+export default function DesktopView() {
 
   const classes = useStyles()
 
   return (
     <Box className={classes.root}>
       <Grid>
-      <Box className={classes.backgroundFilter}>
-        <Box width='70%' >
-        <Typography 
-          className={classes.textStyle} 
-          variant='h2' gutterBottom={true} 
-          align={'center'}
-          color='white'>
+        <Box className={classes.backgroundFilter}>
+          <Box width="70%" >
+            <Typography
+              align={'center'}
+              className={classes.textStyle}
+              color="white"
+              gutterBottom
+              variant="h2"
+            >
           Hello
-        </Typography>
-      </Box>
-      </Box>
+            </Typography>
+          </Box>
+        </Box>
       </Grid>
 
     </Box>
