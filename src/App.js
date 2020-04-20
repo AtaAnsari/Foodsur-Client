@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Router } from 'react-router-dom';
 import Media from 'react-media'
 import { createBrowserHistory } from 'history';
@@ -34,21 +34,23 @@ export default function App() {
   const value = { restrictions, setRestrictions };
 
   return (
-    <Media queries={{
-      desktop: {minWidth: 769} }}>
-      {matches => 
+    <Media
+      queries={{
+        desktop: {minWidth: 769} }}
+    >
+      {matches =>
         matches.desktop ? (
           <DesktopView />
         ) :
-        (<CookiesProvider>
-          <RestrictionsContext.Provider value={value}>
-            <ThemeProvider theme={theme}>
-              <Router history={browserHistory}>
-                <Routes />
-              </Router>
-            </ThemeProvider>
-          </RestrictionsContext.Provider>
-        </CookiesProvider>)}
-      </Media>
+          (<CookiesProvider>
+            <RestrictionsContext.Provider value={value}>
+              <ThemeProvider theme={theme}>
+                <Router history={browserHistory}>
+                  <Routes />
+                </Router>
+              </ThemeProvider>
+            </RestrictionsContext.Provider>
+          </CookiesProvider>)}
+    </Media>
   );
 }
