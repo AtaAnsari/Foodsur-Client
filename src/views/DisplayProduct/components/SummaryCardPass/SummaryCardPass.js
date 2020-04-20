@@ -52,7 +52,8 @@ const SummaryCardPass = (props) => {
       productName: props.productName,
       api_id: props.productId,
       productTags,
-      userId: cookies.session
+      userId: cookies.session,
+      macros: product.macros
     }
 
     axios.post('/api/user-data/add-favourites', productDetails)
@@ -60,10 +61,10 @@ const SummaryCardPass = (props) => {
   }
 
   const removeFavourite = () => {
-    const userId = { 
+    const userId = {
       userId: cookies.session,
       apiId: props.productId
-     }
+    }
 
     axios.delete('/api/user-data/remove-favourites', {
       params: userId

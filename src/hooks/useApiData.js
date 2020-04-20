@@ -37,7 +37,6 @@ export default function useApiData() {
 
     const res = await axios.post(`https://api.edamam.com/api/food-database/nutrients?app_id=edc61ca8&app_key=b9f17ae7284f840d6dd1ef3cbcdcde9e`,
       ingredients)
-    console.log(res)
     const healthLabels = res.data.healthLabels;
     const dietLabels = res.data.dietLabels;
     product.healthTags = healthLabels
