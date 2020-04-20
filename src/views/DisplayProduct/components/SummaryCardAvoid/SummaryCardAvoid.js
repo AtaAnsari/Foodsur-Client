@@ -37,13 +37,14 @@ const useStyles = makeStyles((theme) => ({
 
 const SummaryCardAvoid = (props) => {
 
-
   const [cookies] = useCookies(['session']);
   const [favourite, setFavourite] = useState(false)
+  const [productId, setProductId] = useState('')
   const history = useHistory();
 
   const addFavourite = () => {
     const { product } = props
+    setProductId(product.productId)
     const { dietTags, healthTags } = product
     const productTags = dietTags.concat(healthTags)
 
@@ -58,15 +59,20 @@ const SummaryCardAvoid = (props) => {
 
     axios.post('/api/user-data/add-favourites', productDetails)
   }
+  
 
   const removeFavourite = () => {
-    const userId = { id: cookies.session }
+    const userId = { 
+      userId: cookies.session,
+      apiId: productId
+     }
 
     axios.delete('/api/user-data/remove-favourites', {
       params: userId
     })
       .then(res => setFavourite(false))
   }
+
 
   const classes = useStyles();
   return (

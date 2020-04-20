@@ -62,6 +62,7 @@ const DisplayProduct = (props) => {
           divergent={divergent}
           hasHealthRestriction={hasHealthRestriction}
           product={product}
+          productId={productId} 
         /> :
         <SummaryCardPass
           productName={productName}
