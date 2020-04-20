@@ -47,10 +47,6 @@ const schema = {
 };
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.background.default,
-    height: '100%'
-  },
   grid: {
     height: '100%'
   },
@@ -123,7 +119,8 @@ const useStyles = makeStyles(theme => ({
   logoContainer: {
     display: "flex",
     justifyContent: "center",
-    marginBottom: "30px"
+    marginBottom: "30px",
+    height: "20vh"
   },
 }));
 
@@ -200,7 +197,7 @@ const SignUp = props => {
   }
 
   return (
-    <div className={classes.root}>
+    <div>
       <Box className={classes.logoContainer}>
         <img
           className={classes.logoWidth}
