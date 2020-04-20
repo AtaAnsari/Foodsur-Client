@@ -18,15 +18,18 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     alignContent: 'center',
-    flexWrap: 'wrap',
-    backgroundColor: 'rgba(255, 215, 0, .4)'
+    flexWrap: 'wrap'
   },
   text: {
     width: '60%',
-    margin: '60px 0'
+    marginBottom: '40px',
+    padding: '40px',
+    backgroundColor: 'rgba(255, 215, 0, .5)',
+    borderRadius: '20px'
   },
   logo: {
-    width: '680px'
+    width: '680px',
+    marginBottom: '110px'
   }
 }))
 
@@ -59,7 +62,7 @@ export default function DesktopView() {
             gutterBottom
             variant="h4"
           >
-              Please switch to responsive view (iPhone 6/7/8 etc.), or view the app on your mobile phone.
+              Please switch to responsive view (iPhone 6/7/8 etc.) or view the app on your mobile phone.
           </Typography>
         </Box>
       </Box>
