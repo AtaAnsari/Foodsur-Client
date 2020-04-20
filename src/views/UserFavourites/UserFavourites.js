@@ -34,6 +34,7 @@ const UserFavourites = () => {
     const userData = await axios.get('/api/user-data/user-favourites', {
       params: userId
     })
+    console.log(userData)
     return userData
   }
 
@@ -55,7 +56,7 @@ const UserFavourites = () => {
       <div className={classes.list}>
         {
           favourites.map(favourite => (
-            <ProductExpander favourite={favourite.productName} />
+            <ProductExpander favourite={favourite.productName} macros={favourite.macros} />
           ))}
       </div>
     </Container >

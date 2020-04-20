@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Button, IconButton, Link } from '@material-ui/core';
+import { Typography, Button, IconButton, Link, Table, TableBody, TableHead, TableCell, TableRow, Paper, TableContainer } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "13px",
     fontSize: "18px",
     color: "grey"
+  },
+  productDetailsName: {
+    marginBottom: '10px'
   }
 
 }));
@@ -65,12 +68,42 @@ const ProductExpander = (props) => {
           </div>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails justifyContent="flex-end">
-          <Box display="flex">
-            <p>Austin biodiesel flexitarian before they sold out. Gluten-free truffaut cred jean shorts, cray lyft typewriter bicycle rights hell of VHS cronut. 8-bit migas food truck tbh, meditation raw denim roof party humblebrag. Health goth iceland hell of ugh deep v meditation XOXO. Quinoa PBR&B hell of stumptown air plant.</p>
+          <Box display="flex" flexDirection='column' style={{ alignItems: 'center' }}>
+            <div>
+              <Typography variant='h6' className={classes.productDetailsName}>{props.favourite}</Typography>
+            </div>
+            <div>
+              {
+                props.macros.calories < 1 ? <Typography className={classes.subHeading}>Macro Nutrient Data is Unavailable</Typography> :
+                  <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="simple table">
+                      <TableBody>
+                        <TableRow>
+                          <TableCell align="right">Calories</TableCell>
+                          <TableCell align="right">{props.macros.calories}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                          <TableCell align="right">{props.macros.fat}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                          <TableCell align="right">{props.macros.carbs}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                          <TableCell align="right">{props.macros.protein}</TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+              }
+            </div>
+
           </Box>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    </div>
+    </div >
   )
 
 
