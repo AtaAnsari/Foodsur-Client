@@ -14,7 +14,7 @@ export default function useApiData() {
       "ingredients": [
         {
           "quantity": 1,
-          "measureURI": res.data.hints[0].measures[0].uri,
+          "measureURI": 'http://www.edamam.com/ontologies/edamam.owl#Measure_gram',
           "foodId": productId
         }
       ]
@@ -23,7 +23,7 @@ export default function useApiData() {
       productName: name,
       productId: productId
     }
-  
+
     return {
       upcIngredients,
       product
@@ -41,6 +41,14 @@ export default function useApiData() {
     const dietLabels = res.data.dietLabels;
     product.healthTags = healthLabels
     product.dietTags = dietLabels
+    product.macros = {
+      calories: res.data.totalNutrients.ENERC_KCAL.quantity,
+      fat: res.data.totalNutrients.FAT.quantity,
+      carbs: res.data.totalNutrients.CHOCDF.quantity,
+      protein: res.data.totalNutrients.PROCNT.quantity
+
+    }
+    console.log(product)
     // .catch(err => console.log(err))
     return product
   }
