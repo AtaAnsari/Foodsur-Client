@@ -1,23 +1,27 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles';
-import { Box, Typography, Grid } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundImage: 'url(\'/images/landing-bg.jpg\')',
     height: '100%',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
-    backgroundAttachment: 'fixed',
-    flexDirection: 'column',
-    display: 'flex',
-    alignItems: 'center',
-    justtifyContent: 'center'
+    backgroundAttachment: 'fixed'
   },
-  backgroundFilter: {
-    backgroundColor: fade('#444444', 0.8)
+  textContainer: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    backgroundColor: 'rgba(255, 215, 0, .4)'
+  },
+  text: {
+    width: '60%'
   }
 }))
 
@@ -27,22 +31,28 @@ export default function DesktopView() {
 
   return (
     <Box className={classes.root}>
-      <Grid>
-        <Box className={classes.backgroundFilter}>
-          <Box width="70%" >
-            <Typography
-              align={'center'}
-              className={classes.textStyle}
-              color="white"
-              gutterBottom
-              variant="h2"
-            >
-          Hello
-            </Typography>
-          </Box>
+      <Box className={classes.textContainer}>
+        <Box className={classes.text}>
+          <Typography
+            align={'center'}
+            color="textPrimary"
+            gutterBottom
+            variant="h3"
+          >
+              Foodsur is a Progressive Web Application that is viewed best on mobile. 
+          </Typography>
         </Box>
-      </Grid>
-
+        <Box className={classes.text}>
+          <Typography
+            align={'center'}
+            color="textPrimary"
+            gutterBottom
+            variant="h3"
+          >
+              Please switch to responsive view (iPhone 6/7/8 etc.), or view the app on your mobile phone.
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   )
 }
