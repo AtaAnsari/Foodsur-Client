@@ -14,7 +14,7 @@ export default function useApiData() {
       "ingredients": [
         {
           "quantity": 1,
-          "measureURI": 'http://www.edamam.com/ontologies/edamam.owl#Measure_gram',
+          "measureURI": res.data.hints[0].measures[0].uri,
           "foodId": productId
         }
       ]

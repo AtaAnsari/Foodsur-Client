@@ -1,24 +1,4 @@
-// import React from 'react'
-// import {Typography, Button} from '@material-ui/core';
-// import { makeStyles } from '@material-ui/styles';
-// import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-// import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-// import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import { Box} from '@material-ui/core';
-
-// const useStyles = makeStyles((theme) => ({
-//   heading: {
-//     fontSize: theme.typography.pxToRem(15),
-//     fontWeight: theme.typography.fontWeightRegular,
-//   }
-// }));
-
-// const ProductExpander = (props) => {
-
-// const classes = useStyles();
-
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -28,18 +8,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import { getSearchResults } from 'helpers/getSearchResults'
 import useApiData from 'hooks/useApiData';
 import { useHistory } from 'react-router-dom';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-
-
-
-
-
+import { useCookies } from 'react-cookie';
+import axios from 'axios'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -62,100 +37,102 @@ const ProductExpander = (props) => {
   const [heart, setHeart] = useState(false);
   const { isolateProductData } = useApiData()
   const history = useHistory();
+  const [cookies] = useCookies(['session']);
 
-//   const handleBack = function() {
-//   history.push("/home");
-// };
 
-const handleArrowClick = (productName, apiId)=> {
-  const upcIngredients = {
-    "ingredients": [
-      {
-        "quantity": 1,
-        "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-        "foodId": apiId
-      }
-    ]
+  const handleArrowClick = (productName, apiId) => {
+    const upcIngredients = {
+      "ingredients": [
+        {
+          "quantity": 1,
+          "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
+          "foodId": apiId
+        }
+      ]
+    }
+
+    const product = {
+      productName,
+      productId: apiId
+    }
+
+    isolateProductData(upcIngredients, product)
+      .then((productData) => {
+        history.push({
+          pathname: '/display-product',
+          state: { product: productData }
+        })
+      });
   }
 
-  const product = {
-    productName,
-    productId: apiId
+  const addUserFavourite = () => {
+
+    const productDetails = {
+      productName: props.productName,
+      userId: cookies.session
+    }
+    console.log('Prod Details', productDetails)
+    axios.post('/api/user-data/add-favourites', productDetails)
   }
 
-isolateProductData(upcIngredients, product)
-  .then((productData) => {history.push({
-    pathname: '/display-product',
-    state: { product: productData}
-  })});
-}
+  const removeFavourite = () => {
+    const userId = {
+      userId: cookies.session,
+      apiId: props.apiId
+    }
+    console.log(userId)
+
+    axios.delete('/api/user-data/remove-favourites', {
+      params: userId
+    })
+  }
 
   return (
- <div className={classes.root}>
-     <Grid item xs={12} md={6}>
-          <div className={classes.demo}>
-            <List dense={dense}>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      {props.rank}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={props.productName}
-                    secondary={secondary ? 'Secondary text' : null}
-                    style={{marginRight: "30px"}}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete" onClick={
-                      () => {
-                        {if(heart){
-                          setHeart(false)
-                        } else {
-                          setHeart(true)
-                        }}
+    <div className={classes.root}>
+      <Grid item xs={12} md={6}>
+        <div className={classes.demo}>
+          <List dense={dense}>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  {props.rank}
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={props.productName}
+                secondary={secondary ? 'Secondary text' : null}
+                style={{ marginRight: "30px" }}
+              />
+              <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete" onClick={
+                  () => {
+                    {
+                      if (heart) {
+                        setHeart(false)
+                        removeFavourite()
+                      } else {
+                        setHeart(true)
+                        addUserFavourite()
                       }
-                    }>
-                      {
-                        heart ?
-                        <FavoriteIcon />:
-                        <FavoriteBorderIcon />
-                      }
-                      
-                    </IconButton>
-                    <IconButton onClick={()=> {handleArrowClick(props.productName, props.apiId)}} edge="end" aria-label="delete">
-                      <KeyboardArrowRightIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-            </List>
-          </div>
-        </Grid>
+                    }
+                  }
+                }>
+                  {
+                    heart ?
+                      <FavoriteIcon /> :
+                      <FavoriteBorderIcon />
+                  }
+
+                </IconButton>
+                <IconButton onClick={() => { handleArrowClick(props.productName, props.apiId) }} edge="end" aria-label="delete">
+                  <KeyboardArrowRightIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </List>
         </div>
-
-    // <div className={classes.root}>
-
-
-    //   <ExpansionPanel>
-    //     <ExpansionPanelSummary
-    //       expandIcon={<ExpandMoreIcon />}
-    //       aria-controls="panel1a-content"
-    //       id="panel1a-header"
-    //     >
-    //       <Typography className={classes.heading}>{props.productName}</Typography>
-    //     </ExpansionPanelSummary>
-    //     <ExpansionPanelDetails justifyContent="flex-end">
-    //       <Box display="flex">
-    //       <Button size= "small" variant="contained" color="primary">
-    //         Add to Favourites
-    //       </Button>
-    //       <Button style={{marginLeft: "50px"}} size= "small" variant="contained" color="primary" >
-    //         Detailed Preferences
-    //       </Button>
-    //       </Box>
-    //     </ExpansionPanelDetails>
-    //   </ExpansionPanel>
-    // </div>
+      </Grid>
+    </div>
   )
 }
 
