@@ -33,6 +33,11 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { getSearchResults } from 'helpers/getSearchResults'
 import useApiData from 'hooks/useApiData';
 import { useHistory } from 'react-router-dom';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+
+
 
 
 
@@ -54,6 +59,7 @@ const ProductExpander = (props) => {
   const classes = useStyles();
   const [dense, setDense] = useState(false);
   const [secondary, setSecondary] = useState(false);
+  const [heart, setHeart] = useState(false);
   const { isolateProductData } = useApiData()
   const history = useHistory();
 
@@ -101,8 +107,21 @@ isolateProductData(upcIngredients, product)
                     style={{marginRight: "30px"}}
                   />
                   <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <StarBorderIcon />
+                    <IconButton edge="end" aria-label="delete" onClick={
+                      () => {
+                        {if(heart){
+                          setHeart(false)
+                        } else {
+                          setHeart(true)
+                        }}
+                      }
+                    }>
+                      {
+                        heart ?
+                        <FavoriteIcon />:
+                        <FavoriteBorderIcon />
+                      }
+                      
                     </IconButton>
                     <IconButton onClick={()=> {handleArrowClick(props.productName, props.apiId)}} edge="end" aria-label="delete">
                       <KeyboardArrowRightIcon />
