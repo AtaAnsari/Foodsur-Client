@@ -8,6 +8,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Box } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useCookies } from 'react-cookie';
+import axios from 'axios'
 
 
 
@@ -40,6 +42,20 @@ const useStyles = makeStyles((theme) => ({
 const ProductExpander = (props) => {
   const history = useHistory();
   const classes = useStyles()
+  const [cookies] = useCookies(['session']);
+
+  const removeFavourite = () => {
+    const userId = {
+      userId: cookies.session,
+      apiId: props.apiId
+    }
+
+    console.log('called')
+
+    axios.delete('/api/user-data/remove-favourites', {
+      params: userId
+    })
+  }
 
   return (
     <div className={classes.root}>
@@ -50,8 +66,8 @@ const ProductExpander = (props) => {
         <div className={classes.icon}>
           <Link variant="h6" style={{ color: "black" }} href="#" >
             + Grocery List
-  </Link>
-          <IconButton >
+          </Link>
+          <IconButton onClick={removeFavourite}>
             <DeleteIcon />
           </IconButton>
         </div>

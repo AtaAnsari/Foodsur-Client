@@ -56,7 +56,7 @@ const UserFavourites = () => {
       <div className={classes.list}>
         {
           favourites.map(favourite => (
-            <ProductExpander favourite={favourite.productName} macros={favourite.macros} />
+            <ProductExpander favourite={favourite.productName} macros={favourite.macros} apiId={favourite.apiId} />
           ))}
       </div>
     </Container >
