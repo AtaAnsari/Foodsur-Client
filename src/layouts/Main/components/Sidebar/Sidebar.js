@@ -7,10 +7,9 @@ import { Divider, Drawer, Box } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import StarIcon from '@material-ui/icons/Star';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import { Profile, SidebarNav, UpgradePlan } from './components';
+import { SidebarNav } from './components';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -71,12 +70,7 @@ const Sidebar = props => {
       title: 'Popular',
       href: '/popular-products',
       icon: <StarIcon />
-    },
-    {
-      title: 'Profile',
-      href: '/account',
-      icon: <AccountBoxIcon />
-    },
+    }
   ];
 
   const logout =  {
