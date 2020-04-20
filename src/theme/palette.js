@@ -7,7 +7,7 @@ export default {
   black,
   white,
   primary: {
-    contrastText: white,
+    contrastText: black,
     dark: colors.indigo[900],
     main: "#FFD700",
     light: colors.indigo[100]

@@ -58,9 +58,12 @@ const SidebarNav = props => {
 
   const [cookies, setCookie, removeCookie] = useCookies(['session']);
 
-  // Won't show logout link in Sidebar if currently at /landing
+  // Won't show logout link in Sidebar if currently at /landing, /login, /sign-up
   const location = useLocation();
-  const notLanding = location.pathname !== '/landing';
+  const loggedIn =
+    location.pathname !== '/landing' &&
+    location.pathname !== '/login' &&
+    location.pathname !== '/sign-up';
 
   // Removes session cookie if 'Logout' is clicked, and closes the sidebar
   const handleLogout = () => {
@@ -91,7 +94,7 @@ const SidebarNav = props => {
           </Button>
         </ListItem>
       ))}
-      {notLanding &&
+      {loggedIn &&
         <ListItem
           className={classes.item}
           disableGutters

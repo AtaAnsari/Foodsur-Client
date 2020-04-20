@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -27,6 +27,10 @@ const Topbar = props => {
   const { className, onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
+
+  // Won't show menu button in Topbar if currently at /landing
+  const location = useLocation();
+  const loggedIn = location.pathname !== '/landing';
 
   const [notifications] = useState([]);
 
@@ -61,14 +65,16 @@ const Topbar = props => {
             <InputIcon />
           </IconButton>
         </Hidden>
-        <Hidden lgUp>
-          <IconButton
-            color="inherit"
-            onClick={onSidebarOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Hidden>
+        {loggedIn &&
+          <Hidden lgUp>
+            <IconButton
+              color="inherit"
+              onClick={onSidebarOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
+        }
       </Toolbar>
     </AppBar>
   );

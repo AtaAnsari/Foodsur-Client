@@ -116,7 +116,7 @@ const Login = () => {
           color="textSecondary"
           variant="body1"
         >
-          Dont Have an Account?{' '}
+          Don't have an account?{' '}
           <Link
             component={RouterLink}
             to="/sign-up"
