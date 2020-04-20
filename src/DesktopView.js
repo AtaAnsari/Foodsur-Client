@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     width: '60%'
+  },
+  logo: {
+    width: '680px'
   }
 }))
 
@@ -32,6 +35,11 @@ export default function DesktopView() {
   return (
     <Box className={classes.root}>
       <Box className={classes.textContainer}>
+        <img
+          alt="Foodsur Logo"
+          className={classes.logo}
+          src="/images/logos/foodsur.png"
+        />
         <Box className={classes.text}>
           <Typography
             align={'center'}
@@ -47,7 +55,7 @@ export default function DesktopView() {
             align={'center'}
             color="textPrimary"
             gutterBottom
-            variant="h3"
+            variant="h4"
           >
               Please switch to responsive view (iPhone 6/7/8 etc.), or view the app on your mobile phone.
           </Typography>
