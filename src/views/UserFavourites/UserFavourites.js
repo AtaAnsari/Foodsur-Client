@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { Container, TextField, Typography, Button } from '@material-ui/core';
-import { UserFavouritesCard } from './components'
+import { ProductExpander } from './components'
 import axios from 'axios'
 import useLoginValidation from 'hooks/useLoginValidation';
 import { useCookies } from 'react-cookie';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => ({
+
   root: {
-    padding: theme.spacing(4)
+    backgroundColor:"white",
+    height: "100vh"
+  },
+  list: {
+    textTransform: 'capitalize'
   }
-})
+}));
 
 const UserFavourites = () => {
 
   const classes = useStyles()
   const [cookies] = useCookies(['session']);
   const [favourites, setFavourites] = useState([])
+  
 
   useLoginValidation();
 
@@ -45,11 +51,13 @@ const UserFavourites = () => {
 
   return (
     <Container className={classes.root}>
-      <Typography align='center' variant='h2'>Favorited Items</Typography>
+      <Typography style={{paddingTop: "20px"}} align='center' variant='h1'>Favorite Items</Typography>
+      <div className={classes.list}>
       {
         favourites.map(favourite => (
-          <UserFavouritesCard favourite={favourite} />
+          <ProductExpander favourite={favourite.productName} />
         ))}
+      </div>
     </Container >
   )
 }

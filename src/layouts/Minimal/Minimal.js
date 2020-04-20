@@ -8,7 +8,8 @@ import { useMediaQuery } from '@material-ui/core';
 const useStyles = makeStyles(() => ({
   root: {
     paddingTop: 64,
-    height: '100%'
+    height: '100%',
+    backgroundColor:"white"
   },
   content: {
     height: '100%'

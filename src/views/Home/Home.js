@@ -12,7 +12,8 @@ import { getSearchResults } from 'helpers/getSearchResults';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
+    backgroundColor: "white"
   },
   searchButtonContainer: {
     marginTop: '1rem',
