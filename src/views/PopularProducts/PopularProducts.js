@@ -171,7 +171,7 @@ const PopularProducts = () => {
           className= {classes.logoWidth}
           alt="Logo"
           src="/images/misc/ylabel.png"
-          style={{width:"140px", transform:"rotate(-90deg)"}}
+          style={{width:"132px", transform:"rotate(-90deg)"}}
           />
         </div>
       <div>
