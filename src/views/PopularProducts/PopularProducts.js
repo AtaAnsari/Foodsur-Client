@@ -6,7 +6,7 @@ import { ProductExpander } from './components'
 import { Bar } from 'react-chartjs-2';
 import palette from 'theme/palette';
 import { makeStyles } from '@material-ui/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, CardHeader, Divider } from '@material-ui/core';
 
 
 
@@ -17,8 +17,9 @@ const useStyles = makeStyles(theme => ({
   },
   graph: {
     backgroundColor: "white",
-    marginLeft: "20px",
-    marginRight: "20px"
+    marginLeft:"35px",
+    marginRight: "35px",
+    position:"relative",
   },
   header: {
     backgroundColor: "white",
@@ -165,20 +166,33 @@ const PopularProducts = () => {
         </Typography>
       </div>
       <div className={classes.graph}>
-        <Bar
+        <div style={{position:"absolute", top: "41%", left: "-26%"}}>
+          <img 
+          className= {classes.logoWidth}
+          alt="Logo"
+          src="/images/misc/ylabel.png"
+          style={{width:"140px", transform:"rotate(-90deg)"}}
+          />
+        </div>
+      <div>
+      <Bar
           data={data}
           options={options}
         />
       </div>
+    </div>
+      
       <div className={classes.subtitle}>
         <Typography variant='h6' gutterBottom={true} align={'center'} color='black'>
-          Rank
+          Popular Products by Rank
         </Typography>
       </div>
       <div>
-        <Typography variant='h5' gutterBottom={true} align={'start'} color='black' style={{ paddingLeft: '20px' }}>
-          Ranked Items That Meet your Requirements:
-        </Typography>
+      <Divider />
+      <CardHeader
+        title="Items favourited by users with your dietary restrictions (ordered by rank in popularity):"
+      />
+      <Divider />
       </div>
       <div className={classes.list}>
         {productList}
