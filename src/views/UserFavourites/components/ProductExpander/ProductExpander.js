@@ -50,12 +50,12 @@ const ProductExpander = (props) => {
       apiId: props.apiId
     }
 
-    console.log('called')
 
     axios.delete('/api/user-data/remove-favourites', {
       params: userId
     })
   }
+
 
   return (
     <div className={classes.root}>
@@ -67,7 +67,10 @@ const ProductExpander = (props) => {
           <Link variant="h6" style={{ color: "black" }} href="#" >
             + Grocery List
           </Link>
-          <IconButton onClick={removeFavourite}>
+          <IconButton onClick={() => {
+            removeFavourite()
+            props.updateFavouriteState(props.index)
+          }}>
             <DeleteIcon />
           </IconButton>
         </div>

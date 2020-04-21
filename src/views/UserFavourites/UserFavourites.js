@@ -50,13 +50,18 @@ const UserFavourites = () => {
     return () => loggedIn = false;
   }, [])
 
+  const updateFavouriteState = (index) => {
+    const newFavourites = [...favourites.slice(0, index), ...favourites.slice(index + 1)]
+    setFavourites(newFavourites)
+  }
+
   return (
     <Container className={classes.root}>
       <Typography style={{ paddingTop: "20px" }} align='center' variant='h1'>Favorite Items</Typography>
       <div className={classes.list}>
         {
-          favourites.map(favourite => (
-            <ProductExpander favourite={favourite.productName} macros={favourite.macros} apiId={favourite.apiId} />
+          favourites.map((favourite, index) => (
+            <ProductExpander key={index} index={index} updateFavouriteState={updateFavouriteState} favourite={favourite.productName} macros={favourite.macros} apiId={favourite.apiId} />
           ))}
       </div>
     </Container >
