@@ -3,8 +3,8 @@
   "name": "Foodsur",
   "icons": [
     {
-      "src": "images/logos/sLogo.png",
-      "sizes": "256x256",
+      "src": "images/logos/S-logo-lrg.png",
+      "sizes": "500x500",
       "type": "image/png"
     }
   ],
