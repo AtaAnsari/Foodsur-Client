@@ -20,7 +20,8 @@ const useStyles = makeStyles(() => ({
     fontStyle: 'italic',
     paddingBottom: '13px',
     fontSize: '18px',
-    color: 'grey'
+    color: 'grey',
+    textAlign: 'center'
   }
 }));
 
@@ -72,7 +73,7 @@ const UserFavourites = () => {
       <div className={classes.list}>
         {favourites && favourites.length < 1 &&
           <Typography className={classes.subHeading}>
-            You dont currently have any favourites
+            You don't currently have any favourites
           </Typography>
         }
         {favourites && favourites.length >= 1 &&
