@@ -25,11 +25,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 const UserFavourites = () => {
-
   const classes = useStyles()
   const [cookies] = useCookies(['session']);
-  const [favourites, setFavourites] = useState([])
-  console.log(favourites)
+
+  const [favourites, setFavourites] = useState('')
 
   useLoginValidation();
 
@@ -58,8 +57,8 @@ const UserFavourites = () => {
   }, [])
 
   const updateFavouriteState = (index) => {
-    const newFavourites = [...favourites.slice(0, index), ...favourites.slice(index + 1)]
-    setFavourites(newFavourites)
+    const newFavourites = [...favourites.slice(0, index), ...favourites.slice(index + 1)];
+    setFavourites(newFavourites);
   }
 
   return (
@@ -68,9 +67,15 @@ const UserFavourites = () => {
         align="center"
         style={{ paddingTop: '20px' }}
         variant="h1"
-      >Favorite Items</Typography>
+      >Favorite Items
+      </Typography>
       <div className={classes.list}>
-        {favourites.length < 1 ? <Typography className={classes.subHeading}>You dont currently have any favourites</Typography> :
+        {favourites && favourites.length < 1 &&
+          <Typography className={classes.subHeading}>
+            You dont currently have any favourites
+          </Typography>
+        }
+        {favourites && favourites.length >= 1 &&
           favourites.map((favourite, index) => (
             <ProductExpander
               apiId={favourite.apiId}
