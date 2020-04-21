@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -39,7 +39,6 @@ const ProductExpander = (props) => {
   const history = useHistory();
   const [cookies] = useCookies(['session']);
 
-
   const handleArrowClick = (productName, apiId) => {
     const upcIngredients = {
       "ingredients": [
@@ -71,6 +70,7 @@ const ProductExpander = (props) => {
       productName: props.productName,
       userId: cookies.session
     }
+
     console.log('Prod Details', productDetails)
     axios.post('/api/user-data/add-favourites', productDetails)
   }
@@ -118,7 +118,7 @@ const ProductExpander = (props) => {
                   }
                 }>
                   {
-                    heart ?
+                    props.isFavourited ?
                       <FavoriteIcon /> :
                       <FavoriteBorderIcon />
                   }
