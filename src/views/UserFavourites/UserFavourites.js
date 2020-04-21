@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
-import { Container, TextField, Typography, Button } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { ProductExpander } from './components'
 import axios from 'axios'
 import useLoginValidation from 'hooks/useLoginValidation';
 import { useCookies } from 'react-cookie';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 
   root: {
-    backgroundColor: "white",
-    height: "100vh"
+    backgroundColor: 'white',
+    height: '100vh'
   },
   list: {
     textTransform: 'capitalize'
   },
   subHeading: {
-    paddingTop: "17px",
-    fontStyle: "italic",
-    paddingBottom: "13px",
-    fontSize: "18px",
-    color: "grey"
+    paddingTop: '17px',
+    fontStyle: 'italic',
+    paddingBottom: '13px',
+    fontSize: '18px',
+    color: 'grey'
   }
 }));
 
@@ -37,7 +37,7 @@ const UserFavourites = () => {
     id: cookies.session
   }
 
-  const getUserFavourites = async () => {
+  const getUserFavourites = async() => {
     const userData = await axios.get('/api/user-data/user-favourites', {
       params: userId
     })
@@ -64,11 +64,22 @@ const UserFavourites = () => {
 
   return (
     <Container className={classes.root}>
-      <Typography style={{ paddingTop: "20px" }} align='center' variant='h1'>Favorite Items</Typography>
+      <Typography
+        align="center"
+        style={{ paddingTop: '20px' }}
+        variant="h1"
+      >Favorite Items</Typography>
       <div className={classes.list}>
         {favourites.length < 1 ? <Typography className={classes.subHeading}>You dont currently have any favourites</Typography> :
           favourites.map((favourite, index) => (
-            <ProductExpander key={index} index={index} updateFavouriteState={updateFavouriteState} favourite={favourite.productName} macros={favourite.macros} apiId={favourite.apiId} />
+            <ProductExpander
+              apiId={favourite.apiId}
+              favourite={favourite.productName}
+              index={index}
+              key={index}
+              macros={favourite.macros}
+              updateFavouriteState={updateFavouriteState}
+            />
           ))}
       </div>
     </Container >
