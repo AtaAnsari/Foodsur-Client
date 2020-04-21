@@ -1,51 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/styles';
-import { Container, TextField, Typography, Button } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { ProductExpander } from './components'
 import axios from 'axios'
 import useLoginValidation from 'hooks/useLoginValidation';
 import { useCookies } from 'react-cookie';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 
   root: {
-    backgroundColor: "white",
-    height: "100vh"
+    backgroundColor: 'white',
+    height: '100vh'
   },
   list: {
     textTransform: 'capitalize'
   },
   subHeading: {
-    paddingTop: "17px",
-    fontStyle: "italic",
-    paddingBottom: "13px",
-    fontSize: "18px",
-    color: "grey"
+    paddingTop: '17px',
+    fontStyle: 'italic',
+    paddingBottom: '13px',
+    fontSize: '18px',
+    color: 'grey'
   }
 }));
 
 const UserFavourites = () => {
-
   const classes = useStyles()
   const [cookies] = useCookies(['session']);
-  const [favourites, setFavourites] = useState([])
-  console.log(favourites)
+
+  const [favourites, setFavourites] = useState('')
 
   useLoginValidation();
 
-  const userId = {
-    id: cookies.session
-  }
-
-  const getUserFavourites = async () => {
+  // Fetches user favourites from the database
+  const getUserFavourites = async() => {
     const userData = await axios.get('/api/user-data/user-favourites', {
-      params: userId
+      params: { id: cookies.session }
     })
     console.log(userData)
     return userData
   }
 
-  // Sets favourites to user favourites (will stop setting of state if not logged in)
+  // Set favourites to user favourites
+  // (will stop setting of state if not logged in)
   useEffect(() => {
     let loggedIn = true;
     getUserFavourites()
@@ -57,18 +54,37 @@ const UserFavourites = () => {
     return () => loggedIn = false;
   }, [])
 
+  // Updates favourites state when a favourite is deleted
+  // Used by child components
   const updateFavouriteState = (index) => {
-    const newFavourites = [...favourites.slice(0, index), ...favourites.slice(index + 1)]
-    setFavourites(newFavourites)
+    const newFavourites = [...favourites.slice(0, index), ...favourites.slice(index + 1)];
+    setFavourites(newFavourites);
   }
 
   return (
     <Container className={classes.root}>
-      <Typography style={{ paddingTop: "20px" }} align='center' variant='h1'>Favorite Items</Typography>
+      <Typography
+        align="center"
+        style={{ paddingTop: '20px' }}
+        variant="h1"
+      >Favorite Items
+      </Typography>
       <div className={classes.list}>
-        {favourites.length < 1 ? <Typography className={classes.subHeading}>You dont currently have any favourites</Typography> :
+        {favourites && favourites.length < 1 &&
+          <Typography className={classes.subHeading}>
+            You dont currently have any favourites
+          </Typography>
+        }
+        {favourites && favourites.length >= 1 &&
           favourites.map((favourite, index) => (
-            <ProductExpander key={index} index={index} updateFavouriteState={updateFavouriteState} favourite={favourite.productName} macros={favourite.macros} apiId={favourite.apiId} />
+            <ProductExpander
+              apiId={favourite.apiId}
+              favourite={favourite.productName}
+              index={index}
+              key={index}
+              macros={favourite.macros}
+              updateFavouriteState={updateFavouriteState}
+            />
           ))}
       </div>
     </Container >
