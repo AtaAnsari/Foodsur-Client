@@ -32,19 +32,17 @@ const UserFavourites = () => {
 
   useLoginValidation();
 
-  const userId = {
-    id: cookies.session
-  }
-
+  // Fetches user favourites from the database
   const getUserFavourites = async() => {
     const userData = await axios.get('/api/user-data/user-favourites', {
-      params: userId
+      params: { id: cookies.session }
     })
     console.log(userData)
     return userData
   }
 
-  // Sets favourites to user favourites (will stop setting of state if not logged in)
+  // Set favourites to user favourites
+  // (will stop setting of state if not logged in)
   useEffect(() => {
     let loggedIn = true;
     getUserFavourites()
@@ -56,6 +54,8 @@ const UserFavourites = () => {
     return () => loggedIn = false;
   }, [])
 
+  // Updates favourites state when a favourite is deleted
+  // Used by child components
   const updateFavouriteState = (index) => {
     const newFavourites = [...favourites.slice(0, index), ...favourites.slice(index + 1)];
     setFavourites(newFavourites);
