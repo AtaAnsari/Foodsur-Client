@@ -33,7 +33,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2)
   },
   logo: {
-    width: '120px'
+      width: "120px",
+      height: "48px"
   },
   edamamLogo: {
     width: '130px'
