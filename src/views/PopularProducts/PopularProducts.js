@@ -178,18 +178,19 @@ const PopularProducts = () => {
         </Typography>
       </div>
       <div className={classes.graph}>
-        <div style={{ position: "absolute", top: "41%", left: "-26%" }}>
-          <img
-            className={classes.logoWidth}
-            alt="Logo"
-            src="/images/misc/ylabel.png"
-            style={{ width: "140px", transform: "rotate(-90deg)" }}
+        <div style={{position:"absolute", top: "41%", left: "-26%"}}>
+          <img 
+          className= {classes.logoWidth}
+          alt="Logo"
+          src="/images/misc/ylabel.png"
+          style={{width:"132px", transform:"rotate(-90deg)"}}
           />
         </div>
         <div>
           <Bar
             data={data}
             options={options}
+
           />
         </div>
       </div>

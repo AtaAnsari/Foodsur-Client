@@ -40,6 +40,9 @@ const ProductExpander = (props) => {
   const [cookies] = useCookies(['session']);
 
   const handleArrowClick = (productName, apiId) => {
+    history.push({
+      pathname:'/loading'
+    })
     const upcIngredients = {
       "ingredients": [
         {
@@ -57,7 +60,7 @@ const ProductExpander = (props) => {
 
     isolateProductData(upcIngredients, product)
       .then((productData) => {
-        history.push({
+        history.replace({
           pathname: '/display-product',
           state: { product: productData }
         })
