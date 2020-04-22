@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 const SummaryCardAvoid = (props) => {
 
   const [cookies] = useCookies(['session']);
-  const [favourite, setFavourite] = useState(false)
+  const [favourite, setFavourite] = useState(props.isFavourited)
   const [productId, setProductId] = useState('')
   const history = useHistory();
 
@@ -65,7 +65,7 @@ const SummaryCardAvoid = (props) => {
   const removeFavourite = () => {
     const userId = {
       userId: cookies.session,
-      apiId: productId
+      apiId: props.productId
     }
 
     axios.delete('/api/user-data/remove-favourites', {

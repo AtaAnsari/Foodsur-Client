@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardHeader, Divider, CardContent, Typography, Button, Box, IconButton } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useHistory } from 'react-router-dom';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,8 +39,15 @@ const useStyles = makeStyles((theme) => ({
 const SummaryCardPass = (props) => {
 
   const [cookies] = useCookies(['session']);
-  const [favourite, setFavourite] = useState(false)
+  const [favourite, setFavourite] = useState(props.isFavourited)
   const history = useHistory();
+  console.log('These are the props:', props.isFavourited)
+  // useEffect(() => {
+  //   setFavourite(props.isFavourited)
+  // }, [])
+
+  console.log('Favourite:', favourite)
+
 
   const addFavourite = () => {
     const { product } = props
