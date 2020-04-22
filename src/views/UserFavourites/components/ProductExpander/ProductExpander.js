@@ -64,9 +64,6 @@ const ProductExpander = (props) => {
           <Typography variant="h4" className={classes.heading}>{props.favourite.length < 18 ? props.favourite : props.favourite.slice(0, 20).concat('...')}</Typography>
         </div>
         <div className={classes.icon}>
-          <Link variant="h6" style={{ color: "black" }} href="#" >
-            + Grocery List
-          </Link>
           <IconButton onClick={() => {
             removeFavourite()
             props.updateFavouriteState(props.index)
