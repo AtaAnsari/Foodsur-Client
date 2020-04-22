@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import useUserRestrictions from 'hooks/useUserRestrictions'
 import { RestrictionCard, PassCard, SummaryCardAvoid, SummaryCardPass } from './components'
 import { makeStyles } from '@material-ui/styles';
+import axios from 'axios'
+import { useCookies } from 'react-cookie';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +26,33 @@ const useStyles = makeStyles((theme) => ({
 const DisplayProduct = (props) => {
 
   const classes = useStyles();
+  const [cookies] = useCookies(['session'])
+  const [isFavourited, setIsFavourited] = useState(false)
+  const [doneLoading, setDoneLoading] = useState(false)
 
+
+  const checkIfFavourited = async () => {
+
+    const apiId = {
+      id: props.location.state.product.productId,
+      user: cookies.session
+    }
+
+    const isFav = await axios.get('/api/user-data/check-favourites', { params: apiId })
+    return isFav
+  }
+  console.log(doneLoading)
+
+  useEffect(() => {
+    checkIfFavourited()
+      .then(res => {
+        setIsFavourited(res.data)
+        setDoneLoading(true)
+      })
+  }, [])
+  console.log(doneLoading)
+
+  console.log('This is our state from the back end: ', isFavourited)
   const { compareRestrictions } = useUserRestrictions();
 
   const product = props.location.state.product
@@ -55,21 +83,24 @@ const DisplayProduct = (props) => {
 
   return (
     <div>
-      {divergent.length > 0 ?
+      {doneLoading && divergent.length > 0 &&
         <SummaryCardAvoid
           productName={productName}
           shared={shared}
           divergent={divergent}
           hasHealthRestriction={hasHealthRestriction}
           product={product}
-          productId={productId} 
-        /> :
+          productId={productId}
+          isFavourited={isFavourited}
+        />}
+      {doneLoading && divergent.length === 0 &&
         <SummaryCardPass
           productName={productName}
           productId={productId}
           product={product}
           shared={shared}
           divergent={divergent}
+          isFavourited={isFavourited}
         />}
 
     </div>

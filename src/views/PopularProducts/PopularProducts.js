@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "white",
     marginLeft:"46px",
     marginRight: "35px",
-    position:"relative",
+    position: "relative",
   },
   header: {
     backgroundColor: "white",
@@ -46,7 +46,9 @@ const PopularProducts = () => {
   const [cookies] = useCookies(['session']);
   const [popularProducts, setPoplarProducts] = useState([])
   const [popularityCount, setpopularityCount] = useState([])
+  const [userFavourites, setUserFavourites] = useState([])
 
+  console.log('User Favourites', userFavourites)
 
   const userId = {
     id: cookies.session
@@ -65,8 +67,9 @@ const PopularProducts = () => {
     getPopularProducts()
       .then(product => {
         if (loggedIn) {
+          setpopularityCount(product.data[0]);
           setPoplarProducts(product.data[1]);
-          setpopularityCount(product.data[0])
+          setUserFavourites(product.data[2])
         }
 
       })
@@ -75,13 +78,22 @@ const PopularProducts = () => {
   }, [])
 
 
-  const productList = popularProducts.map((product, idx) => {
-    console.log('product', product);
+
+  const productList = popularProducts.map(function (product, idx) {
+
+    let isFavourited = false
+    userFavourites.forEach(favourite => {
+      if (favourite.favouriteId === product.id) {
+        isFavourited = true
+      }
+    })
 
     const productName = product.name.toLowerCase()
     return <ProductExpander
       productName={productName}
+      productId={product.id}
       rank={idx + 1}
+      isFavourited={isFavourited}
       apiId={product.apiId}
     />
   }
@@ -174,25 +186,26 @@ const PopularProducts = () => {
           style={{width:"132px", transform:"rotate(-90deg)"}}
           />
         </div>
-      <div>
-      <Bar
-          data={data}
-          options={options}
-        />
+        <div>
+          <Bar
+            data={data}
+            options={options}
+
+          />
+        </div>
       </div>
-    </div>
-      
+
       <div className={classes.subtitle}>
         <Typography variant='h6' gutterBottom={true} align={'center'} color='black'>
           Popular Products by Rank
         </Typography>
       </div>
       <div>
-      <Divider />
-      <CardHeader
-        title="Items favourited by users with your dietary restrictions (ordered by rank in popularity):"
-      />
-      <Divider />
+        <Divider />
+        <CardHeader
+          title="Items favourited by users with your dietary restrictions (ordered by rank in popularity):"
+        />
+        <Divider />
       </div>
       <div className={classes.list}>
         {productList}
