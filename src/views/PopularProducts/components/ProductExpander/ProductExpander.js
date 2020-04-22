@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 const ProductExpander = (props) => {
   const [dense, setDense] = useState(false);
   const [secondary, setSecondary] = useState(false);
-  const [heart, setHeart] = useState(false);
+  const [heart, setHeart] = useState(props.isFavourited);
 
   const { isolateProductData } = useApiData()
 
@@ -41,6 +41,8 @@ const ProductExpander = (props) => {
   const history = useHistory();
   const [cookies] = useCookies(['session']);
 
+
+  // Takes the user to /display-product page for the clicked product
   const handleArrowClick = (productName, apiId) => {
     history.push({
       pathname:'/loading'
@@ -69,6 +71,7 @@ const ProductExpander = (props) => {
       });
   }
 
+  // Adds the product to user favourites
   const addUserFavourite = () => {
 
     const productDetails = {
@@ -80,6 +83,7 @@ const ProductExpander = (props) => {
     axios.post('/api/user-data/add-favourites', productDetails)
   }
 
+  // Removes the product from user favourites
   const removeFavourite = () => {
     const userId = {
       userId: cookies.session,
@@ -131,7 +135,7 @@ const ProductExpander = (props) => {
                   }
                 >
                   {
-                    props.isFavourited ?
+                    heart ?
                       <FavoriteIcon /> :
                       <FavoriteBorderIcon />
                   }
