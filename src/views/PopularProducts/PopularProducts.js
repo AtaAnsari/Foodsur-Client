@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
   graph: {
     backgroundColor: "white",
-    marginLeft: "35px",
+    marginLeft:"46px",
     marginRight: "35px",
     position: "relative",
   },
