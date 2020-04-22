@@ -9,29 +9,27 @@ import { makeStyles } from '@material-ui/styles';
 import { Typography, CardHeader, Divider } from '@material-ui/core';
 
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
   },
   graph: {
-    backgroundColor: "white",
-    marginLeft: "35px",
-    marginRight: "35px",
-    position: "relative",
+    backgroundColor: 'white',
+    marginLeft: '35px',
+    marginRight: '35px',
+    position: 'relative',
   },
   header: {
-    backgroundColor: "white",
-    paddingTop: "20px",
-    paddingBottom: "20px"
+    backgroundColor: 'white',
+    paddingTop: '20px',
+    paddingBottom: '20px'
   },
   subtitle: {
-    backgroundColor: "white",
-    marginBottom: "20px"
+    backgroundColor: 'white',
+    marginBottom: '20px'
   },
   background: {
-    backgroundColor: "white"
+    backgroundColor: 'white'
   },
   list: {
     textTransform: 'capitalize'
@@ -54,7 +52,7 @@ const PopularProducts = () => {
     id: cookies.session
   }
 
-  const getPopularProducts = async () => {
+  const getPopularProducts = async() => {
     const popularData = await axios.get('/api/user-data/popular-products', {
       params: userId
     })
@@ -79,7 +77,7 @@ const PopularProducts = () => {
 
 
 
-  const productList = popularProducts.map(function (product, idx) {
+  const productList = popularProducts.map(function(product, idx) {
 
     let isFavourited = false
     userFavourites.forEach(favourite => {
@@ -90,12 +88,12 @@ const PopularProducts = () => {
 
     const productName = product.name.toLowerCase()
     return <ProductExpander
-      productName={productName}
-      productId={product.id}
-      rank={idx + 1}
-      isFavourited={isFavourited}
       apiId={product.apiId}
-    />
+      isFavourited={isFavourited}
+      productId={product.id}
+      productName={productName}
+      rank={idx + 1}
+           />
   }
   )
 
@@ -173,17 +171,22 @@ const PopularProducts = () => {
   return (
     <div className={classes.background}>
       <div className={classes.header}>
-        <Typography variant='h1' gutterBottom={true} align={'center'} color='black'>
+        <Typography
+          align={'center'}
+          color="black"
+          gutterBottom
+          variant="h1"
+        >
           Popular Items
         </Typography>
       </div>
       <div className={classes.graph}>
-        <div style={{position:"absolute", top: "41%", left: "-26%"}}>
-          <img 
-          className= {classes.logoWidth}
-          alt="Logo"
-          src="/images/misc/ylabel.png"
-          style={{width:"132px", transform:"rotate(-90deg)"}}
+        <div style={{position:'absolute', top: '41%', left: '-26%'}}>
+          <img
+            alt="Logo"
+            className= {classes.logoWidth}
+            src="/images/misc/ylabel.png"
+            style={{width:'132px', transform:'rotate(-90deg)'}}
           />
         </div>
         <div>
@@ -196,7 +199,12 @@ const PopularProducts = () => {
       </div>
 
       <div className={classes.subtitle}>
-        <Typography variant='h6' gutterBottom={true} align={'center'} color='black'>
+        <Typography
+          align={'center'}
+          color="black"
+          gutterBottom
+          variant="h6"
+        >
           Popular Products by Rank
         </Typography>
       </div>
