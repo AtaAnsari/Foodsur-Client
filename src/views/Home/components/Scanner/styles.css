@@ -4,22 +4,21 @@
 
 .container,
 #interactive.viewport {
-  width: 70vw;
-  height: 20vh;
-  margin: 0 auto;
+  width: 200px;
+  height: 140px;
 }
 
 #interactive.viewport canvas,
 video {
-  width: 70vw;
-  height: 20vh;
+  width: 200px;
+  height: 140px;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -10px;
+  left: 55px;
 }
 
 #interactive.viewport canvas.drawingBuffer,
 video.drawingBuffer {
-  width: 70vw;
-  height: 20vh;
+  width: 200px;
+  height: 140px;
 }

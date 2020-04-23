@@ -14,10 +14,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(4)
   },
   graph: {
-    backgroundColor: 'white',
-    marginLeft: '35px',
-    marginRight: '35px',
-    position: 'relative',
+    backgroundColor: "white",
+    marginLeft:"46px",
+    marginRight: "35px",
+    position: "relative",
   },
   header: {
     backgroundColor: 'white',
