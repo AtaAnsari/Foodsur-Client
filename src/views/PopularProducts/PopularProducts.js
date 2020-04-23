@@ -44,7 +44,7 @@ const PopularProducts = () => {
   const [cookies] = useCookies(['session']);
   const [popularProducts, setPoplarProducts] = useState([])
   const [popularityCount, setpopularityCount] = useState([])
-  const [userFavourites, setUserFavourites] = useState([])
+  const [userFavourites, setUserFavourites] = useState('')
 
   console.log('User Favourites', userFavourites)
 
@@ -52,6 +52,7 @@ const PopularProducts = () => {
     id: cookies.session
   }
 
+  // Gets the popular products relevant to the user, and user's current favourites
   const getPopularProducts = async() => {
     const popularData = await axios.get('/api/user-data/popular-products', {
       params: userId
@@ -60,6 +61,7 @@ const PopularProducts = () => {
     return popularData
   }
 
+  // Get popular products and user favourites on first render and set the state
   useEffect(() => {
     let loggedIn = true;
     getPopularProducts()
@@ -77,7 +79,7 @@ const PopularProducts = () => {
 
 
 
-  const productList = popularProducts.map(function(product, idx) {
+  const productList = userFavourites && popularProducts.map(function(product, idx) {
 
     let isFavourited = false
     userFavourites.forEach(favourite => {
