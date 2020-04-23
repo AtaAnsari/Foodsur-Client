@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -31,24 +31,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProductExpander = (props) => {
-  const classes = useStyles();
   const [dense, setDense] = useState(false);
   const [secondary, setSecondary] = useState(false);
-  const [heart, setHeart] = useState(false);
+  const [heart, setHeart] = useState(props.isFavourited);
+
   const { isolateProductData } = useApiData()
+
+  const classes = useStyles();
   const history = useHistory();
   const [cookies] = useCookies(['session']);
 
+
+  // Takes the user to /display-product page for the clicked product
   const handleArrowClick = (productName, apiId) => {
     history.push({
       pathname:'/loading'
     })
     const upcIngredients = {
-      "ingredients": [
+      'ingredients': [
         {
-          "quantity": 1,
-          "measureURI": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram",
-          "foodId": apiId
+          'quantity': 1,
+          'measureURI': 'http://www.edamam.com/ontologies/edamam.owl#Measure_gram',
+          'foodId': apiId
         }
       ]
     }
@@ -67,6 +71,7 @@ const ProductExpander = (props) => {
       });
   }
 
+  // Adds the product to user favourites
   const addUserFavourite = () => {
 
     const productDetails = {
@@ -78,6 +83,7 @@ const ProductExpander = (props) => {
     axios.post('/api/user-data/add-favourites', productDetails)
   }
 
+  // Removes the product from user favourites
   const removeFavourite = () => {
     const userId = {
       userId: cookies.session,
@@ -92,7 +98,11 @@ const ProductExpander = (props) => {
 
   return (
     <div className={classes.root}>
-      <Grid item xs={12} md={6}>
+      <Grid
+        item
+        md={6}
+        xs={12}
+      >
         <div className={classes.demo}>
           <List dense={dense}>
             <ListItem>
@@ -104,30 +114,40 @@ const ProductExpander = (props) => {
               <ListItemText
                 primary={props.productName}
                 secondary={secondary ? 'Secondary text' : null}
-                style={{ marginRight: "30px" }}
+                style={{ marginRight: '30px' }}
               />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete" onClick={
-                  () => {
-                    {
-                      if (heart) {
-                        setHeart(false)
-                        removeFavourite()
-                      } else {
-                        setHeart(true)
-                        addUserFavourite()
+                <IconButton
+                  aria-label="delete"
+                  edge="end"
+                  onClick={
+                    () => {
+                      {
+                        if (heart) {
+                          setHeart(false)
+                          removeFavourite()
+                        } else {
+                          setHeart(true)
+                          addUserFavourite()
+                        }
                       }
                     }
                   }
-                }>
+                >
                   {
-                    props.isFavourited ?
+                    heart ?
                       <FavoriteIcon /> :
                       <FavoriteBorderIcon />
                   }
 
                 </IconButton>
-                <IconButton onClick={() => { handleArrowClick(props.productName, props.apiId) }} edge="end" aria-label="delete">
+                <IconButton
+                  aria-label="delete"
+                  edge="end"
+                  onClick={() => {
+                    handleArrowClick(props.productName, props.apiId)
+                  }}
+                >
                   <KeyboardArrowRightIcon />
                 </IconButton>
               </ListItemSecondaryAction>
