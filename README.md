@@ -23,7 +23,7 @@ Users can also add favourite products to come back to later, and also view their
 
 ## Screen Shots
 
-[Foodsur mobile landing page showing a login and sign-up button.](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-landing-page.png)
-[Foodsur home page showing a barcode scanner and a text search box.](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-home.png)
-[Foodsur favourites item page displaying an items calories and macro nutrients](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-favourites.png)
-[Foodsur popular items page showing products that are favourited by other users that have the same dietary restrictions](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-popular-items.png)
+![Foodsur mobile landing page showing a login and sign-up button.](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-landing-page.png)
+![Foodsur home page showing a barcode scanner and a text search box.](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-home.png)
+![Foodsur favourites item page displaying an items calories and macro nutrients](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-favourites.png)
+![Foodsur popular items page showing products that are favourited by other users that have the same dietary restrictions](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-popular-items.png)
