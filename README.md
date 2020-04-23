@@ -5,8 +5,8 @@ Foodsur is a progressive web app that eliminates the difficulty in finding out i
 Users can also add favourite products to come back to later, and also view their caloric and macro nutrient profile. Users can also view popular items that match the users dietary preferences and see how many other users have added these items to their favourites. 
 
 [Foodsur App](https://foodsur.netlify.app/)  
-[Foodsur backend/api repo](https://github.com/AtaAnsari/Foodsur-Client)  
-[Foodsur client side repo](https://github.com/berk-ozer/foodsur-api)
+[Foodsur backend/api repo](https://github.com/berk-ozer/foodsur-api)
+[Foodsur client side repo](https://github.com/AtaAnsari/Foodsur-Client)
 
 ## Dependencies
 
@@ -23,3 +23,7 @@ Users can also add favourite products to come back to later, and also view their
 
 ## Screen Shots
 
+[Foodsur mobile landing page showing a login and sign-up button.](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-landing-page.png)
+[Foodsur home page showing a barcode scanner and a text search box.](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-home.png)
+[Foodsur favourites item page displaying an items calories and macro nutrients](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-favourites.png)
+[Foodsur popular items page showing products that are favourited by other users that have the same dietary restrictions](https://github.com/AtaAnsari/Foodsur-Client/blob/master/docs/foodsur-popular-items.png)
