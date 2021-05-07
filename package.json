@@ -49,7 +49,7 @@
     "react-scripts": "^3.0.1",
     "react-spinners": "^0.8.1",
     "recompose": "^0.30.0",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "uuid": "^3.3.2",
     "validate.js": "^0.13.1"
   },
